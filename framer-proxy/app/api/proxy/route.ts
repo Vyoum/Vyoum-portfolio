@@ -50,7 +50,7 @@ export async function GET(request: Request) {
       const replaced = text.replaceAll(
         FRAMER_BASE,
         // This is your domain on Vercel – update later if needed
-        "https://yourdomain.com"
+        "https://vyoum-portfolio.vercel.app"
       );
 
       return new NextResponse(replaced, {
