@@ -1,7 +1,7 @@
 // app/api/proxy/route.ts
 import { NextResponse } from "next/server";
 
-const FRAMER_BASE = "https://vyoumportfolio.framer.website"; // <-- change this
+const FRAMER_BASE = "https://generous-seat-870379.framer.app"; // <-- change this
 
 export const runtime = "edge";
 
