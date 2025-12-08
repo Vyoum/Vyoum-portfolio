@@ -3,9 +3,9 @@
 import React from "react";
 
 const socialLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com" },
+  { label: "Instagram", href: "https://instagram.com" },
+  { label: "X", href: "https://twitter.com" },
   { label: "GitHub", href: "https://github.com" },
-  { label: "Twitter", href: "https://twitter.com" },
 ];
 
 export default function HomePage() {
@@ -32,7 +32,7 @@ export default function HomePage() {
         style={{
           position: "fixed",
           bottom: "16px",
-          left: "16px",
+          right: "16px",
           display: "flex",
           alignItems: "center",
           gap: "10px",
