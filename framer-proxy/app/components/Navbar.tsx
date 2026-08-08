@@ -11,6 +11,7 @@ const navLinks = [
   { name: "Services", href: "#services" },
   { name: "Pricing", href: "#pricing" },
   { name: "Blog", href: "#blog" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -37,8 +38,24 @@ export default function Navbar() {
           <span className={styles.name}>Joseph Alexander</span>
         </Link>
 
+        <nav className={styles.desktopNav} aria-label="Primary navigation">
+          {navLinks.map((link) => (
+            <Link key={link.name} href={link.href} className={styles.navLink}>
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+
+        <Link href="#contact" className={styles.desktopCta}>
+          Book a call
+        </Link>
+
         <button
           className={styles.menuToggle}
+          aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
+
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X size={20} /> : <MoreHorizontal size={20} />}
@@ -48,6 +65,7 @@ export default function Navbar() {
       {/* Mobile Menu (Now acts as the main menu since links are hidden) */}
       {mobileOpen && (
         <motion.div
+          id="mobile-navigation"
           className={styles.dropdownMenu}
           initial={{ opacity: 0, y: -20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
