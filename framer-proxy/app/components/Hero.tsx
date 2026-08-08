@@ -33,6 +33,11 @@ export default function Hero() {
     [0, 0.72, 1],
     ["translate(-50%, -50%) rotate(-2deg) scale(1)", "translate(-50%, -40%) rotate(0deg) scale(1.03)", "translate(-50%, -26%) rotate(0deg) scale(1.06)"]
   );
+  const card4Transform = useTransform(
+    smoothProgress,
+    [0, 0.72, 1],
+    ["translate(-50%, -50%) rotate(9deg) scale(0.78)", "translate(18%, -34%) rotate(12deg) scale(0.78)", "translate(145%, 20%) rotate(16deg) scale(0.78)"]
+  );
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -107,6 +112,9 @@ export default function Hero() {
               </motion.div>
               <motion.div className={`${styles.card} ${styles.card3}`} style={{ transform: card3Transform }}>
                 <Image src="/card1.png" alt="Project 3" fill className={styles.cardImage} />
+              </motion.div>
+              <motion.div className={`${styles.card} ${styles.card4}`} style={{ transform: card4Transform }}>
+                <Image src="/card3.png" alt="Project 4" fill className={styles.cardImage} />
               </motion.div>
             </div>
           </motion.div>

@@ -111,21 +111,21 @@ export default function Projects() {
   });
 
   // Calculate transforms for each card
-  const x1 = useTransform(scrollYProgress, [0, 0.4], ["0vw", "-22vw"]);
-  const y1 = useTransform(scrollYProgress, [0, 0.4], ["0vh", "-24vh"]);
-  const rot1 = useTransform(scrollYProgress, [0, 0.4], [-8, 0]);
+  const x1 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "-22vw"]);
+  const y1 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "-24vh"]);
+  const rot1 = useTransform(scrollYProgress, [0, 0.58], [-8, 0]);
 
-  const x2 = useTransform(scrollYProgress, [0, 0.4], ["0vw", "22vw"]);
-  const y2 = useTransform(scrollYProgress, [0, 0.4], ["0vh", "-24vh"]);
-  const rot2 = useTransform(scrollYProgress, [0, 0.4], [6, 0]);
+  const x2 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "22vw"]);
+  const y2 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "-24vh"]);
+  const rot2 = useTransform(scrollYProgress, [0, 0.58], [6, 0]);
 
-  const x3 = useTransform(scrollYProgress, [0, 0.4], ["0vw", "-22vw"]);
-  const y3 = useTransform(scrollYProgress, [0, 0.4], ["0vh", "24vh"]);
-  const rot3 = useTransform(scrollYProgress, [0, 0.4], [-6, 0]);
+  const x3 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "-22vw"]);
+  const y3 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "24vh"]);
+  const rot3 = useTransform(scrollYProgress, [0, 0.58], [-6, 0]);
 
-  const x4 = useTransform(scrollYProgress, [0, 0.4], ["0vw", "22vw"]);
-  const y4 = useTransform(scrollYProgress, [0, 0.4], ["0vh", "24vh"]);
-  const rot4 = useTransform(scrollYProgress, [0, 0.4], [8, 0]);
+  const x4 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "22vw"]);
+  const y4 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "24vh"]);
+  const rot4 = useTransform(scrollYProgress, [0, 0.58], [8, 0]);
   
   const transforms = [
     { translateX: x1, translateY: y1, rotate: rot1 },
@@ -134,8 +134,8 @@ export default function Projects() {
     { translateX: x4, translateY: y4, rotate: rot4 },
   ];
   
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.2]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.2]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0.2]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.58], [1, 1.2]);
 
   return (
     <section ref={containerRef} className={styles.scrollSection} id="projects">
