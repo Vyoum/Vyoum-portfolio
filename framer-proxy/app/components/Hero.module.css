@@ -87,6 +87,17 @@
   font-size: clamp(3rem, 5vw, 4.5rem);
   line-height: 1.1;
   margin-bottom: 24px;
+  letter-spacing: -0.03em;
+}
+
+.titleGray {
+  color: #888888;
+  font-weight: 500;
+}
+
+.titleBlack {
+  color: var(--foreground);
+  font-weight: 800;
 }
 
 .subtitle {
@@ -95,6 +106,16 @@
   max-width: 500px;
   margin-bottom: 40px;
   line-height: 1.6;
+}
+
+.subtitleBold {
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.subtitleSubtle {
+  font-weight: 400;
+  color: var(--text-muted);
 }
 
 .actions {

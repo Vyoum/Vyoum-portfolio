@@ -44,13 +44,13 @@ export default function Hero() {
             </motion.div>
 
             <motion.h1 className={styles.title} variants={itemVariants}>
-              Design that <br />
-              <span className="text-gradient">delivers results.</span>
+              <span className={styles.titleGray}>Design that</span> <br />
+              <span className={styles.titleBlack}>delivers results.</span>
             </motion.h1>
 
             <motion.p className={styles.subtitle} variants={itemVariants}>
-              Strategic design that drives growth, not just looks good. I create
-              everything your brand needs to attract customers and turn them into sales.
+              <span className={styles.subtitleBold}>Strategic design that drives growth, not just looks good.</span>{" "}
+              <span className={styles.subtitleSubtle}>I create everything your brand needs to attract customers and turn them into sales.</span>
             </motion.p>
 
             <motion.div className={styles.actions} variants={itemVariants}>
