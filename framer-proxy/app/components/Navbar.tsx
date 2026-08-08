@@ -31,9 +31,10 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
     >
-      <div className={`container ${styles.navContainer}`}>
-        <Link href="/" className={styles.logo}>
-          JOSEPH
+      <div className={styles.pillContainer}>
+        <Link href="/" className={styles.profileSection}>
+          <div className={styles.avatar}></div>
+          <span className={styles.name}>Joseph Alexander</span>
         </Link>
 
         <nav className={styles.desktopNav}>
@@ -45,14 +46,14 @@ export default function Navbar() {
         </nav>
 
         <div className={styles.actions}>
-          <Link href="#contact" className="btn-primary">
-            Book Now
+          <Link href="#contact" className={styles.contactBtn}>
+            Contact
           </Link>
           <button
             className={styles.mobileToggle}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>

@@ -1,112 +1,105 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import styles from "./Projects.module.css";
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const projects = [
   {
-    title: "Axiom Ecommerce Site",
-    category: "Web Design",
-    color: "#1e1e1e",
+    title: "Kora",
+    category: "Consulting Site",
+    image: "/card1.png",
+    link: "#",
   },
   {
-    title: "Mugen App Redesign",
-    category: "UI/UX",
-    color: "#2a2a2a",
+    title: "KYMA",
+    category: "AI Agency",
+    image: "/card2.png",
+    link: "#",
   },
   {
-    title: "KYMA Branding",
-    category: "Brand Identity",
-    color: "#333333",
+    title: "Mugen Studio",
+    category: "Design Studio",
+    image: "/card3.png",
+    link: "#",
   },
   {
-    title: "Nexus Dashboard",
-    category: "Product Design",
-    color: "#3d3d3d",
+    title: "LaunchNow",
+    category: "SaaS Platform",
+    image: "/card1.png",
+    link: "#",
   },
 ];
 
-const Card = ({ project, index, progress, range, targetScale }: any) => {
-  const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start end", "start start"],
-  });
-
-  const imageScale = useTransform(scrollYProgress, [0, 1], [2, 1]);
-  const scale = useTransform(progress, range, [1, targetScale]);
+const ProjectCard = ({ project }: { project: any }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
+  const cursorX = useSpring(x, springConfig);
+  const cursorY = useSpring(y, springConfig);
+  
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set(e.clientX - rect.left);
+    y.set(e.clientY - rect.top);
+  };
 
   return (
-    <div ref={container} className={styles.cardContainer}>
-      <motion.div
-        style={{
-          backgroundColor: project.color,
-          scale,
-          top: `calc(-5vh + ${index * 25}px)`,
-        }}
-        className={styles.card}
+    <Link href={project.link} className={styles.cardWrapper}>
+      <div 
+        className={styles.imageContainer}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onMouseMove={handleMouseMove}
       >
-        <div className={styles.cardContent}>
-          <div className={styles.cardHeader}>
-            <h3 className={styles.cardTitle}>{project.title}</h3>
-            <p className={styles.cardCategory}>{project.category}</p>
-          </div>
-          <div className={styles.cardImageContainer}>
-            <motion.div style={{ scale: imageScale }} className={styles.cardImageInner}>
-              {/* Placeholder for project image */}
-              <div className={styles.imagePlaceholder}>
-                 Project Image
-              </div>
-            </motion.div>
-          </div>
-          <div className={styles.cardFooter}>
-            <Link href="#" className={styles.viewProject}>
-              View Project <ArrowUpRight size={18} />
-            </Link>
-          </div>
+        <Image src={project.image} alt={project.title} fill className={styles.cardImage} />
+        
+        {/* Custom cursor pill */}
+        <motion.div
+          className={styles.viewProjectPill}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ 
+            opacity: isHovered ? 1 : 0, 
+            scale: isHovered ? 1 : 0.5 
+          }}
+          transition={{ duration: 0.2 }}
+          style={{
+            x: cursorX,
+            y: cursorY,
+            translateX: "-50%",
+            translateY: "-50%"
+          }}
+        >
+          View Project
+        </motion.div>
+      </div>
+      
+      <div className={styles.cardMeta}>
+        <div>
+          <h3 className={styles.cardTitle}>{project.title}</h3>
+          <p className={styles.cardCategory}>{project.category}</p>
         </div>
-      </motion.div>
-    </div>
+        <span className={styles.cardLinkText}>↗ View Project</span>
+      </div>
+    </Link>
   );
 };
 
 export default function Projects() {
-  const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start start", "end end"],
-  });
-
   return (
-    <section className={styles.projectsSection} id="projects">
-      <div className={`container ${styles.container}`}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>Featured Projects</h2>
-        </div>
+    <section className={`section ${styles.projectsSection}`} id="projects">
+      <div className="container">
+        <h2 className={styles.sectionTitle}>Latest Projects</h2>
         
-        <div ref={container} className={styles.cardsWrapper}>
-          {projects.map((project, i) => {
-            const targetScale = 1 - (projects.length - i) * 0.05;
-            return (
-              <Card
-                key={i}
-                index={i}
-                project={project}
-                progress={scrollYProgress}
-                range={[i * 0.25, 1]}
-                targetScale={targetScale}
-              />
-            );
-          })}
-        </div>
-        
-        <div className={styles.viewAllWrapper}>
-          <Link href="#all-projects" className="btn-secondary">
-            View all my projects
-          </Link>
+        <div className={styles.projectsGrid}>
+          {projects.map((project, index) => (
+            <ProjectCard key={index} project={project} />
+          ))}
         </div>
       </div>
     </section>

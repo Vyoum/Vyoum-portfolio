@@ -1,31 +1,53 @@
 .navbar {
   position: fixed;
-  top: 0;
+  top: 24px;
   left: 0;
   width: 100%;
   z-index: 100;
-  transition: background var(--transition), border-bottom var(--transition);
-  padding: 24px 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+  transition: transform 0.3s ease;
 }
 
 .scrolled {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 0;
+  /* Header stays floating, we might want to slightly fade background of pill */
 }
 
-.navContainer {
+.pillContainer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 6px 6px 6px 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  gap: 32px;
+  width: 100%;
+  max-width: 850px;
 }
 
-.logo {
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
+.profileSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-image: url("https://i.pravatar.cc/100?img=11");
+  background-size: cover;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--foreground);
+  letter-spacing: -0.01em;
 }
 
 .desktopNav {
@@ -36,13 +58,14 @@
 @media (min-width: 768px) {
   .desktopNav {
     display: flex;
+    align-items: center;
   }
 }
 
 .navLink {
   font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-muted);
+  font-weight: 600;
+  color: var(--text-dark);
   transition: color var(--transition);
 }
 
@@ -53,7 +76,22 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+}
+
+.contactBtn {
+  background: var(--surface);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition);
+}
+
+.contactBtn:hover {
+  background: var(--surface-hover);
 }
 
 .mobileToggle {
@@ -61,6 +99,9 @@
   align-items: center;
   justify-content: center;
   color: var(--foreground);
+  padding: 10px;
+  border-radius: 50%;
+  background: var(--surface);
 }
 
 @media (min-width: 768px) {
@@ -72,18 +113,22 @@
 .mobileMenu {
   position: absolute;
   top: 100%;
-  left: 0;
-  width: 100%;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  left: 24px;
+  right: 24px;
+  margin-top: 16px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   padding: 16px 24px;
   gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .mobileNavLink {
   font-size: 1.1rem;
   font-weight: 500;
   padding: 8px 0;
+  color: var(--foreground);
 }
