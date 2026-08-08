@@ -7,19 +7,6 @@
   overflow: hidden;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
-  z-index: -1;
-  pointer-events: none;
-}
-
 .container {
   position: relative;
   z-index: 1;
@@ -51,8 +38,8 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
+  gap: 7px;
+  padding: 5px 12px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
@@ -184,13 +171,13 @@
 }
 
 .card1 {
-  transform: translate(-50%, -50%) rotate(-12deg) scale(0.85);
+  transform: translate(-50%, -50%) rotate(-7deg) scale(0.85);
   z-index: 1;
   filter: brightness(0.6);
 }
 
 .card2 {
-  transform: translate(-50%, -50%) rotate(8deg) scale(0.9);
+  transform: translate(-50%, -50%) rotate(5deg) scale(0.9);
   z-index: 2;
   filter: brightness(0.8);
 }

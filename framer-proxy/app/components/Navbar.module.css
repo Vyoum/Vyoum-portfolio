@@ -18,14 +18,51 @@
 .pillContainer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   background: var(--background);
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
-  padding: 6px 6px 6px 6px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  gap: 16px;
-  width: max-content; /* THIS is the key to matching the screenshot length */
+  padding: 6px 8px 6px 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  gap: 18px;
+  width: max-content;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navLink {
+  padding: 10px 12px;
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: color var(--transition), background var(--transition);
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--foreground);
+  background: var(--surface);
+}
+
+.desktopCta {
+  padding: 11px 16px;
+  border-radius: var(--radius-full);
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.desktopCta:hover,
+.desktopCta:focus-visible {
+  transform: translateY(-1px);
+  opacity: 0.88;
 }
 
 .profileSection {
@@ -111,4 +148,22 @@
 
 .menuContactBtn:hover {
   opacity: 0.9;
+}
+
+@media (max-width: 1024px) {
+  .desktopNav,
+  .desktopCta {
+    display: none;
+  }
+
+  .menuToggle {
+    display: flex;
+  }
+}
+
+@media (min-width: 1025px) {
+  .menuToggle,
+  .dropdownMenu {
+    display: none;
+  }
 }
