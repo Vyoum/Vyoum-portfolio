@@ -20,18 +20,18 @@ export default function Hero() {
   });
   const card1Transform = useTransform(
     smoothProgress,
-    [0, 0.55, 1],
-    ["translate(-50%, -50%) rotate(-7deg) scale(0.85)", "translate(-70%, -36%) rotate(-14deg) scale(0.85)", "translate(-82%, -22%) rotate(-16deg) scale(0.85)"]
+    [0, 0.72, 1],
+    ["translate(-50%, -50%) rotate(-7deg) scale(0.85)", "translate(-78%, -40%) rotate(-12deg) scale(0.85)", "translate(-150%, -18%) rotate(-16deg) scale(0.85)"]
   );
   const card2Transform = useTransform(
     smoothProgress,
-    [0, 0.55, 1],
-    ["translate(-50%, -50%) rotate(5deg) scale(0.9)", "translate(-35%, -38%) rotate(11deg) scale(0.9)", "translate(-20%, -20%) rotate(13deg) scale(0.9)"]
+    [0, 0.72, 1],
+    ["translate(-50%, -50%) rotate(5deg) scale(0.9)", "translate(-22%, -40%) rotate(9deg) scale(0.9)", "translate(50%, -18%) rotate(13deg) scale(0.9)"]
   );
   const card3Transform = useTransform(
     smoothProgress,
-    [0, 0.55, 1],
-    ["translate(-50%, -50%) rotate(-2deg) scale(1)", "translate(-50%, -38%) rotate(0deg) scale(1.03)", "translate(-50%, -18%) rotate(0deg) scale(1.06)"]
+    [0, 0.72, 1],
+    ["translate(-50%, -50%) rotate(-2deg) scale(1)", "translate(-50%, -40%) rotate(0deg) scale(1.03)", "translate(-50%, -26%) rotate(0deg) scale(1.06)"]
   );
 
   const containerVariants: Variants = {
