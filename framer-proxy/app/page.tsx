@@ -1,10 +1,14 @@
-import About from "./components/About";
-import Hero from "./components/Hero";
+import React from "react";
 import Navbar from "./components/Navbar";
-import PortfolioSections, { Footer } from "./components/PortfolioSections";
+import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import WorkHistory from "./components/WorkHistory";
+import About from "./components/About";
 import Pricing from "./components/Pricing";
 import Testimonials from "./components/Testimonials";
-import WorkHistory from "./components/WorkHistory";
+import FAQ from "./components/FAQ";
+import BlogPreview from "./components/BlogPreview";
+import Footer from "./components/Footer";
 
 export default function HomePage() {
   return (
@@ -12,11 +16,13 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        <PortfolioSections />
+        <Projects />
         <WorkHistory />
         <About />
         <Pricing />
         <Testimonials />
+        <FAQ />
+        <BlogPreview />
       </main>
       <Footer />
     </>
