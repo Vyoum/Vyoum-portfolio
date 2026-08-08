@@ -1,7 +1,7 @@
 // app/api/proxy/route.ts
 import { NextResponse } from "next/server";
 
-const FRAMER_BASE = "https://vyoumportfolio.framer.website"; // <-- change this
+const FRAMER_BASE = "https://vyoum-portfolio.framer.website"; // <-- change this
 
 export const runtime = "edge";
 
@@ -50,7 +50,7 @@ export async function GET(request: Request) {
       const replaced = text.replaceAll(
         FRAMER_BASE,
         // This is your domain on Vercel – update later if needed
-        "https://vyoum-portfolio.vercel.app"
+        "https://vyoum-portfolio.framer.website"
       );
 
       return new NextResponse(replaced, {
@@ -64,7 +64,7 @@ export async function GET(request: Request) {
       status: upstreamRes.status,
       headers: originalHeaders,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Proxy error:", err);
     return new NextResponse("Proxy error", { status: 502 });
   }
