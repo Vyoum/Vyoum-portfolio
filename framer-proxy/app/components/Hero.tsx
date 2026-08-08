@@ -3,8 +3,9 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
 import styles from "./Hero.module.css";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { Star } from "lucide-react";
 
 export default function Hero() {
   const containerVariants: Variants = {
@@ -29,46 +30,102 @@ export default function Hero() {
   return (
     <section className={`section ${styles.hero}`} id="home">
       <div className={`container ${styles.container}`}>
-        <motion.div
-          className={styles.content}
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div className={styles.badge} variants={itemVariants}>
-            <span className={styles.pulse}></span>
-            Available for August &apos;26
+        <div className={styles.topSection}>
+          {/* Left Column */}
+          <motion.div
+            className={styles.leftColumn}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div className={styles.badge} variants={itemVariants}>
+              <span className={styles.pulse}></span>
+              Available for August &apos;25
+            </motion.div>
+
+            <motion.h1 className={styles.title} variants={itemVariants}>
+              Design that <br />
+              <span className="text-gradient">delivers results.</span>
+            </motion.h1>
+
+            <motion.p className={styles.subtitle} variants={itemVariants}>
+              Strategic design that drives growth, not just looks good. I create
+              everything your brand needs to attract customers and turn them into sales.
+            </motion.p>
+
+            <motion.div className={styles.actions} variants={itemVariants}>
+              <Link href="#contact" className={styles.bookCallBtn}>
+                <div className={styles.avatarWrap}>
+                  <div className={styles.avatarInner}>
+                    {/* Placeholder for avatar */}
+                  </div>
+                </div>
+                Book a call with me
+              </Link>
+            </motion.div>
           </motion.div>
 
-          <motion.h1 className={styles.title} variants={itemVariants}>
-            Design that <br />
-            <span className="text-gradient">delivers results.</span>
-          </motion.h1>
-
-          <motion.p className={styles.subtitle} variants={itemVariants}>
-            Strategic design that drives growth, not just looks good. I create
-            everything your brand needs to attract customers and turn them into sales.
-          </motion.p>
-
-          <motion.div className={styles.actions} variants={itemVariants}>
-            <Link href="#work" className="btn-primary">
-              View my work <ArrowRight size={18} />
-            </Link>
-            <Link href="#contact" className="btn-secondary">
-              Book a call
-            </Link>
-          </motion.div>
-
-          <motion.div className={styles.techStack} variants={itemVariants}>
-            <p className={styles.techTitle}>99+ Happy clients</p>
-            <div className={styles.techTags}>
-              {["Figma", "Framer", "Webflow", "Rive", "Blender"].map((tech) => (
-                <span key={tech} className={styles.techTag}>
-                  {tech}
-                </span>
-              ))}
+          {/* Right Column */}
+          <motion.div
+            className={styles.rightColumn}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className={styles.cardsWrapper}>
+              <div className={`${styles.card} ${styles.card1}`}>
+                <Image src="/card2.png" alt="Project 1" fill className={styles.cardImage} />
+              </div>
+              <div className={`${styles.card} ${styles.card2}`}>
+                <Image src="/card3.png" alt="Project 2" fill className={styles.cardImage} />
+              </div>
+              <div className={`${styles.card} ${styles.card3}`}>
+                <Image src="/card1.png" alt="Project 3" fill className={styles.cardImage} />
+              </div>
             </div>
           </motion.div>
+        </div>
+
+        {/* Bottom Section */}
+        <motion.div
+          className={styles.bottomSection}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div className={styles.clientStats}>
+            <div className={styles.avatars}>
+               <div className={styles.miniAvatar} style={{ zIndex: 5 }}></div>
+               <div className={styles.miniAvatar} style={{ zIndex: 4 }}></div>
+               <div className={styles.miniAvatar} style={{ zIndex: 3 }}></div>
+               <div className={styles.miniAvatar} style={{ zIndex: 2 }}></div>
+               <div className={styles.miniAvatar} style={{ zIndex: 1 }}></div>
+            </div>
+            <div className={styles.ratingInfo}>
+              <div className={styles.stars}>
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={14} fill="currentColor" color="currentColor" />
+                ))}
+              </div>
+              <span className={styles.happyClientsText}>99+ Happy clients</span>
+            </div>
+          </div>
+          
+          <div className={styles.logosWrapper}>
+            <div className={styles.logosTrack}>
+              <div className={styles.logoItem}>WORKPUNKT</div>
+              <div className={styles.logoItem}>Daiorus</div>
+              <div className={styles.logoItem}>Kintsugi</div>
+              <div className={styles.logoItem}>CoreOS</div>
+              <div className={styles.logoItem}>Luminary</div>
+              {/* Duplicate for infinite scroll */}
+              <div className={styles.logoItem}>WORKPUNKT</div>
+              <div className={styles.logoItem}>Daiorus</div>
+              <div className={styles.logoItem}>Kintsugi</div>
+              <div className={styles.logoItem}>CoreOS</div>
+              <div className={styles.logoItem}>Luminary</div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
