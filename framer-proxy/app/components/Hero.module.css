@@ -191,6 +191,11 @@
   box-shadow: 0 25px 50px rgba(0,0,0,0.2);
 }
 
+.card4 {
+  z-index: 0;
+  filter: brightness(0.48);
+}
+
 /* Bottom Section */
 .bottomSection {
   display: flex;
