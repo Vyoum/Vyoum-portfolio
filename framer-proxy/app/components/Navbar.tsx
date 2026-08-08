@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { MoreHorizontal, X } from "lucide-react";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 
@@ -37,45 +37,35 @@ export default function Navbar() {
           <span className={styles.name}>Joseph Alexander</span>
         </Link>
 
-        <nav className={styles.desktopNav}>
-          {navLinks.map((link) => (
-            <Link key={link.name} href={link.href} className={styles.navLink}>
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-
-        <div className={styles.actions}>
-          <Link href="#contact" className={styles.contactBtn}>
-            Contact
-          </Link>
-          <button
-            className={styles.mobileToggle}
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
+        <button
+          className={styles.menuToggle}
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X size={20} /> : <MoreHorizontal size={20} />}
+        </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu (Now acts as the main menu since links are hidden) */}
       {mobileOpen && (
         <motion.div
-          className={styles.mobileMenu}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
+          className={styles.dropdownMenu}
+          initial={{ opacity: 0, y: -20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -20, scale: 0.95 }}
         >
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className={styles.mobileNavLink}
+              className={styles.menuNavLink}
               onClick={() => setMobileOpen(false)}
             >
               {link.name}
             </Link>
           ))}
+          <Link href="#contact" className={styles.menuContactBtn} onClick={() => setMobileOpen(false)}>
+            Book a call
+          </Link>
         </motion.div>
       )}
     </motion.header>
