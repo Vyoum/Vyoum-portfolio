@@ -1,13 +1,39 @@
 "use client";
 
-import React from "react";
-import { motion, type Variants } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useSpring, useTransform, type Variants } from "framer-motion";
 import styles from "./Hero.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
+  const card1Transform = useTransform(
+    smoothProgress,
+    [0, 0.55, 1],
+    ["translate(-50%, -50%) rotate(-7deg) scale(0.85)", "translate(-70%, -36%) rotate(-14deg) scale(0.85)", "translate(-82%, -22%) rotate(-16deg) scale(0.85)"]
+  );
+  const card2Transform = useTransform(
+    smoothProgress,
+    [0, 0.55, 1],
+    ["translate(-50%, -50%) rotate(5deg) scale(0.9)", "translate(-35%, -38%) rotate(11deg) scale(0.9)", "translate(-20%, -20%) rotate(13deg) scale(0.9)"]
+  );
+  const card3Transform = useTransform(
+    smoothProgress,
+    [0, 0.55, 1],
+    ["translate(-50%, -50%) rotate(-2deg) scale(1)", "translate(-50%, -38%) rotate(0deg) scale(1.03)", "translate(-50%, -18%) rotate(0deg) scale(1.06)"]
+  );
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -28,7 +54,7 @@ export default function Hero() {
   };
 
   return (
-    <section className={`section ${styles.hero}`} id="home">
+    <section ref={heroRef} className={`section ${styles.hero}`} id="home">
       <div className={`container ${styles.container}`}>
         <div className={styles.topSection}>
           {/* Left Column */}
@@ -73,15 +99,15 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className={styles.cardsWrapper}>
-              <div className={`${styles.card} ${styles.card1}`}>
+              <motion.div className={`${styles.card} ${styles.card1}`} style={{ transform: card1Transform }}>
                 <Image src="/card2.png" alt="Project 1" fill className={styles.cardImage} />
-              </div>
-              <div className={`${styles.card} ${styles.card2}`}>
+              </motion.div>
+              <motion.div className={`${styles.card} ${styles.card2}`} style={{ transform: card2Transform }}>
                 <Image src="/card3.png" alt="Project 2" fill className={styles.cardImage} />
-              </div>
-              <div className={`${styles.card} ${styles.card3}`}>
+              </motion.div>
+              <motion.div className={`${styles.card} ${styles.card3}`} style={{ transform: card3Transform }}>
                 <Image src="/card1.png" alt="Project 3" fill className={styles.cardImage} />
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

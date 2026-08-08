@@ -4,7 +4,7 @@
   align-items: center;
   padding-top: 120px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .container {
@@ -186,18 +186,6 @@
   transform: translate(-50%, -50%) rotate(-2deg) scale(1);
   z-index: 3;
   box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-}
-
-.cardsWrapper:hover .card1 {
-  transform: translate(-70%, -40%) rotate(-15deg) scale(0.85);
-}
-
-.cardsWrapper:hover .card2 {
-  transform: translate(-30%, -45%) rotate(12deg) scale(0.9);
-}
-
-.cardsWrapper:hover .card3 {
-  transform: translate(-50%, -55%) rotate(0deg) scale(1.05);
 }
 
 /* Bottom Section */
