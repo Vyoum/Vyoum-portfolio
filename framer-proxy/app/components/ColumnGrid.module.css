@@ -1,0 +1,42 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rail {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: var(--grid-max);
+  margin: 0 auto;
+}
+
+.vline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--grid-line);
+}
+
+/* Match .container content edges — pad inset, no layout changes */
+.vlineLeft {
+  left: var(--grid-pad);
+}
+
+.vlineRight {
+  right: var(--grid-pad);
+}
+
+@media (max-width: 768px) {
+  .vlineLeft {
+    left: var(--grid-pad-mobile);
+  }
+
+  .vlineRight {
+    right: var(--grid-pad-mobile);
+  }
+}

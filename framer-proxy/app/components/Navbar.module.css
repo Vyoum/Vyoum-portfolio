@@ -1,0 +1,240 @@
+.header {
+  position: fixed;
+  top: 24px;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 0 40px;
+  pointer-events: none;
+}
+
+.wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 10px 12px 10px 18px;
+  border-radius: 40px;
+  border: 1px solid #d9d9d9;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.brand {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.brandLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #111;
+  white-space: nowrap;
+}
+
+.actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 28px;
+}
+
+.links {
+  display: none;
+  align-items: center;
+  gap: 28px;
+}
+
+.link {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.link:hover {
+  opacity: 0.55;
+}
+
+/* Explicit size so Contact never gets squashed by flex/layout morph */
+.contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 108px;
+  height: 40px;
+  padding: 0 22px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  color: #111;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: background 0.2s ease;
+}
+
+.contact:hover {
+  background: #f7f7f7;
+}
+
+.dotsDesktop {
+  display: none;
+}
+
+.dotsMobile {
+  display: block;
+}
+
+.dots {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #828282;
+  top: 50%;
+  transition: all 0.3s ease;
+}
+
+.dot1 {
+  left: 12.5%;
+  transform: translate(-50%, -50%);
+}
+
+.dot2 {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dot3 {
+  left: 87.5%;
+  transform: translate(-50%, -50%);
+}
+
+.dotHidden {
+  left: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+
+.dotXLeft {
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: #111;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.dotXRight {
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: #111;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.mobileMenu {
+  position: absolute;
+  top: calc(100% + 10px);
+  z-index: 110;
+  display: flex;
+  width: min(220px, calc(100vw - 2rem));
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #d9d9d9;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+}
+
+.mobileLink {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .links {
+    display: flex;
+  }
+
+  .dotsDesktop {
+    display: block;
+  }
+
+  .dotsMobile {
+    display: none;
+  }
+
+  .contact {
+    /* desktop: only show beside expanded links (controlled in JSX) */
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    padding: 0 24px;
+  }
+
+  .contact {
+    display: none;
+  }
+
+  .mobileMenu .contact {
+    display: inline-flex;
+    width: 100%;
+    margin-top: 4px;
+  }
+}

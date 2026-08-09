@@ -1,5 +1,6 @@
 .workSection {
-  background: var(--background);
+  background: transparent;
+  padding-top: 160px;
 }
 
 .container {

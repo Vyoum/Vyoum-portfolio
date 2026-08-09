@@ -1,0 +1,419 @@
+.scene {
+  position: relative;
+  width: 100%;
+  /* Extra scroll room so the tall project grid can unpin before Work History */
+  height: 380vh;
+  background: transparent;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  /* Tall enough for large 2×2 cards under the heading (not clipped to 100vh) */
+  height: max(100vh, 1180px);
+  width: 100%;
+  overflow: visible;
+}
+
+/* Single composition: hero copy, pile target, grid, logos share one frame */
+.frame {
+  position: relative;
+  height: 100%;
+  padding-top: 148px;
+  padding-bottom: 0;
+}
+
+/* ——— Hero copy (left) ——— */
+
+.heroCopy {
+  position: absolute;
+  top: 148px;
+  /* Absolute kids ignore .container padding — inset explicitly */
+  left: calc(var(--grid-pad) + 24px);
+  width: min(480px, 42%);
+  max-width: 480px;
+  padding-right: 0;
+  box-sizing: border-box;
+  /* Below project cards so clients/logos never cover the grid */
+  z-index: 15;
+  overflow: visible;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 28px;
+  color: var(--foreground);
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  background: #34c759;
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(52, 199, 89, 0.4);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(52, 199, 89, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 199, 89, 0);
+  }
+}
+
+.heroTitle {
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  line-height: 1.08;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+  overflow: visible;
+}
+
+.titleGray {
+  color: #888888;
+  font-weight: 500;
+}
+
+.titleBlack {
+  color: var(--foreground);
+  font-weight: 800;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.heroSubtitle {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  max-width: 500px;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.subtitleBold {
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.subtitleSubtle {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.bookCallBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--foreground);
+  color: var(--background);
+  padding: 8px 24px 8px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  margin-bottom: 50px;
+}
+
+.bookCallBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.avatarWrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding: 2px;
+}
+
+.avatarInner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--background);
+  background-image: url("https://i.pravatar.cc/100?img=11");
+  background-size: cover;
+}
+
+.clientStats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.avatars {
+  display: flex;
+}
+
+.miniAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--background);
+  margin-left: -10px;
+  background-size: cover;
+  background-color: #ddd;
+}
+
+.miniAvatar:first-child {
+  margin-left: 0;
+}
+
+.miniAvatar[data-i="1"] {
+  background-image: url("https://i.pravatar.cc/100?img=1");
+}
+.miniAvatar[data-i="2"] {
+  background-image: url("https://i.pravatar.cc/100?img=2");
+}
+.miniAvatar[data-i="3"] {
+  background-image: url("https://i.pravatar.cc/100?img=3");
+}
+.miniAvatar[data-i="4"] {
+  background-image: url("https://i.pravatar.cc/100?img=4");
+}
+.miniAvatar[data-i="5"] {
+  background-image: url("https://i.pravatar.cc/100?img=5");
+}
+
+.ratingInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+  color: var(--foreground);
+}
+
+.happyClientsText {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Pile target — right side of the hero composition */
+.pileSlot {
+  position: absolute;
+  top: 42%;
+  right: calc(48px + var(--grid-pad));
+  transform: translateY(-50%);
+  width: min(380px, 40%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.pileAnchor {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: 32px;
+  visibility: hidden;
+}
+
+.hint {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  visibility: visible;
+}
+
+/* ——— Projects grid (final layout; cards start translated to pile) ——— */
+
+.header {
+  position: absolute;
+  top: 148px;
+  left: calc(var(--grid-pad) + 24px);
+  right: calc(48px + var(--grid-pad) + 24px);
+  z-index: 35;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.title {
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  color: var(--foreground);
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--foreground);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.grid {
+  position: absolute;
+  left: calc(var(--grid-pad) + 24px);
+  right: calc(48px + var(--grid-pad) + 24px);
+  top: 300px;
+  bottom: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 24px;
+  align-content: start;
+  z-index: 30;
+  min-height: 0;
+  padding-bottom: 80px;
+}
+
+.logosBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* Span from hero column out to the right edge grid line */
+  width: calc(var(--grid-max) - 2 * var(--grid-pad) - 24px);
+  max-width: calc(100vw - 2 * var(--grid-pad) - 24px);
+  margin-top: 36px;
+  padding: 18px 0;
+  border-top: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--grid-line);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.logosDivider {
+  width: 1px;
+  height: 32px;
+  flex-shrink: 0;
+  background: var(--grid-line);
+}
+
+.logosWrapper {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  /* Logos enter from the right grid edge; soft fade only at the far right clip */
+  mask-image: linear-gradient(
+    to right,
+    black 0%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    black 0%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.logosTrack {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  animation: slide 20s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 25px));
+  }
+}
+
+.logoItem {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  opacity: 0.6;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 860px) {
+  .heroCopy {
+    position: absolute;
+    top: 120px;
+    left: calc(var(--grid-pad-mobile) + 12px);
+    right: calc(var(--grid-pad-mobile) + 12px);
+    width: auto;
+    max-width: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 15;
+    padding: 0;
+    overflow: visible;
+    background: linear-gradient(
+      180deg,
+      var(--background) 70%,
+      transparent 100%
+    );
+  }
+
+  .heroSubtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .clientStats {
+    justify-content: flex-start;
+  }
+
+  .logosBar {
+    width: calc(100vw - 2 * var(--grid-pad-mobile) - 24px);
+    max-width: calc(100vw - 2 * var(--grid-pad-mobile) - 24px);
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  .pileSlot {
+    top: auto;
+    bottom: 96px;
+    right: 50%;
+    transform: translateX(50%);
+    width: min(300px, 72vw);
+  }
+
+  .header {
+    top: 160px;
+    left: calc(var(--grid-pad-mobile) + 12px);
+    right: calc(var(--grid-pad-mobile) + 12px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .grid {
+    top: 250px;
+    left: calc(var(--grid-pad-mobile) + 12px);
+    right: calc(var(--grid-pad-mobile) + 12px);
+    bottom: 88px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-content: start;
+    overflow-y: auto;
+  }
+}

@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar";
+import ColumnGrid from "./components/ColumnGrid";
 import UntanglingProjects from "./components/UntanglingProjects";
 import WorkHistory from "./components/WorkHistory";
 import About from "./components/About";
@@ -11,10 +12,12 @@ import Footer from "./components/Footer";
 export default function HomePage() {
   return (
     <>
+      <ColumnGrid />
       <Navbar />
       <main>
-        {/* Hero + project pile→grid live in one scroll-scrubbed wrapper */}
+        {/* Hero + project pile→grid: one scroll-scrubbed section, same card stack */}
         <UntanglingProjects />
+        <div className="gridRule" aria-hidden="true" />
         <WorkHistory />
         <About />
         <Pricing />

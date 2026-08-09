@@ -1,5 +1,5 @@
 .blogSection {
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
 }
 
 .container {

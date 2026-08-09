@@ -7,22 +7,46 @@ import {
   motion,
   useScroll,
 } from "framer-motion";
-import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
+import styles from "./Navbar.module.css";
 
 const navLinks = [
-  { name: "Build", href: "#work" },
-  { name: "Design", href: "#services" },
-  { name: "Launch", href: "#pricing" },
-  { name: "Grow", href: "#blog" },
+  { name: "Work", href: "#work" },
+  { name: "Services", href: "#services" },
+  { name: "Pricing", href: "#pricing" },
+  { name: "Blog", href: "#blog" },
 ] as const;
 
 const spring = {
   type: "spring" as const,
-  stiffness: 380,
-  damping: 34,
-  mass: 0.7,
+  bounce: 0,
+  duration: 0.55,
 };
+
+function DotsButton({
+  open,
+  onClick,
+  onMouseEnter,
+}: {
+  open: boolean;
+  onClick: () => void;
+  onMouseEnter?: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={open ? "Close menu" : "Open menu"}
+      aria-expanded={open}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      className={styles.dots}
+    >
+      <span className={`${styles.dot} ${open ? styles.dotXLeft : styles.dot1}`} />
+      <span className={`${styles.dot} ${open ? styles.dotHidden : styles.dot2}`} />
+      <span className={`${styles.dot} ${open ? styles.dotXRight : styles.dot3}`} />
+    </button>
+  );
+}
 
 export default function Navbar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -37,92 +61,90 @@ export default function Navbar() {
     });
   }, [scrollY]);
 
+  const showLinks = !isCollapsed || menuOpen;
+
   return (
-    <header className="fixed top-6 left-0 z-[100] flex w-full justify-center px-4 md:px-6">
-      <div className="relative flex flex-col items-center">
+    <header className={styles.header}>
+      <div
+        className={styles.wrap}
+        onMouseLeave={() => {
+          if (isCollapsed) setMenuOpen(false);
+        }}
+      >
         <LayoutGroup id="site-nav">
           <motion.nav
             layout
             transition={spring}
             aria-label="Primary"
-            className="relative flex items-center gap-1 rounded-full border border-black/10 bg-white/75 py-1.5 pr-1.5 pl-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/60"
+            className={styles.nav}
+            style={{
+              gap: isCollapsed && !menuOpen ? 40 : 88,
+            }}
           >
-            <motion.div layout="position" transition={spring} className="shrink-0">
-              <Link
-                href="/"
-                className="flex items-center rounded-full px-3 py-2 no-underline"
-              >
-                <span className="text-[0.95rem] font-semibold tracking-[-0.02em] text-neutral-900 whitespace-nowrap">
-                  Vyoum Agarwaal
-                </span>
+            <motion.div layout="position" transition={spring} className={styles.brand}>
+              <Link href="/" className={styles.brandLink}>
+                <span
+                  className={styles.avatar}
+                  style={{
+                    backgroundImage:
+                      'url("https://i.pravatar.cc/100?img=11")',
+                  }}
+                  aria-hidden
+                />
+                <span className={styles.name}>Vyoum Agarwaal</span>
               </Link>
             </motion.div>
 
-            <AnimatePresence mode="popLayout" initial={false}>
-              {!isCollapsed ? (
-                <motion.div
-                  key="expanded-cluster"
-                  layout
-                  initial={{ opacity: 0, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, filter: "blur(4px)" }}
-                  transition={{ duration: 0.22, ease: [0.25, 1, 0.5, 1] }}
-                  className="flex items-center gap-1"
-                >
-                  <nav
-                    className="mx-1 hidden items-center gap-0.5 md:flex"
-                    aria-label="Core pillars"
+            <div className={styles.actions}>
+              <AnimatePresence mode="wait" initial={false}>
+                {showLinks ? (
+                  <motion.div
+                    key="links"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className={styles.links}
+                    aria-label="Site sections"
                   >
                     {navLinks.map((link) => (
-                      <Link
-                        key={link.name}
-                        href={link.href}
-                        className="rounded-full px-3.5 py-2 text-sm font-medium text-neutral-500 no-underline transition-colors hover:bg-black/[0.04] hover:text-neutral-900"
-                      >
+                      <Link key={link.name} href={link.href} className={styles.link}>
                         {link.name}
                       </Link>
                     ))}
-                  </nav>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="dots"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className={styles.dotsDesktop}
+                  >
+                    <DotsButton
+                      open={false}
+                      onClick={() => setMenuOpen(true)}
+                      onMouseEnter={() => setMenuOpen(true)}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-                  <button
-                    type="button"
-                    aria-label="Open menu"
-                    aria-expanded={menuOpen}
-                    onClick={() => setMenuOpen((open) => !open)}
-                    className="flex size-10 items-center justify-center rounded-full text-neutral-500 transition-colors hover:bg-black/[0.04] hover:text-neutral-900 md:hidden"
-                  >
-                    <MoreHorizontal size={20} />
-                  </button>
-
-                  <Link
-                    href="#contact"
-                    className="ml-0.5 inline-flex shrink-0 items-center justify-center rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-white no-underline shadow-[0_8px_20px_rgba(0,0,0,0.18)] transition hover:opacity-90"
-                  >
-                    Book a call
-                  </Link>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="collapsed-dots"
-                  layout
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.85 }}
-                  transition={{ duration: 0.2, ease: [0.25, 1, 0.5, 1] }}
-                  className="flex items-center pr-0.5"
-                >
-                  <button
-                    type="button"
-                    aria-label="Open menu"
-                    aria-expanded={menuOpen}
-                    onClick={() => setMenuOpen((open) => !open)}
-                    className="flex size-10 items-center justify-center rounded-full text-neutral-600 transition-colors hover:bg-black/[0.04] hover:text-neutral-900"
-                  >
-                    <MoreHorizontal size={20} strokeWidth={2.25} />
-                  </button>
-                </motion.div>
+              {/* Contact stays outside the link morph so it never collapses into them */}
+              {showLinks && (
+                <Link href="#contact" className={styles.contact}>
+                  Contact
+                </Link>
               )}
-            </AnimatePresence>
+
+              <div className={styles.dotsMobile}>
+                <DotsButton
+                  open={menuOpen}
+                  onClick={() => setMenuOpen((o) => !o)}
+                />
+              </div>
+            </div>
           </motion.nav>
         </LayoutGroup>
 
@@ -130,18 +152,18 @@ export default function Navbar() {
           {menuOpen && (
             <motion.div
               key="nav-menu"
-              initial={{ opacity: 0, y: -10, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -8, scale: 0.96 }}
-              transition={{ duration: 0.2, ease: [0.25, 1, 0.5, 1] }}
-              className="absolute top-[calc(100%+12px)] z-[110] w-[min(260px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-black/10 bg-white/90 p-2 shadow-[0_16px_40px_rgba(0,0,0,0.12)] backdrop-blur-xl"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className={styles.mobileMenu}
             >
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="block rounded-xl px-4 py-3 text-sm font-medium text-neutral-700 no-underline transition-colors hover:bg-black/[0.04] hover:text-neutral-900"
+                  className={styles.mobileLink}
                 >
                   {link.name}
                 </Link>
@@ -149,9 +171,9 @@ export default function Navbar() {
               <Link
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-1 block rounded-xl bg-neutral-900 px-4 py-3 text-center text-sm font-semibold text-white no-underline"
+                className={styles.contact}
               >
-                Book a call
+                Contact
               </Link>
             </motion.div>
           )}

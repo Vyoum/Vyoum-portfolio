@@ -1,5 +1,5 @@
 .aboutSection {
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
   position: relative;
   overflow: hidden;
 }
@@ -8,10 +8,16 @@
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
+  max-width: var(--grid-max);
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  background-image: linear-gradient(var(--grid-line), var(--grid-line));
+  background-repeat: no-repeat;
+  background-size: calc(100% - 2 * var(--grid-pad)) 1px;
+  background-position: center top;
+  pointer-events: none;
 }
 
 .container {

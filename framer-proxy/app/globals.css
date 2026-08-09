@@ -16,6 +16,13 @@
   --radius-lg: 24px;
   --radius-full: 9999px;
   --transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Page column grid — keep in sync with ColumnGrid */
+  --grid-max: 1240px;
+  --grid-pad: 48px;
+  --grid-pad-mobile: 24px;
+  --grid-cols: 12;
+  --grid-line: rgba(0, 0, 0, 0.07);
 }
 
 * {
@@ -32,6 +39,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Content sits above the column-grid overlay */
+main,
+header,
+footer {
+  position: relative;
+  z-index: 1;
 }
 
 html {
@@ -56,11 +72,43 @@ button {
   font-family: inherit;
 }
 
-/* Utilities */
+/* Utilities — aligns to the same rail as ColumnGrid */
 .container {
-  max-width: 1240px;
+  max-width: var(--grid-max);
   margin: 0 auto;
-  padding: 0 28px;
+  padding: 0 var(--grid-pad);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--grid-pad-mobile);
+  }
+}
+
+/* Horizontal rule that snaps to the column rail */
+.gridRule {
+  width: 100%;
+  max-width: var(--grid-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--grid-pad);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.gridRule::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--grid-line);
+}
+
+@media (max-width: 768px) {
+  .gridRule {
+    padding: 0 var(--grid-pad-mobile);
+  }
 }
 
 .glass {

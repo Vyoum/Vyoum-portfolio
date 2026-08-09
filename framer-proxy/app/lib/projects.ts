@@ -1,11 +1,13 @@
+export type ProjectTone = "kora" | "kyma" | "mugen" | "axiom";
+
 export type Project = {
   id: string;
   title: string;
   category: string;
   href: string;
   image: string;
-  /** Soft LaunchFolio-style panel color */
-  tone: string;
+  /** Soft LaunchFolio-style panel color key */
+  tone: ProjectTone;
   /** Starting pile rotation in degrees */
   angle: number;
 };
@@ -17,7 +19,7 @@ export const PROJECTS: Project[] = [
     category: "Consulting Site",
     href: "#",
     image: "/card1.png",
-    tone: "bg-[#c6f45b]",
+    tone: "kora",
     angle: -8,
   },
   {
@@ -26,7 +28,7 @@ export const PROJECTS: Project[] = [
     category: "AI Agency",
     href: "#",
     image: "/card2.png",
-    tone: "bg-[#b6a9ff]",
+    tone: "kyma",
     angle: 4,
   },
   {
@@ -35,7 +37,7 @@ export const PROJECTS: Project[] = [
     category: "Design studio",
     href: "#",
     image: "/card3.png",
-    tone: "bg-[#ff806d]",
+    tone: "mugen",
     angle: 12,
   },
   {
@@ -44,7 +46,7 @@ export const PROJECTS: Project[] = [
     category: "Ecommerce Site",
     href: "#",
     image: "/card1.png",
-    tone: "bg-[#8cd8ff]",
+    tone: "axiom",
     angle: -4,
   },
 ];

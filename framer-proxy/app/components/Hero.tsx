@@ -1,14 +1,13 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
 import styles from "./Hero.module.css";
 
-/**
- * Standalone hero (optional). The live homepage uses UntanglingProjects,
- * which embeds the hero + scroll-scrubbed project pile→grid.
- */
+const logos = ["360degrees", "Codecraft_", "Frequencii", "Kintsugi", "WORKPUNKT"];
+
 export default function Hero() {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -66,6 +65,44 @@ export default function Hero() {
               </Link>
             </motion.div>
           </motion.div>
+
+          <motion.div
+            className={styles.rightColumn}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
+          >
+            <div className={styles.cardsWrapper}>
+              <div className={`${styles.card} ${styles.card1}`}>
+                <Image
+                  src="/card2.png"
+                  alt="Project preview"
+                  fill
+                  className={styles.cardImage}
+                  sizes="440px"
+                />
+              </div>
+              <div className={`${styles.card} ${styles.card2}`}>
+                <Image
+                  src="/card3.png"
+                  alt="Project preview"
+                  fill
+                  className={styles.cardImage}
+                  sizes="440px"
+                />
+              </div>
+              <div className={`${styles.card} ${styles.card3}`}>
+                <Image
+                  src="/card1.png"
+                  alt="Featured project preview"
+                  fill
+                  priority
+                  className={styles.cardImage}
+                  sizes="440px"
+                />
+              </div>
+            </div>
+          </motion.div>
         </div>
 
         <motion.div
@@ -99,19 +136,11 @@ export default function Hero() {
 
           <div className={styles.logosWrapper}>
             <div className={styles.logosTrack}>
-              {[
-                "WORKPUNKT",
-                "Daiorus",
-                "Kintsugi",
-                "CoreOS",
-                "Luminary",
-              ]
-                .flatMap((logo) => [logo, logo])
-                .map((logo, i) => (
-                  <div key={`${logo}-${i}`} className={styles.logoItem}>
-                    {logo}
-                  </div>
-                ))}
+              {[...logos, ...logos].map((logo, i) => (
+                <div key={`${logo}-${i}`} className={styles.logoItem}>
+                  {logo}
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>
