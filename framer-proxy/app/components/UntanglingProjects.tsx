@@ -32,12 +32,13 @@ export default function UntanglingProjects() {
     mass: 0.35,
   });
 
-  const heroOpacity = useTransform(progress, [0, 0.18, 0.38], [1, 0.45, 0]);
-  const heroY = useTransform(progress, [0, 0.38], [0, -56]);
-  const heroPointer = useTransform(progress, (p) => (p > 0.32 ? "none" : "auto"));
+  /* Soft hero exit — same continuous ground; cards are the main motion */
+  const heroOpacity = useTransform(progress, [0, 0.28, 0.52], [1, 0.55, 0]);
+  const heroY = useTransform(progress, [0, 0.52], [0, -28]);
+  const heroPointer = useTransform(progress, (p) => (p > 0.4 ? "none" : "auto"));
 
-  const headingOpacity = useTransform(progress, [0.22, 0.48], [0, 1]);
-  const headingY = useTransform(progress, [0.22, 0.48], [28, 0]);
+  const headingOpacity = useTransform(progress, [0.3, 0.55], [0, 1]);
+  const headingY = useTransform(progress, [0.3, 0.55], [16, 0]);
   const hintOpacity = useTransform(progress, [0, 0.14], [1, 0]);
 
   return (

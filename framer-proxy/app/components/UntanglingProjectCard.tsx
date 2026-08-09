@@ -100,7 +100,7 @@ export default function UntanglingProjectCard({
   const opacity = useTransform(ready, (v) => (v ? 1 : 0));
 
   return (
-    <div ref={cellRef} className={styles.cell} style={{ zIndex: 20 - index }}>
+    <div ref={cellRef} className={styles.cell} style={{ zIndex: 4 - index }}>
       <motion.div style={{ x, y, rotate, opacity }} className={styles.mover}>
         <Link href={project.href} className={styles.card}>
           <div className={`${styles.frame} ${TONE_CLASS[project.tone]}`}>
@@ -110,13 +110,18 @@ export default function UntanglingProjectCard({
                 alt={project.title}
                 fill
                 className={styles.shotImage}
-                sizes="(max-width: 860px) 78vw, 300px"
+                sizes="(max-width: 860px) 70vw, 260px"
                 priority={index < 2}
               />
+              <span className={styles.shotDim} aria-hidden />
             </div>
             <span className={styles.badge}>
               <ArrowUpRight size={12} strokeWidth={2.5} />
               {project.title}
+            </span>
+            <span className={styles.viewProject}>
+              View Project
+              <ArrowUpRight size={15} strokeWidth={2.25} />
             </span>
           </div>
 

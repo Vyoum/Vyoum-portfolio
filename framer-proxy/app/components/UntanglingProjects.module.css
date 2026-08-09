@@ -3,7 +3,8 @@
   width: 100%;
   /* Extra scroll room so the tall project grid can unpin before Work History */
   height: 380vh;
-  background: transparent;
+  /* Same continuous page ground for the whole fan — no section color flip */
+  background: var(--background);
 }
 
 .sticky {
@@ -13,6 +14,7 @@
   height: max(100vh, 1280px);
   width: 100%;
   overflow: visible;
+  background: var(--background);
 }
 
 /* Single composition: hero copy, pile target, grid, logos share one frame */
@@ -140,8 +142,10 @@
 }
 
 .titleBlack {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 700;
   color: var(--foreground);
-  font-weight: 800;
   white-space: nowrap;
   display: inline-block;
 }
@@ -307,11 +311,17 @@
   top: 148px;
   left: calc(var(--grid-pad) + 24px);
   right: calc(48px + var(--grid-pad) + 24px);
-  z-index: 35;
+  /* Always paint above fanning cards (inspo: title readable over the stack) */
+  z-index: 80;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
+  pointer-events: none;
+}
+
+.header a {
+  pointer-events: auto;
 }
 
 .title {
@@ -336,16 +346,18 @@
   position: absolute;
   left: calc(var(--grid-pad) + 24px);
   right: calc(48px + var(--grid-pad) + 24px);
-  top: 300px;
+  /* Sit clearly under the Latest Projects heading */
+  top: 340px;
   bottom: auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 36px 48px;
   align-content: start;
   justify-items: center;
-  z-index: 30;
+  z-index: 10;
   min-height: 0;
   padding-bottom: 80px;
+  isolation: isolate;
 }
 
 .logosBar {
@@ -474,10 +486,11 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+    z-index: 80;
   }
 
   .grid {
-    top: 250px;
+    top: 280px;
     left: calc(var(--grid-pad-mobile) + 12px);
     right: calc(var(--grid-pad-mobile) + 12px);
     bottom: 88px;
@@ -485,5 +498,6 @@
     gap: 16px;
     align-content: start;
     overflow-y: auto;
+    z-index: 10;
   }
 }
