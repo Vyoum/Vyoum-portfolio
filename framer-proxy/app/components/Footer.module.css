@@ -256,14 +256,30 @@
   font-weight: 700;
   line-height: 0.72;
   letter-spacing: -0.06em;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.56);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.42) 48%, rgba(255, 255, 255, 0.08) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-align: center;
   text-transform: uppercase;
   user-select: none;
   pointer-events: none;
-  /* Crop to top half of the glyphs */
+  filter: blur(0.35px);
+  text-shadow: 0 12px 26px rgba(255, 255, 255, 0.2), 0 26px 42px rgba(255, 255, 255, 0.14);
+  /* Crop to the hazy upper half of the glyphs */
   height: 0.42em;
   overflow: hidden;
+}
+
+.wordmark::after {
+  content: "";
+  position: absolute;
+  inset: 34% 8% -12% 8%;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.14);
+  filter: blur(42px);
+  opacity: 0.42;
 }
 
 @media (max-width: 767px) {
