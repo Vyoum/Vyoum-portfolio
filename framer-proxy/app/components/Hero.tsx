@@ -48,11 +48,10 @@ export default function Hero() {
 
             <motion.p className={styles.subtitle} variants={itemVariants}>
               <span className={styles.subtitleBold}>
-                Strategic design that drives growth, not just looks good.
+              Strategic development that drives growth, not just working code.
               </span>{" "}
               <span className={styles.subtitleSubtle}>
-                I create everything your brand needs to attract customers and
-                turn them into sales.
+              I build everything your business needs to go from idea to revenue.
               </span>
             </motion.p>
 
