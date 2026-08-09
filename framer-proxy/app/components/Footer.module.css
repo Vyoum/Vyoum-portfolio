@@ -68,6 +68,17 @@
   gap: 0.22em;
 }
 
+.rotatingPhrase {
+  display: inline-flex;
+  min-width: 7.2ch;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rotatingWord {
+  display: inline-block;
+}
+
 .dot {
   width: 0.18em;
   height: 0.18em;
@@ -245,12 +256,18 @@
   font-weight: 700;
   line-height: 0.72;
   letter-spacing: -0.06em;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.72);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.62) 56%, rgba(255, 255, 255, 0.2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-align: center;
   text-transform: uppercase;
   user-select: none;
   pointer-events: none;
-  /* Crop to top half of the glyphs */
+  filter: blur(0.12px);
+  text-shadow: 0 5px 14px rgba(255, 255, 255, 0.14);
+  /* Crop to the soft lower edge of the letters */
   height: 0.42em;
   overflow: hidden;
 }

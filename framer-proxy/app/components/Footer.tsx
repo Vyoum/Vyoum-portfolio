@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import styles from "./Footer.module.css";
 
 function IconX() {
@@ -74,7 +75,19 @@ const socials: Social[] = [
   { href: "#", label: "LinkedIn", Icon: IconLinkedIn },
 ];
 
+const rotatingWords = ["Develop", "Design", "Build", "Scale", "Automate"];
+
 export default function Footer() {
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setWordIndex((current) => (current + 1) % rotatingWords.length);
+    }, 2200);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
     <footer className={styles.footer} id="contact">
       <div className={styles.badge}>
@@ -90,7 +103,21 @@ export default function Footer() {
       <div className={`container ${styles.inner}`}>
         <h2 className={styles.headline}>
           <span className={styles.headlinePrimary}>
-            Lets design
+            <span className={styles.rotatingPhrase} aria-live="polite">
+              <span>Let&apos;s </span>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={rotatingWords[wordIndex]}
+                  className={styles.rotatingWord}
+                  initial={{ opacity: 0, y: "0.55em" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: "-0.55em" }}
+                  transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {rotatingWords[wordIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
             <span className={styles.dot} aria-hidden />
           </span>
           <span className={styles.headlineMuted}>incredible work together.</span>
