@@ -128,7 +128,7 @@ export default function UntanglingProjects() {
           <div className={styles.pileSlot} aria-hidden>
             <div ref={pileRef} className={styles.pileAnchor} />
             <motion.p style={{ opacity: hintOpacity }} className={styles.hint}>
-              Scroll to untangle
+              
             </motion.p>
           </div>
 
