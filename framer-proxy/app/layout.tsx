@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import SmoothScroll from "./components/SmoothScroll";
+import CustomCursor from "./components/CustomCursor";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,9 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-background">
       <body className={`${inter.variable} antialiased`}>
         <SmoothScroll>{children}</SmoothScroll>
+        <CustomCursor />
       </body>
     </html>
   );
