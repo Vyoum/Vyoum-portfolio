@@ -68,6 +68,17 @@
   gap: 0.22em;
 }
 
+.rotatingPhrase {
+  display: inline-flex;
+  min-width: 7.2ch;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rotatingWord {
+  display: inline-block;
+}
+
 .dot {
   width: 0.18em;
   height: 0.18em;
