@@ -69,12 +69,14 @@ export default function UntanglingProjectCard({
 
     const sticky = stickyRef.current;
     const pile = pileRef.current;
+    const cell = cellRef.current;
     const ro =
       typeof ResizeObserver !== "undefined"
         ? new ResizeObserver(measure)
         : null;
     if (sticky) ro?.observe(sticky);
     if (pile) ro?.observe(pile);
+    if (cell) ro?.observe(cell);
 
     return () => {
       cancelAnimationFrame(raf);
@@ -108,7 +110,7 @@ export default function UntanglingProjectCard({
                 alt={project.title}
                 fill
                 className={styles.shotImage}
-                sizes="(max-width: 860px) 90vw, 45vw"
+                sizes="(max-width: 860px) 78vw, 300px"
                 priority={index < 2}
               />
             </div>

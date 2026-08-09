@@ -9,8 +9,8 @@
 .sticky {
   position: sticky;
   top: 0;
-  /* Tall enough for large 2×2 cards under the heading (not clipped to 100vh) */
-  height: max(100vh, 1180px);
+  /* Tall enough for medium 4:5 cards in a 2×2 under the heading */
+  height: max(100vh, 1280px);
   width: 100%;
   overflow: visible;
 }
@@ -270,13 +270,13 @@
   white-space: nowrap;
 }
 
-/* Pile target — right of hero title (same vertical band as h1) */
+/* Pile target — same medium device size as settled cards */
 .pileSlot {
   position: absolute;
   top: 190px;
   right: calc(48px + var(--grid-pad));
   transform: none;
-  width: min(380px, 40%);
+  width: min(300px, 32%);
   z-index: 5;
   display: flex;
   flex-direction: column;
@@ -286,8 +286,9 @@
 
 .pileAnchor {
   width: 100%;
-  aspect-ratio: 3 / 2;
-  border-radius: 32px;
+  /* Match card frame aspect so pile center aligns with the medium device */
+  aspect-ratio: 4 / 5;
+  border-radius: 28px;
   visibility: hidden;
 }
 
@@ -339,8 +340,9 @@
   bottom: auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px 24px;
+  gap: 36px 48px;
   align-content: start;
+  justify-items: center;
   z-index: 30;
   min-height: 0;
   padding-bottom: 80px;
@@ -462,7 +464,7 @@
     bottom: 96px;
     right: 50%;
     transform: translateX(50%);
-    width: min(300px, 72vw);
+    width: min(280px, 72vw);
   }
 
   .header {
