@@ -1,132 +1,281 @@
 .footer {
-  background: var(--surface);
-  padding: 120px 0 40px;
   position: relative;
+  background: #000;
+  color: #fff;
   overflow: hidden;
+  padding: 72px 0 0;
+  margin-top: 40px;
 }
 
-.footer::before {
-  content: "";
+/* Floating profile chip sitting on the light → black edge */
+.badge {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  background: #fff;
+  color: #111;
+  border-radius: 9999px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
 }
 
-.container {
-  max-width: 1200px;
+.badgeAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.badgeName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.inner {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 120px;
+  gap: 56px;
+  padding-top: 56px;
+  padding-bottom: 120px;
 }
 
-.top {
+.headline {
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 0.08em;
+  font-size: clamp(2.75rem, 7.2vw, 5.75rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  max-width: 18ch;
 }
 
-@media (min-width: 992px) {
-  .top {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+.headlinePrimary {
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.22em;
 }
 
-.letstalk h2 {
-  font-size: clamp(3rem, 6vw, 5rem);
-  line-height: 1.1;
-  max-width: 600px;
-  text-transform: uppercase;
+.dot {
+  width: 0.18em;
+  height: 0.18em;
+  border-radius: 50%;
+  background: #fff;
+  flex-shrink: 0;
+  translate: 0 0.08em;
 }
 
-.contactInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+.headlineMuted {
+  color: #808080;
+}
+
+.contactRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
 }
 
 @media (min-width: 768px) {
-  .contactInfo {
-    flex-direction: row;
-    gap: 80px;
+  .contactRow {
+    grid-template-columns: 1.35fr 0.85fr 1.2fr;
+    gap: 48px;
+    align-items: start;
   }
 }
 
-.contactBlock {
+.block {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .label {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
+  margin: 0;
+  color: #808080;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
-.link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1.1rem;
-  transition: color var(--transition);
+.value {
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  width: fit-content;
+  transition: opacity 0.2s ease;
 }
 
-.link:hover {
-  color: var(--accent);
+.value:hover {
+  opacity: 0.7;
 }
 
 .socials {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
-.bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+.socialIcon,
+.socialPill {
+  display: inline-flex;
   align-items: center;
-  border-top: 1px solid var(--border);
-  padding-top: 40px;
+  justify-content: center;
+  background: #fff;
+  color: #000;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.socialIcon:hover,
+.socialPill:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.socialIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.socialPill {
+  height: 36px;
+  padding: 0 12px 0 10px;
+  border-radius: 9999px;
+  gap: 8px;
+}
+
+.socialGlyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.socialCount {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #000;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.navRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: end;
 }
 
 @media (min-width: 768px) {
-  .bottom {
-    flex-direction: row;
-    justify-content: space-between;
+  .navRow {
+    grid-template-columns: 1.35fr 0.85fr 1.2fr;
+    gap: 48px;
+    align-items: start;
   }
 }
 
-.copyright {
-  color: var(--text-muted);
-  font-size: 0.95rem;
+.menuGrid {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 12px 40px;
+  width: fit-content;
 }
 
-.footerLinks {
+.menuCol {
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.footerLinks a {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  transition: color var(--transition);
+.menuCol a {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  width: fit-content;
+  transition: opacity 0.2s ease;
 }
 
-.footerLinks a:hover {
-  color: var(--foreground);
+.menuCol a:hover {
+  opacity: 0.7;
 }
 
-.bigLogo {
-  font-size: clamp(2rem, 5vw, 4rem);
+.copyright {
+  margin: 0;
+  color: #808080;
+  font-size: 0.9rem;
+  font-weight: 500;
+  justify-self: start;
+}
+
+@media (min-width: 768px) {
+  .copyright {
+    justify-self: end;
+    align-self: end;
+    text-align: right;
+  }
+}
+
+/* Cropped oversized brand — only the crown of the letters shows */
+.wordmark {
+  position: relative;
+  z-index: 1;
+  margin: 24px 0 0;
+  padding: 0 var(--grid-pad);
+  font-size: clamp(6.5rem, 28vw, 22rem);
   font-weight: 700;
-  letter-spacing: -0.05em;
-  color: var(--text-muted);
-  opacity: 0.2;
+  line-height: 0.72;
+  letter-spacing: -0.06em;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  user-select: none;
+  pointer-events: none;
+  /* Crop to top half of the glyphs */
+  height: 0.42em;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    padding-top: 64px;
+  }
+
+  .inner {
+    gap: 40px;
+    padding-top: 40px;
+    padding-bottom: 72px;
+  }
+
+  .headline {
+    max-width: none;
+  }
+
+  .badgeName {
+    font-size: 0.8rem;
+  }
+
+  .wordmark {
+    font-size: clamp(5rem, 34vw, 12rem);
+    height: 0.4em;
+  }
 }
