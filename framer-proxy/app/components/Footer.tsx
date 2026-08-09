@@ -12,7 +12,7 @@ export default function Footer() {
         <div className={styles.top}>
           <div className={styles.letstalk}>
             <h2>
-              Let's design <br />
+              Let&apos;s design <br />
               build <br />
               create <br />
               <span className="text-gradient">incredible work</span> together.

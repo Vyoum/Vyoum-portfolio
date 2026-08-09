@@ -1,7 +1,5 @@
-import React from "react";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Projects from "./components/Projects";
+import UntanglingProjects from "./components/UntanglingProjects";
 import WorkHistory from "./components/WorkHistory";
 import About from "./components/About";
 import Pricing from "./components/Pricing";
@@ -15,8 +13,8 @@ export default function HomePage() {
     <>
       <Navbar />
       <main>
-        <Hero />
-        <Projects />
+        {/* Hero + project pile→grid live in one scroll-scrubbed wrapper */}
+        <UntanglingProjects />
         <WorkHistory />
         <About />
         <Pricing />
