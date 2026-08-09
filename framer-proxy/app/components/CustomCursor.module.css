@@ -1,0 +1,48 @@
+.cursor,
+.ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 180ms ease;
+}
+
+.cursor {
+  mix-blend-mode: normal;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.ring {
+  mix-blend-mode: difference;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  transition: opacity 180ms ease, width 220ms cubic-bezier(0.22, 1, 0.36, 1), height 220ms cubic-bezier(0.22, 1, 0.36, 1), margin 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.hovering {
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  border-color: #fff;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor,
+  .ring {
+    display: none;
+  }
+}
