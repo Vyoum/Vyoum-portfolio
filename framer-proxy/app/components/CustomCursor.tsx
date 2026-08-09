@@ -37,8 +37,8 @@ export default function CustomCursor() {
     };
 
     const animate = () => {
-      position.current.x += (target.current.x - position.current.x) * 0.22;
-      position.current.y += (target.current.y - position.current.y) * 0.22;
+      position.current.x += (target.current.x - position.current.x) * 0.14;
+      position.current.y += (target.current.y - position.current.y) * 0.14;
       const transform = `translate3d(${position.current.x}px, ${position.current.y}px, 0)`;
       cursor.style.transform = transform;
       ring.style.transform = transform;
