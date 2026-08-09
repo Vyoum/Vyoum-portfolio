@@ -38,9 +38,9 @@
 }
 
 .cardWrapper {
-  width: 40vw; /* Card sizing relative to viewport */
-  max-width: 500px;
-  min-width: 300px;
+  width: 32vw;
+  max-width: 420px;
+  min-width: 280px;
   /* Centering handled by framer motion x/y and absolute position */
 }
 
@@ -56,7 +56,7 @@
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 11;
+  aspect-ratio: 4 / 3;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--surface);

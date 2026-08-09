@@ -160,9 +160,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 480px;
-  height: 320px;
-  border-radius: 16px;
+  width: clamp(300px, 34vw, 420px);
+  height: clamp(220px, 25vw, 310px);
+  border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.1);
   border: 4px solid var(--background);

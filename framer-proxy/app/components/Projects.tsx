@@ -111,20 +111,20 @@ export default function Projects() {
   });
 
   // Calculate transforms for each card
-  const x1 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "-22vw"]);
-  const y1 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "-24vh"]);
+  const x1 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "-18vw"]);
+  const y1 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "-19vh"]);
   const rot1 = useTransform(scrollYProgress, [0, 0.58], [-8, 0]);
 
-  const x2 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "22vw"]);
-  const y2 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "-24vh"]);
+  const x2 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "18vw"]);
+  const y2 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "-19vh"]);
   const rot2 = useTransform(scrollYProgress, [0, 0.58], [6, 0]);
 
-  const x3 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "-22vw"]);
-  const y3 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "24vh"]);
+  const x3 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "-18vw"]);
+  const y3 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "19vh"]);
   const rot3 = useTransform(scrollYProgress, [0, 0.58], [-6, 0]);
 
-  const x4 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "22vw"]);
-  const y4 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "24vh"]);
+  const x4 = useTransform(scrollYProgress, [0, 0.58], ["0vw", "18vw"]);
+  const y4 = useTransform(scrollYProgress, [0, 0.58], ["0vh", "19vh"]);
   const rot4 = useTransform(scrollYProgress, [0, 0.58], [8, 0]);
   
   const transforms = [
