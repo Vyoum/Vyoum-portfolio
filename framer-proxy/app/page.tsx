@@ -23,9 +23,9 @@ export default function HomePage() {
         <FeaturedReview />
         <div className="gridRule" aria-hidden="true" />
         <Services />
+        <About />
         <div className="gridRule" aria-hidden="true" />
         <WorkHistory />
-        <About />
         <Pricing />
         <Testimonials />
         <FAQ />

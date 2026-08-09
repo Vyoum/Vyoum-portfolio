@@ -1,48 +1,195 @@
-.aboutSection {
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
-  position: relative;
-  overflow: hidden;
+@media (min-width: 1px) {
+  .aboutSection {
+    position: relative;
+    overflow: hidden;
+    background: #f7f7f5;
+    color: #0a0a0a;
+    padding: clamp(5rem, 10vw, 9rem) 0 clamp(6rem, 12vw, 11rem);
+  }
+
+  .container {
+    max-width: 1180px;
+  }
+
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(4rem, 8vw, 8rem);
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    max-width: 980px;
+    margin: 0;
+    font-size: clamp(3.4rem, 8.3vw, 8.2rem);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.075em;
+  }
+
+  .title span {
+    color: #8c8c8c;
+  }
+
+  .title strong {
+    color: #080808;
+    font-weight: 500;
+  }
+
+  .titleDot {
+    flex: 0 0 auto;
+    width: clamp(1.6rem, 3vw, 2.8rem);
+    height: clamp(1.6rem, 3vw, 2.8rem);
+    margin-top: 1.1rem;
+    border-radius: 50%;
+    background: #080808;
+  }
+
+  .bodyGrid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(3rem, 8vw, 8rem);
+    align-items: start;
+  }
+
+  .profile {
+    min-width: 0;
+  }
+
+  .imageWrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 0.86;
+    border-radius: 1.5rem;
+    background: #d8d8d8;
+  }
+
+  .imageWrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .socials {
+    position: absolute;
+    right: 1.1rem;
+    bottom: 1.1rem;
+    display: flex;
+    gap: 0.45rem;
+  }
+
+  .socials a {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    border-radius: 50%;
+    color: #fff;
+    background: rgba(10, 10, 10, 0.78);
+    backdrop-filter: blur(12px);
+    transition: transform 180ms ease, background 180ms ease;
+  }
+
+  .socials a:hover {
+    transform: translateY(-4px);
+    background: #000;
+  }
+
+  .profileMeta {
+    padding-top: 1.2rem;
+  }
+
+  .profileMeta h3,
+  .profileMeta p {
+    margin: 0;
+  }
+
+  .profileMeta h3 {
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+  }
+
+  .profileMeta p {
+    margin-top: 0.35rem;
+    color: #666;
+    font-size: 1.05rem;
+  }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 6vw, 6.5rem);
+    padding-top: 0.4rem;
+  }
+
+  .copy p {
+    max-width: 720px;
+    margin: 0;
+    color: #5f5f5f;
+    font-size: clamp(1.45rem, 2.7vw, 2.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.055em;
+  }
+
+  .copy strong {
+    color: #090909;
+    font-weight: 600;
+  }
+
+  .contactLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: clamp(4rem, 8vw, 8rem);
+    color: #080808;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .contactLink:hover svg {
+    transform: translate(3px, -3px);
+  }
+
+  .contactLink svg {
+    transition: transform 180ms ease;
+  }
 }
 
-.aboutSection::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: var(--grid-max);
-  height: 1px;
-  background-image: linear-gradient(var(--grid-line), var(--grid-line));
-  background-repeat: no-repeat;
-  background-size: calc(100% - 2 * var(--grid-pad)) 1px;
-  background-position: center top;
-  pointer-events: none;
-}
+@media (max-width: 760px) {
+  .aboutSection {
+    padding-top: 4.5rem;
+  }
 
-.container {
-  max-width: 900px;
-}
+  .header {
+    margin-bottom: 3.5rem;
+  }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
+  .title {
+    font-size: clamp(3rem, 13vw, 5.5rem);
+  }
 
-.title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.1;
-  max-width: 800px;
-}
+  .titleDot {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.6rem;
+  }
 
-.textContent {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
-  color: var(--text-muted);
-  line-height: 1.6;
-  max-width: 700px;
-  margin-left: auto;
+  .bodyGrid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .imageWrap {
+    aspect-ratio: 1 / 1.08;
+  }
+
+  .copy {
+    gap: 2.75rem;
+  }
 }
