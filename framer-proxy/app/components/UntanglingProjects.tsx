@@ -62,7 +62,7 @@ export default function UntanglingProjects() {
             <h1 className={styles.heroTitle}>
               <span className={styles.titleGray}>Systems that</span>
               <br />
-              <span className={styles.titleBlack}>scale Growth</span>
+              <span className={styles.titleBlack}>scale Growth.</span>
             </h1>
 
             <p className={styles.heroSubtitle}>
