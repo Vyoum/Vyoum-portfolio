@@ -106,7 +106,7 @@ export default function UntanglingProjects() {
                       />
                     ))}
                   </div>
-                  <span className={styles.happyClientsText}>99+ Happy clients</span>
+                  <span className={styles.happyClientsText}>29+ Happy clients</span>
                 </div>
               </div>
 

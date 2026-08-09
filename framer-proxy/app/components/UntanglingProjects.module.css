@@ -44,7 +44,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 12px 6px 10px;
-  background: var(--surface);
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   font-size: 0.85rem;
@@ -57,7 +57,7 @@
 
 .badge:hover {
   border-color: rgba(52, 199, 89, 0.35);
-  background: #f0faf2;
+  background: #fff;
   transform: translateY(-3px);
 }
 
@@ -270,12 +270,12 @@
   white-space: nowrap;
 }
 
-/* Pile target — right side of the hero composition */
+/* Pile target — right of hero title (same vertical band as h1) */
 .pileSlot {
   position: absolute;
-  top: 42%;
+  top: 210px;
   right: calc(48px + var(--grid-pad));
-  transform: translateY(-50%);
+  transform: none;
   width: min(380px, 40%);
   z-index: 5;
   display: flex;

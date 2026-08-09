@@ -46,7 +46,7 @@ export default function Testimonials() {
                 <Star key={s} size={20} fill="var(--accent)" color="var(--accent)" />
               ))}
             </div>
-            <span>99+ Happy clients</span>
+            <span>29+ Happy clients</span>
           </div>
         </motion.div>
 
