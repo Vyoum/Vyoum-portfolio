@@ -47,7 +47,6 @@ export default function Navbar() {
             aria-label="Primary"
             className="relative flex items-center gap-1 rounded-full border border-black/10 bg-white/75 py-1.5 pr-1.5 pl-2 shadow-[0_8px_30px_rgba(0,0,0,0.08)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/60"
           >
-            {/* Left: name only (no avatar) */}
             <motion.div layout="position" transition={spring} className="shrink-0">
               <Link
                 href="/"
@@ -59,11 +58,6 @@ export default function Navbar() {
               </Link>
             </motion.div>
 
-            {/*
-              Expanded: center pillars + Book a call
-              Collapsed: compact ··· control
-              AnimatePresence popLayout lets the glass pill morph width via layout
-            */}
             <AnimatePresence mode="popLayout" initial={false}>
               {!isCollapsed ? (
                 <motion.div
@@ -90,7 +84,6 @@ export default function Navbar() {
                     ))}
                   </nav>
 
-                  {/* Mobile: access pillars before collapse */}
                   <button
                     type="button"
                     aria-label="Open menu"

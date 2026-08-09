@@ -5,6 +5,10 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import styles from "./Hero.module.css";
 
+/**
+ * Standalone hero (optional). The live homepage uses UntanglingProjects,
+ * which embeds the hero + scroll-scrubbed project pile→grid.
+ */
 export default function Hero() {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -62,15 +66,6 @@ export default function Hero() {
               </Link>
             </motion.div>
           </motion.div>
-
-          <motion.p
-            className="hidden max-w-xs text-sm leading-relaxed text-neutral-400 md:block"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.6 }}
-          >
-            Scroll — project cards start piled, then settle into the grid.
-          </motion.p>
         </div>
 
         <motion.div
@@ -110,11 +105,13 @@ export default function Hero() {
                 "Kintsugi",
                 "CoreOS",
                 "Luminary",
-              ].flatMap((logo) => [logo, logo]).map((logo, i) => (
-                <div key={`${logo}-${i}`} className={styles.logoItem}>
-                  {logo}
-                </div>
-              ))}
+              ]
+                .flatMap((logo) => [logo, logo])
+                .map((logo, i) => (
+                  <div key={`${logo}-${i}`} className={styles.logoItem}>
+                    {logo}
+                  </div>
+                ))}
             </div>
           </div>
         </motion.div>
