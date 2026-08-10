@@ -1,7 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowUpRight, Globe2, Laptop, PanelTop, WandSparkles } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  ChevronDown,
+  Globe2,
+  Laptop,
+  PanelTop,
+  WandSparkles,
+} from "lucide-react";
 import styles from "./About.module.css";
 
 const paragraphs = [
@@ -19,7 +27,53 @@ const paragraphs = [
   },
 ];
 
+const workHistory = [
+  {
+    company: "KYMA",
+    role: "Full-Stack Designer",
+    period: "2012-2024",
+  },
+  {
+    company: "Mugen",
+    role: "Staff Product Designer",
+    period: "2020-2022",
+  },
+  {
+    company: "Axiom",
+    role: "Designer",
+    period: "2016-2020",
+  },
+];
+
+const easeOut = [0.22, 1, 0.36, 1] as const;
+
+function WorkCard({
+  job,
+  stacked,
+}: {
+  job: (typeof workHistory)[number];
+  stacked?: boolean;
+}) {
+  return (
+    <div
+      className={`${styles.historyCard}${stacked ? ` ${styles.historyCardStacked}` : ""}`}
+    >
+      {stacked ? <div className={styles.historyStack} aria-hidden /> : null}
+      <div className={styles.historyFace}>
+        <div className={styles.historyTop}>
+          <span className={styles.historyCompany}>{job.company}</span>
+          <span className={styles.historyRole}>{job.role}</span>
+        </div>
+        <span className={styles.historyPeriod}>{job.period}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function About() {
+  const [expanded, setExpanded] = useState(false);
+  const [first, ...rest] = workHistory;
+
   return (
     <section className={styles.aboutSection} id="about">
       <div className={`container ${styles.container}`}>
@@ -57,6 +111,55 @@ export default function About() {
             <div className={styles.profileMeta}>
               <h3>Vyoum Agarwal</h3>
               <p>Full-stack Designer</p>
+            </div>
+
+            <div className={styles.history}>
+              <h4 className={styles.historyTitle}>My work history</h4>
+
+              <div className={styles.historyList}>
+                <WorkCard job={first} stacked={!expanded} />
+
+                <AnimatePresence initial={false}>
+                  {expanded
+                    ? rest.map((job, index) => (
+                        <motion.div
+                          key={job.company}
+                          className={styles.historyReveal}
+                          initial={{ opacity: 0, y: 28, height: 0 }}
+                          animate={{ opacity: 1, y: 0, height: "auto" }}
+                          exit={{ opacity: 0, y: 12, height: 0 }}
+                          transition={{
+                            duration: 0.55,
+                            ease: easeOut,
+                            delay: index * 0.07,
+                          }}
+                        >
+                          <div className={styles.historyRevealInner}>
+                            <WorkCard job={job} />
+                          </div>
+                        </motion.div>
+                      ))
+                    : null}
+                </AnimatePresence>
+              </div>
+
+              <motion.button
+                type="button"
+                className={styles.showAll}
+                onClick={() => setExpanded((v) => !v)}
+                aria-expanded={expanded}
+                whileTap={{ scale: 0.98 }}
+              >
+                {expanded ? "Hide" : "Show all"}
+                <motion.span
+                  className={styles.showAllIcon}
+                  aria-hidden
+                  animate={{ rotate: expanded ? 180 : 0 }}
+                  transition={{ duration: 0.4, ease: easeOut }}
+                >
+                  <ChevronDown size={14} strokeWidth={2.5} />
+                </motion.span>
+              </motion.button>
             </div>
           </motion.div>
 

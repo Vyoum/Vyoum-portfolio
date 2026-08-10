@@ -2,7 +2,7 @@
   .aboutSection {
     position: relative;
     overflow: hidden;
-    background: #f7f7f5;
+    background: #fff;
     color: #0a0a0a;
     padding: clamp(5rem, 10vw, 9rem) 0 clamp(6rem, 12vw, 11rem);
   }
@@ -118,6 +118,162 @@
     margin-top: 0.35rem;
     color: #666;
     font-size: 1.05rem;
+  }
+
+  /* ——— Work history (stacked paper cards) ——— */
+  .history {
+    margin-top: 2.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .historyTitle {
+    margin: 0 0 1.15rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #0a0a0a;
+  }
+
+  .historyList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .historyCard {
+    position: relative;
+    padding-bottom: 0;
+  }
+
+  .historyCardStacked {
+    padding-bottom: 10px;
+  }
+
+  /* Soft stacked pages — only for the collapsed single card */
+  .historyStack,
+  .historyStack::before {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 100%;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+  }
+
+  .historyStack {
+    top: 6px;
+    z-index: 0;
+  }
+
+  .historyStack::before {
+    content: "";
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    z-index: -1;
+    opacity: 0.85;
+  }
+
+  .historyFace {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: stretch;
+    gap: 16px;
+    min-height: 104px;
+    padding: 22px 24px 20px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    /* Flat list cards: hairline only, no drop shadow under */
+    box-shadow: none;
+  }
+
+  .historyCardStacked .historyFace {
+    box-shadow:
+      0 10px 24px rgba(0, 0, 0, 0.07),
+      0 2px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  .historyTop {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .historyCompany {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0a0a0a;
+  }
+
+  .historyRole {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #6b6b6b;
+  }
+
+  .historyPeriod {
+    align-self: end;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #8a8a8a;
+    white-space: nowrap;
+  }
+
+  .historyReveal {
+    overflow: hidden;
+  }
+
+  .historyRevealInner {
+    padding-top: 2px;
+  }
+
+  .showAll {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    gap: 10px;
+    margin-top: 1.25rem;
+    padding: 8px 10px 8px 16px;
+    border-radius: 9999px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: #fff;
+    color: #0a0a0a;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .showAll:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  }
+
+  .showAllIcon {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #0a0a0a;
+    color: #fff;
   }
 
   .copy {

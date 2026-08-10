@@ -3,7 +3,6 @@ import ColumnGrid from "./components/ColumnGrid";
 import UntanglingProjects from "./components/UntanglingProjects";
 import FeaturedReview from "./components/FeaturedReview";
 import Services from "./components/Services";
-import WorkHistory from "./components/WorkHistory";
 import About from "./components/About";
 import Pricing from "./components/Pricing";
 import Testimonials from "./components/Testimonials";
@@ -25,7 +24,6 @@ export default function HomePage() {
         <Services />
         <About />
         <div className="gridRule" aria-hidden="true" />
-        <WorkHistory />
         <Pricing />
         <Testimonials />
         <FAQ />
