@@ -111,9 +111,9 @@
 .card {
   position: relative;
   display: flex;
-  min-height: 26rem;
+  min-height: 20rem;
   flex-direction: column;
-  padding: 2rem 2.25rem 2rem;
+  padding: 1.5rem 1.75rem 1.5rem;
   border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
   border-radius: 2rem;
   background: var(--background);
@@ -159,17 +159,17 @@
 }
 
 .quoteMark {
-  height: 3rem;
+  height: 2.5rem;
   color: var(--foreground);
-  font-size: 3.75rem;
+  font-size: 3.25rem;
   font-weight: 800;
   line-height: 0.8;
 }
 
 .text {
   max-width: 30rem;
-  margin: 1.25rem 0 1.5rem;
-  font-size: clamp(1.15rem, 1.35vw, 1.4rem);
+  margin: 1rem 0 1.25rem;
+  font-size: clamp(1rem, 1.1vw, 1.2rem);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1.38;
@@ -221,8 +221,8 @@
   }
 
   .card {
-    min-height: 22rem;
-    padding: 2rem;
+    min-height: 18rem;
+    padding: 1.5rem;
   }
 }
 
@@ -258,8 +258,8 @@
 
   .card,
   .card:nth-child(2n) {
-    min-height: 20rem;
-    padding: 1.5rem;
+    min-height: 17rem;
+    padding: 1.25rem;
     border-radius: 1.5rem;
     transform: none;
   }
@@ -270,8 +270,8 @@
   }
 
   .text {
-    margin-top: 1.5rem;
-    font-size: 1.35rem;
+    margin-top: 1rem;
+    font-size: 1.1rem;
   }
 }
 
