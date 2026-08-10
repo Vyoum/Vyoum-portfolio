@@ -442,10 +442,10 @@
     right: calc(var(--grid-pad-mobile) + 12px);
     width: auto;
     max-width: none;
-    text-align: center;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     z-index: 15;
     padding: 0;
     overflow: visible;
@@ -456,20 +456,79 @@
     );
   }
 
+  .heroTitle {
+    font-size: clamp(2.35rem, 9vw, 3.25rem);
+  }
+
+  .titleBlack {
+    white-space: normal;
+  }
+
   .heroSubtitle {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 34ch;
+  }
+
+  .bookCallBtn {
+    margin-bottom: 36px;
   }
 
   .clientStats {
+    position: relative;
+    z-index: 2;
     justify-content: flex-start;
+    /* Soft veil so the marquee stays readable behind, not on top */
+    padding: 4px 28px 4px 0;
+    background: linear-gradient(
+      90deg,
+      var(--background) 0%,
+      var(--background) 55%,
+      color-mix(in srgb, var(--background) 55%, transparent) 78%,
+      transparent 100%
+    );
   }
 
   .logosBar {
     width: calc(100vw - 2 * var(--grid-pad-mobile) - 24px);
     max-width: calc(100vw - 2 * var(--grid-pad-mobile) - 24px);
-    justify-content: flex-start;
-    flex-wrap: nowrap;
+    position: relative;
+    display: block;
+    min-height: 64px;
+    padding: 14px 0;
+    overflow: hidden;
+  }
+
+  .logosDivider {
+    display: none;
+  }
+
+  /* Marquee sits behind happy clients — same as LaunchFolio mobile */
+  .logosWrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 18%,
+      black 88%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 18%,
+      black 88%,
+      transparent 100%
+    );
+  }
+
+  .logoItem {
+    opacity: 0.4;
+    font-size: 1.1rem;
   }
 
   .pileSlot {
