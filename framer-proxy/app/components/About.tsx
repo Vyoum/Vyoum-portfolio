@@ -88,7 +88,6 @@ export default function About() {
             <span>Designing experiences</span>
             <strong>that solve real problems.</strong>
           </h2>
-          <span className={styles.titleDot} aria-hidden="true" />
         </motion.header>
 
         <div className={styles.bodyGrid}>

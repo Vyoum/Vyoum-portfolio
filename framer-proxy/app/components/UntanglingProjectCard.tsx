@@ -102,7 +102,12 @@ export default function UntanglingProjectCard({
   return (
     <div ref={cellRef} className={styles.cell} style={{ zIndex: 4 - index }}>
       <motion.div style={{ x, y, rotate, opacity }} className={styles.mover}>
-        <Link href={project.href} className={styles.card}>
+        <Link
+          href={project.href}
+          className={styles.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div className={`${styles.frame} ${TONE_CLASS[project.tone]}`}>
             <div className={styles.shot}>
               <Image

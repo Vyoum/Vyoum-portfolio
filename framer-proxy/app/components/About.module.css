@@ -12,22 +12,26 @@
   }
 
   .header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 2rem;
+    display: block;
     margin-bottom: clamp(4rem, 8vw, 8rem);
   }
 
   .title {
     display: flex;
     flex-direction: column;
-    max-width: 980px;
+    max-width: 100%;
     margin: 0;
-    font-size: clamp(3.4rem, 8.3vw, 8.2rem);
+    /* Sized so each phrase stays on one line → two lines total */
+    font-size: clamp(2.4rem, 5.2vw, 4.75rem);
     font-weight: 500;
-    line-height: 0.98;
-    letter-spacing: -0.075em;
+    line-height: 1.02;
+    letter-spacing: -0.06em;
+  }
+
+  .title span,
+  .title strong {
+    display: block;
+    white-space: nowrap;
   }
 
   .title span {
@@ -37,15 +41,6 @@
   .title strong {
     color: #080808;
     font-weight: 500;
-  }
-
-  .titleDot {
-    flex: 0 0 auto;
-    width: clamp(1.6rem, 3vw, 2.8rem);
-    height: clamp(1.6rem, 3vw, 2.8rem);
-    margin-top: 1.1rem;
-    border-radius: 50%;
-    background: #080808;
   }
 
   .bodyGrid {
@@ -327,13 +322,12 @@
   }
 
   .title {
-    font-size: clamp(3rem, 13vw, 5.5rem);
+    font-size: clamp(1.85rem, 7.5vw, 3.25rem);
   }
 
-  .titleDot {
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-top: 0.6rem;
+  .title span,
+  .title strong {
+    white-space: nowrap;
   }
 
   .bodyGrid {

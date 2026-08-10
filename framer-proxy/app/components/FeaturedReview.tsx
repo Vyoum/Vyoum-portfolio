@@ -32,10 +32,10 @@ export default function FeaturedReview() {
               backgroundImage: 'url("https://i.pravatar.cc/96?img=12")',
             }}
             role="img"
-            aria-label="Thomas Weber"
+            aria-label="Priiya Rao"
           />
           <div className={styles.meta}>
-            <p className={styles.name}>Thomas Weber</p>
+            <p className={styles.name}>Priiya Rao</p>
             <p className={styles.role}>Co-founder of KYMA</p>
           </div>
         </motion.div>

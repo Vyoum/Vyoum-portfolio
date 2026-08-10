@@ -9,6 +9,8 @@
   grid-template-columns: minmax(0, 1.15fr) auto minmax(0, 0.85fr);
   gap: clamp(32px, 5vw, 72px);
   align-items: start;
+  /* Same element as .container — keep rail pad + inset inside the lines */
+  padding-inline: calc(var(--grid-pad) + 24px);
 }
 
 .left {
@@ -55,7 +57,7 @@
 
 .stackGrid {
   display: grid;
-  grid-template-columns: repeat(5, 48px);
+  grid-template-columns: repeat(4, 48px);
   gap: 10px;
 }
 
@@ -134,6 +136,12 @@
 
   .stackGrid {
     grid-template-columns: repeat(4, 48px);
+  }
+}
+
+@media (max-width: 768px) {
+  .layout {
+    padding-inline: calc(var(--grid-pad-mobile) + 12px);
   }
 }
 

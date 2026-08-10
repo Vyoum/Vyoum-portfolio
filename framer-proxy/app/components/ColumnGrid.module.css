@@ -1,7 +1,9 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  /* Above section fills so the rails stay visible on white/gray backgrounds;
+     still below navbar / floating CTA / cursor */
+  z-index: 5;
   pointer-events: none;
   overflow: hidden;
 }
@@ -19,7 +21,7 @@
   top: 0;
   bottom: 0;
   width: 1px;
-  background: var(--grid-line);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* Match .container content edges — pad inset, no layout changes */

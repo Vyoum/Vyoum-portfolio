@@ -21,17 +21,17 @@
 }
 
 .title {
-  max-width: 34rem;
+  max-width: min(100%, 22ch);
   margin: 0 0 clamp(2rem, 5vw, 4rem);
-  font-size: clamp(4rem, 7.5vw, 7rem);
+  font-size: clamp(2.75rem, 5.5vw, 5.25rem);
   font-weight: 500;
   letter-spacing: -0.075em;
-  line-height: 0.9;
-  text-wrap: balance;
+  line-height: 0.95;
 }
 
 .title span {
   display: block;
+  white-space: nowrap;
 }
 
 .titleMuted {
@@ -188,8 +188,8 @@
   }
 
   .title {
-    max-width: 28rem;
-    font-size: clamp(3.5rem, 12vw, 6rem);
+    max-width: min(100%, 18ch);
+    font-size: clamp(2.5rem, 9vw, 4.25rem);
   }
 
   .accordion,
@@ -204,7 +204,7 @@
 
 @media (max-width: 560px) {
   .title {
-    font-size: clamp(3rem, 15vw, 4.75rem);
+    font-size: clamp(2.25rem, 10vw, 3.5rem);
   }
 
   .faqItem {

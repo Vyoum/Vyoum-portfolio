@@ -3,21 +3,25 @@
 import { useEffect, useRef } from "react";
 import styles from "./CustomCursor.module.css";
 
+const TRAIL_DISTANCE = 34; // px behind the arrow tip
+const DEFAULT_DIR = { x: 0.4, y: 0.85 }; // sits under/behind a typical arrow
+
 /**
- * Decorative follower only — keeps the normal system arrow cursor.
+ * Soft lagging dot that trails behind the system cursor at a fixed distance.
  */
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-  const dotPos = useRef({ x: -100, y: -100 });
-  const ringPos = useRef({ x: -100, y: -100 });
+  const pos = useRef({ x: -100, y: -100 });
   const target = useRef({ x: -100, y: -100 });
+  const prevPointer = useRef({ x: 0, y: 0 });
+  const direction = useRef({ ...DEFAULT_DIR });
   const frame = useRef<number | null>(null);
+  const lastTime = useRef(0);
+  const primed = useRef(false);
 
   useEffect(() => {
     const dot = dotRef.current;
-    const ring = ringRef.current;
-    if (!dot || !ring) return;
+    if (!dot) return;
 
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
     const prefersReducedMotion = window.matchMedia(
@@ -25,32 +29,58 @@ export default function CustomCursor() {
     ).matches;
     if (isCoarse || prefersReducedMotion) return;
 
+    const setTrailTarget = (x: number, y: number) => {
+      target.current = {
+        x: x - direction.current.x * TRAIL_DISTANCE,
+        y: y - direction.current.y * TRAIL_DISTANCE,
+      };
+    };
+
     const move = (event: PointerEvent) => {
-      target.current = { x: event.clientX, y: event.clientY };
+      const { clientX: x, clientY: y } = event;
+
+      if (primed.current) {
+        const dx = x - prevPointer.current.x;
+        const dy = y - prevPointer.current.y;
+        const len = Math.hypot(dx, dy);
+        if (len > 0.8) {
+          // Face the travel direction so the dot stays behind the arrow
+          direction.current = { x: dx / len, y: dy / len };
+        }
+      } else {
+        primed.current = true;
+        setTrailTarget(x, y);
+        pos.current = { ...target.current };
+        dot.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0)`;
+      }
+
+      prevPointer.current = { x, y };
+      setTrailTarget(x, y);
       dot.classList.add(styles.visible);
-      ring.classList.add(styles.visible);
 
       const interactive = (event.target as HTMLElement).closest(
         "a, button, [role=button], input, textarea, select, summary"
       );
-      ring.classList.toggle(styles.hovering, Boolean(interactive));
       dot.classList.toggle(styles.hoveringDot, Boolean(interactive));
     };
 
     const leave = () => {
+      primed.current = false;
+      direction.current = { ...DEFAULT_DIR };
       dot.classList.remove(styles.visible, styles.hoveringDot);
-      ring.classList.remove(styles.visible, styles.hovering);
     };
 
-    const animate = () => {
-      // Smooth trail behind the real arrow cursor
-      dotPos.current.x += (target.current.x - dotPos.current.x) * 0.28;
-      dotPos.current.y += (target.current.y - dotPos.current.y) * 0.28;
-      ringPos.current.x += (target.current.x - ringPos.current.x) * 0.16;
-      ringPos.current.y += (target.current.y - ringPos.current.y) * 0.16;
+    const animate = (time: number) => {
+      const rawDt = lastTime.current ? time - lastTime.current : 16.67;
+      lastTime.current = time;
+      const dt = Math.min(rawDt, 32) / 16.67;
+      // Soft chase — lag behind the trail point
+      const ease = 1 - Math.pow(0.86, dt);
 
-      dot.style.transform = `translate3d(${dotPos.current.x}px, ${dotPos.current.y}px, 0)`;
-      ring.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0)`;
+      pos.current.x += (target.current.x - pos.current.x) * ease;
+      pos.current.y += (target.current.y - pos.current.y) * ease;
+
+      dot.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0)`;
       frame.current = window.requestAnimationFrame(animate);
     };
 
@@ -65,10 +95,5 @@ export default function CustomCursor() {
     };
   }, []);
 
-  return (
-    <>
-      <div ref={ringRef} className={styles.ring} aria-hidden="true" />
-      <div ref={dotRef} className={styles.cursor} aria-hidden="true" />
-    </>
-  );
+  return <div ref={dotRef} className={styles.cursor} aria-hidden="true" />;
 }

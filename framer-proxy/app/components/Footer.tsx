@@ -104,7 +104,7 @@ export default function Footer() {
         <h2 className={styles.headline}>
           <span className={styles.headlinePrimary}>
             <span className={styles.rotatingPhrase} aria-live="polite">
-              <span>Let&apos;s </span>
+              <span>Let&apos;s</span>
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
                   key={rotatingWords[wordIndex]}

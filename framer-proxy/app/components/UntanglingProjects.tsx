@@ -8,7 +8,16 @@ import { PROJECTS } from "../lib/projects";
 import UntanglingProjectCard from "./UntanglingProjectCard";
 import styles from "./UntanglingProjects.module.css";
 
-const logos = ["360degrees", "Codecraft_", "Frequencii", "Kintsugi", "WORKPUNKT"];
+const logos = [
+  "Vip Marketing",
+  "Daiorus",
+  "House of Indika",
+  "Silver Looms",
+  "WORKPUNKT",
+  "Arovave",
+  "Elevenx.Ai",
+  "YogaFloww",
+];
 
 /**
  * One continuous hero → projects scroll scene:

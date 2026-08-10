@@ -6,7 +6,16 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import styles from "./Hero.module.css";
 
-const logos = ["360degrees", "Codecraft_", "Frequencii", "Kintsugi", "WORKPUNKT"];
+const logos = [
+  "Vip Marketing",
+  "Daiorus",
+  "House of Indika",
+  "Silver Looms",
+  "WORKPUNKT",
+  "Arovave",
+  "Elevenx.Ai",
+  "YogaFloww",
+];
 
 export default function Hero() {
   const containerVariants: Variants = {

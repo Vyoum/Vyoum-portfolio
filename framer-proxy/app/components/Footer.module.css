@@ -70,6 +70,8 @@
 
 .rotatingPhrase {
   display: inline-flex;
+  align-items: baseline;
+  gap: 0.28em;
   min-width: 7.2ch;
   overflow: hidden;
   white-space: nowrap;

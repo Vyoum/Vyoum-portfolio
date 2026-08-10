@@ -210,8 +210,9 @@
   height: 100%;
   border-radius: 50%;
   background-color: var(--background);
-  background-image: url("https://i.pravatar.cc/100?img=11");
+  background-image: url("/avatar.png");
   background-size: cover;
+  background-position: center 18%;
 }
 
 .clientStats {
