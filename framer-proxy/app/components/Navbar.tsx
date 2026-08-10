@@ -86,8 +86,7 @@ export default function Navbar() {
                 <span
                   className={styles.avatar}
                   style={{
-                    backgroundImage:
-                      'url("https://i.pravatar.cc/100?img=11")',
+                    backgroundImage: 'url("/avatar.png")',
                   }}
                   aria-hidden
                 />
