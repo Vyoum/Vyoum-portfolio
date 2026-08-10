@@ -280,7 +280,7 @@
   top: 190px;
   right: calc(48px + var(--grid-pad));
   transform: none;
-  width: min(300px, 32%);
+  width: min(400px, 40%);
   z-index: 5;
   display: flex;
   flex-direction: column;
@@ -290,8 +290,8 @@
 
 .pileAnchor {
   width: 100%;
-  /* Match card frame aspect so pile center aligns with the medium device */
-  aspect-ratio: 4 / 5;
+  /* Match the 400 × 300 project card footprint for smooth hero interpolation */
+  aspect-ratio: 4 / 3;
   border-radius: 28px;
   visibility: hidden;
 }

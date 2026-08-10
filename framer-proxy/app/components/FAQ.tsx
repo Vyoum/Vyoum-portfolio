@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./FAQ.module.css";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, CalendarDays } from "lucide-react";
+import Link from "next/link";
 
 const faqs = [
   {
@@ -42,7 +43,10 @@ export default function FAQ() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className={styles.title}>Your questions answered.</h2>
+            <h2 className={styles.title}>
+              <span>Your questions</span>
+              <span className={styles.titleMuted}>answered.</span>
+            </h2>
           </motion.div>
           
           <div className={styles.accordion}>
@@ -83,6 +87,25 @@ export default function FAQ() {
               );
             })}
           </div>
+
+          <motion.aside
+            className={styles.callout}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className={styles.calloutAvatar} aria-hidden="true" />
+            <p className={styles.calloutEyebrow}>Still not sure?</p>
+            <h3 className={styles.calloutTitle}>Book a free discovery call.</h3>
+            <p className={styles.calloutText}>
+              Learn more about how I work and how I can help you and your business take the next step.
+            </p>
+            <Link className={styles.scheduleButton} href="#contact">
+              <CalendarDays aria-hidden="true" />
+              Schedule now
+            </Link>
+          </motion.aside>
         </div>
       </div>
     </section>

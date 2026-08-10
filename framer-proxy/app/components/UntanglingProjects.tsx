@@ -57,7 +57,7 @@ export default function UntanglingProjects() {
           >
             <div className={styles.badge}>
               <span className={styles.pulse} />
-              Available for August &apos;25
+              Available from August &apos;26
             </div>
 
             <h1 className={styles.heroTitle}>
