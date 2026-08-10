@@ -1,7 +1,7 @@
 .testimonialsSection {
   position: relative;
   overflow: hidden;
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  background: var(--background);
   color: var(--foreground);
 }
 
@@ -35,9 +35,9 @@
   min-width: 0;
   flex: 1;
   flex-direction: column;
-  max-width: 920px;
+  max-width: 780px;
   margin: 0;
-  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  font-size: clamp(2.75rem, 5vw, 5rem);
   font-weight: 500;
   letter-spacing: -0.085em;
   line-height: 0.92;
@@ -110,9 +110,9 @@
 
 .card {
   display: flex;
-  min-height: 38rem;
+  min-height: 26rem;
   flex-direction: column;
-  padding: 3rem 3.25rem 2.75rem;
+  padding: 2rem 2.25rem 2rem;
   border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
   border-radius: 2rem;
   background: var(--background);
@@ -120,17 +120,17 @@
 }
 
 .quoteMark {
-  height: 4.5rem;
+  height: 3rem;
   color: var(--foreground);
-  font-size: 5rem;
+  font-size: 3.75rem;
   font-weight: 800;
   line-height: 0.8;
 }
 
 .text {
   max-width: 30rem;
-  margin: 2.1rem 0 2rem;
-  font-size: clamp(1.35rem, 1.75vw, 1.75rem);
+  margin: 1.25rem 0 1.5rem;
+  font-size: clamp(1.15rem, 1.35vw, 1.4rem);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1.38;
@@ -182,8 +182,8 @@
   }
 
   .card {
-    min-height: 32rem;
-    padding: 2.5rem;
+    min-height: 22rem;
+    padding: 2rem;
   }
 }
 
@@ -194,7 +194,8 @@
   }
 
   .title {
-    font-size: clamp(3rem, 15vw, 5rem);
+    font-size: clamp(2rem, 9vw, 2.75rem);
+    line-height: 0.98;
   }
 
   .rating {
@@ -217,8 +218,8 @@
   }
 
   .card {
-    min-height: 28rem;
-    padding: 2rem;
+    min-height: 20rem;
+    padding: 1.5rem;
     border-radius: 1.5rem;
   }
 
