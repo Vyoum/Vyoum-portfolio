@@ -141,7 +141,7 @@
 
 @media (max-width: 768px) {
   .layout {
-    padding-inline: calc(var(--grid-pad-mobile) + 12px);
+    padding-inline: var(--grid-pad-mobile);
   }
 }
 

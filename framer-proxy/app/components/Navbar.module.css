@@ -269,16 +269,57 @@
 
 @media (max-width: 767px) {
   .header {
-    padding: 0 24px;
+    top: 12px;
+    padding: 0 14px;
+  }
+
+  .nav {
+    min-height: 48px;
+    padding: 6px 8px 6px 10px;
+    border-radius: 28px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .brandLink {
+    gap: 8px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .name {
+    font-size: 0.88rem;
+  }
+
+  .actions {
+    gap: 10px;
+  }
+
+  .dots {
+    width: 28px;
+    height: 28px;
   }
 
   .contact {
     display: none;
   }
 
+  .mobileMenu {
+    top: calc(100% + 8px);
+    width: min(200px, calc(100vw - 1.5rem));
+    padding: 12px;
+    gap: 12px;
+    border-radius: 14px;
+  }
+
   .mobileMenu .contact {
     display: inline-flex;
     width: 100%;
     margin-top: 4px;
+    min-width: 0;
+    height: 36px;
+    font-size: 14px;
   }
 }

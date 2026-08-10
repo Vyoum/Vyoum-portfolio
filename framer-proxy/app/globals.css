@@ -20,7 +20,7 @@
   /* Page column grid — keep in sync with ColumnGrid */
   --grid-max: 1240px;
   --grid-pad: 48px;
-  --grid-pad-mobile: 24px;
+  --grid-pad-mobile: 14px;
   --grid-cols: 12;
   --grid-line: rgba(0, 0, 0, 0.07);
 }
