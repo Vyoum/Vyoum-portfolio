@@ -1,83 +1,103 @@
 .faqSection {
-  background: transparent;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.container {
+  max-width: 1280px;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
-}
-
-@media (min-width: 992px) {
-  .content {
-    flex-direction: row;
-    align-items: flex-start;
-  }
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  align-items: start;
+  gap: clamp(2rem, 6vw, 6rem);
 }
 
 .header {
-  flex: 1;
   position: sticky;
   top: 120px;
+  display: contents;
 }
 
 .title {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  line-height: 1.1;
-  max-width: 400px;
+  max-width: 34rem;
+  margin: 0 0 clamp(2rem, 5vw, 4rem);
+  font-size: clamp(4rem, 7.5vw, 7rem);
+  font-weight: 500;
+  letter-spacing: -0.075em;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+.title span {
+  display: block;
+}
+
+.titleMuted {
+  color: var(--text-muted);
 }
 
 .accordion {
-  flex: 1.5;
+  grid-column: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0.75rem;
 }
 
 .faqItem {
-  border-bottom: 1px solid var(--border);
-  padding: 24px 0;
   cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
+  border-radius: 1.5rem;
+  padding: 1.35rem 1.5rem;
+  background: var(--background);
+  transition: box-shadow 250ms ease, transform 250ms ease;
+}
+
+.faqItem:hover,
+.faqItem.open {
+  box-shadow: 0 0.75rem 1.75rem color-mix(in srgb, var(--foreground) 8%, transparent);
+  transform: translateY(-2px);
 }
 
 .questionRow {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 1.25rem;
 }
 
 .questionNum {
-  font-family: monospace;
+  min-width: 2rem;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.95rem;
 }
 
 .questionText {
-  font-size: 1.1rem;
-  font-weight: 500;
   flex: 1;
-  transition: color var(--transition);
-}
-
-.faqItem:hover .questionText {
-  color: var(--accent);
+  margin: 0;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
 }
 
 .toggleBtn {
-  color: var(--foreground);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
   border-radius: 50%;
-  background: var(--surface);
-  transition: transform var(--transition);
+  color: var(--foreground);
+  background: transparent;
+  transition: transform 250ms ease, background 250ms ease;
 }
 
 .faqItem.open .toggleBtn {
-  transform: rotate(180deg);
-  background: var(--accent);
+  background: var(--foreground);
   color: var(--background);
 }
 
@@ -86,10 +106,140 @@
 }
 
 .answerText {
-  padding-top: 16px;
-  padding-left: 42px;
+  max-width: 48rem;
+  margin: 0;
+  padding: 1.25rem 2rem 0 3.25rem;
   color: var(--text-muted);
-  line-height: 1.6;
-  font-size: 1rem;
-  padding-bottom: 8px;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.callout {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  min-height: 43rem;
+  padding: clamp(2rem, 4vw, 4rem);
+  border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
+  border-radius: 2rem;
+  background: var(--background);
+  box-shadow: 0 1.25rem 2.5rem color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.calloutAvatar {
+  width: 7rem;
+  height: 7rem;
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+  border-radius: 50%;
+  background: url('/avatar.png') center / cover no-repeat;
+}
+
+.calloutEyebrow {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+}
+
+.calloutTitle {
+  margin: 0.4rem 0 2.5rem;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.07em;
+  line-height: 0.98;
+}
+
+.calloutText {
+  max-width: 32rem;
+  margin: 0 0 3rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.45;
+}
+
+.scheduleButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border-radius: 999px;
+  padding: 1rem 1.4rem;
+  color: var(--background);
+  background: var(--foreground);
+  box-shadow: 0 0.75rem 1.5rem color-mix(in srgb, var(--foreground) 22%, transparent);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.scheduleButton:hover {
+  box-shadow: 0 1rem 2rem color-mix(in srgb, var(--foreground) 30%, transparent);
+  transform: translateY(-3px) scale(1.03);
+}
+
+@media (max-width: 991px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    display: block;
+    position: static;
+  }
+
+  .title {
+    max-width: 28rem;
+    font-size: clamp(3.5rem, 12vw, 6rem);
+  }
+
+  .accordion,
+  .callout {
+    width: 100%;
+  }
+
+  .callout {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .title {
+    font-size: clamp(3rem, 15vw, 4.75rem);
+  }
+
+  .faqItem {
+    border-radius: 1.15rem;
+    padding: 1.1rem;
+  }
+
+  .questionRow {
+    gap: 0.75rem;
+  }
+
+  .questionText {
+    font-size: 1rem;
+  }
+
+  .answerText {
+    padding-left: 0;
+    font-size: 0.98rem;
+  }
+
+  .callout {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+
+  .calloutAvatar {
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faqItem,
+  .scheduleButton {
+    transition: none;
+  }
 }
