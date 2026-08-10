@@ -34,11 +34,7 @@
 }
 
 @media (max-width: 768px) {
-  .vlineLeft {
-    left: var(--grid-pad-mobile);
-  }
-
-  .vlineRight {
-    right: var(--grid-pad-mobile);
+  .overlay {
+    display: none;
   }
 }

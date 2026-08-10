@@ -108,7 +108,7 @@ button {
 
 @media (max-width: 768px) {
   .gridRule {
-    padding: 0 var(--grid-pad-mobile);
+    display: none;
   }
 }
 

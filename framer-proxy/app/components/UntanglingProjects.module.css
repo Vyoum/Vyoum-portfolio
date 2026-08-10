@@ -437,7 +437,7 @@
 @media (max-width: 860px) {
   .heroCopy {
     position: absolute;
-    top: 88px;
+    top: 120px;
     left: var(--grid-pad-mobile);
     right: var(--grid-pad-mobile);
     width: auto;
@@ -454,6 +454,18 @@
       var(--background) 70%,
       transparent 100%
     );
+  }
+
+  .badge {
+    gap: 6px;
+    padding: 4px 9px 4px 7px;
+    font-size: 0.72rem;
+    margin-bottom: 18px;
+  }
+
+  .pulse {
+    width: 6px;
+    height: 6px;
   }
 
   .heroTitle {
