@@ -14,15 +14,15 @@ import styles from "./About.module.css";
 
 const paragraphs = [
   {
-    lead: "I love turning ideas into something real through design.",
-    body: "What started as a hobby turned into a career when I discovered how design can make things both look great and work better.",
+    lead: "I Build Intelligent Products That Turn Ideas Into Real Businesses",
+    body: "I’m a software engineer and AI product builder working across AI, AI agents, full stack development, and product design. I turn complex ideas into intelligent, intuitive, and scalable digital products.",
   },
   {
-    lead: "I focus on creating user interfaces that serve a real purpose",
+    lead: "29+ Products Delivered Across 3+ Countries Around the Globe",
     body: "making sure they’re not just pretty, but actually solve problems. Whether I’m working on a mobile app or a website, my goal is to make something that feels natural and easy to use.",
   },
   {
-    lead: "I’m a bit of a perfectionist when it comes to the small stuff,",
+    lead: "I Combine Technology, Design, and Strategy to Build What Actually Matters",
     body: "but I think that’s what makes good design great. This attention to detail helps me build strong relationships with clients, as they know I’ll put the same care into their project that they would.",
   },
 ];

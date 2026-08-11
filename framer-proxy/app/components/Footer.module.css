@@ -5,6 +5,9 @@
   overflow: hidden;
   padding: 72px 0 0;
   margin-top: 40px;
+  /* Design frame: bottom contact section */
+  width: 100%;
+  min-height: 733px;
 }
 
 /* Floating profile chip sitting on the light → black edge */
@@ -48,6 +51,9 @@
   gap: 56px;
   padding-top: 56px;
   padding-bottom: 120px;
+  width: 100%;
+  max-width: 1420px;
+  box-sizing: border-box;
 }
 
 .headline {
@@ -277,12 +283,14 @@
 @media (max-width: 767px) {
   .footer {
     padding-top: 64px;
+    min-height: 0;
   }
 
   .inner {
     gap: 40px;
     padding-top: 40px;
     padding-bottom: 72px;
+    max-width: 100%;
   }
 
   .headline {
