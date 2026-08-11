@@ -177,7 +177,10 @@
   border-radius: var(--radius-full);
   font-weight: 600;
   font-size: 0.95rem;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    gap 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   margin-bottom: 50px;
 }
@@ -185,6 +188,7 @@
 .bookCallBtn:hover {
   transform: translateY(-2px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  gap: 14px;
 }
 
 .bookCallBtn:active {
@@ -192,20 +196,29 @@
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
 }
 
+.bookCallPeople {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
 .avatarWrap {
+  position: relative;
+  z-index: 2;
   width: 32px;
   height: 32px;
   border-radius: 50%;
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   padding: 2px;
-  transition: transform 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .bookCallBtn:hover .avatarWrap {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 .avatarInner {
+  display: block;
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -213,6 +226,69 @@
   background-image: url("/avatar.png");
   background-size: cover;
   background-position: center 18%;
+}
+
+/* Collapsed by default — expands the pill on hover */
+.bookCallExtra {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    max-width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    margin-left 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    gap 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bookCallBtn:hover .bookCallExtra {
+  max-width: 64px;
+  margin-left: 6px;
+  gap: 6px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.plusSign {
+  flex-shrink: 0;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0.92;
+}
+
+.youChip {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bookCallExtra,
+  .bookCallBtn,
+  .avatarWrap {
+    transition: none;
+  }
+
+  .bookCallBtn:hover .bookCallExtra {
+    transform: none;
+  }
 }
 
 .clientStats {
@@ -369,7 +445,8 @@
   width: calc(var(--grid-max) - 2 * var(--grid-pad) - 24px);
   max-width: calc(100vw - 2 * var(--grid-pad) - 24px);
   margin-top: 36px;
-  padding: 18px 0;
+  padding: 28px 0;
+  min-height: 88px;
   border-top: 1px solid var(--grid-line);
   border-bottom: 1px solid var(--grid-line);
   position: relative;
@@ -379,7 +456,7 @@
 
 .logosDivider {
   width: 1px;
-  height: 32px;
+  height: 40px;
   flex-shrink: 0;
   background: var(--grid-line);
 }
@@ -406,8 +483,8 @@
 .logosTrack {
   display: flex;
   align-items: center;
-  gap: 50px;
-  animation: slide 20s linear infinite;
+  gap: 56px;
+  animation: slide 22s linear infinite;
   white-space: nowrap;
 }
 
@@ -416,16 +493,17 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-50% - 25px));
+    transform: translateX(calc(-50% - 28px));
   }
 }
 
 .logoItem {
-  font-size: 1.25rem;
+  font-size: 1.45rem;
   font-weight: 700;
   color: var(--text-muted);
   opacity: 0.55;
   letter-spacing: -0.02em;
+  line-height: 1;
   transition: opacity 0.25s ease, color 0.25s ease;
 }
 
@@ -495,13 +573,29 @@
     height: 24px;
   }
 
+  .youChip {
+    width: 24px;
+    height: 24px;
+    font-size: 0.58rem;
+  }
+
+  .bookCallBtn:hover .bookCallExtra {
+    max-width: 48px;
+    margin-left: 4px;
+    gap: 4px;
+  }
+
+  .plusSign {
+    font-size: 0.8rem;
+  }
+
   .clientStats {
     position: relative;
     z-index: 2;
     justify-content: flex-start;
     width: 100%;
     padding: 0;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     background: none;
   }
 
@@ -512,9 +606,10 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    justify-content: center;
     gap: 0;
-    min-height: 0;
-    padding: 14px 0 12px;
+    min-height: 108px;
+    padding: 22px 0 24px;
     overflow: hidden;
   }
 
@@ -528,6 +623,7 @@
     inset: auto;
     z-index: 1;
     width: 100%;
+    min-height: 40px;
     order: 2;
     display: flex;
     align-items: center;
@@ -547,9 +643,13 @@
     );
   }
 
+  .logosTrack {
+    gap: 40px;
+  }
+
   .logoItem {
-    opacity: 0.45;
-    font-size: 1rem;
+    opacity: 0.5;
+    font-size: 1.2rem;
   }
 
   .pileSlot {

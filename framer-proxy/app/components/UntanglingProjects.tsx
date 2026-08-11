@@ -85,9 +85,15 @@ export default function UntanglingProjects() {
             </p>
 
             <Link href="#contact" className={styles.bookCallBtn}>
-              <div className={styles.avatarWrap}>
-                <div className={styles.avatarInner} />
-              </div>
+              <span className={styles.bookCallPeople}>
+                <span className={styles.avatarWrap}>
+                  <span className={styles.avatarInner} />
+                </span>
+                <span className={styles.bookCallExtra} aria-hidden="true">
+                  <span className={styles.plusSign}>+</span>
+                  <span className={styles.youChip}>You</span>
+                </span>
+              </span>
               Book a call with me
             </Link>
 

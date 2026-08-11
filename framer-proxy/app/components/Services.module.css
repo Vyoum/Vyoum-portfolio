@@ -133,27 +133,44 @@
   .titleStrong {
     max-width: none;
   }
-
-  .stackGrid {
-    grid-template-columns: repeat(4, 48px);
-  }
 }
 
 @media (max-width: 768px) {
   .layout {
     padding-inline: var(--grid-pad-mobile);
   }
+
+  .stackGrid {
+    grid-template-columns: repeat(4, 60px);
+    gap: 12px;
+  }
+
+  .stackTile {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+  }
+
+  .stackTile svg {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 @media (max-width: 480px) {
   .stackGrid {
-    grid-template-columns: repeat(4, 44px);
-    gap: 8px;
+    grid-template-columns: repeat(4, 56px);
+    gap: 10px;
   }
 
   .stackTile {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
+    width: 56px;
+    height: 56px;
+    border-radius: 13px;
+  }
+
+  .stackTile svg {
+    width: 26px;
+    height: 26px;
   }
 }
