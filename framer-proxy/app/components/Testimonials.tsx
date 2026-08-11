@@ -77,7 +77,7 @@ export default function Testimonials() {
                   <Star key={star} size={19} fill="currentColor" />
                 ))}
               </div>
-              <span>99+ Happy clients</span>
+              <span>29+ Happy clients</span>
             </div>
           </div>
         </motion.div>

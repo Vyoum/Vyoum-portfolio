@@ -60,7 +60,7 @@ export default function Hero() {
               Strategic development that drives growth, not just working code.
               </span>{" "}
               <span className={styles.subtitleSubtle}>
-              I build everything your business needs to go from idea to revenue.
+              29+ products delivered across 3+ countries, turning ambitious ideas into digital experiences built to scale.
               </span>
             </motion.p>
 
