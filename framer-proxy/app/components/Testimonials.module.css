@@ -17,9 +17,12 @@
 }
 
 .container {
-  max-width: 1280px;
+  max-width: var(--grid-max);
   padding-top: clamp(5rem, 9vw, 8rem);
   padding-bottom: clamp(5rem, 9vw, 8rem);
+  /* Same element as .container — keep rail pad + inset inside the lines */
+  padding-inline: calc(var(--grid-pad) + 24px);
+  box-sizing: border-box;
 }
 
 .header {
@@ -41,6 +44,7 @@
   font-weight: 500;
   letter-spacing: -0.085em;
   line-height: 0.92;
+  overflow-wrap: anywhere;
 }
 
 .title span {
@@ -223,6 +227,12 @@
   .card {
     min-height: 18rem;
     padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: var(--grid-pad-mobile);
   }
 }
 

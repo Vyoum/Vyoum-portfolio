@@ -97,7 +97,7 @@ export default function Footer() {
             backgroundImage: 'url("https://i.pravatar.cc/100?img=11")',
           }}
         />
-        <span className={styles.badgeName}>Joseph Alexander</span>
+        <span className={styles.badgeName}>Vyoum Agarwaal</span>
       </div>
 
       <div className={`container ${styles.inner}`}>
@@ -183,12 +183,12 @@ export default function Footer() {
             </div>
           </div>
 
-          <p className={styles.copyright}>© 2026 Joseph Alexander</p>
+          <p className={styles.copyright}>© 2026 Vyoum Agarwaal</p>
         </div>
       </div>
 
       <div className={styles.wordmark} aria-hidden>
-        JOSEPH
+        VYOUM
       </div>
     </footer>
   );
