@@ -46,7 +46,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 12px 6px 10px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   font-size: 0.85rem;
@@ -59,7 +59,7 @@
 
 .badge:hover {
   border-color: rgba(52, 199, 89, 0.35);
-  background: #fff;
+  background: var(--surface-hover);
   transform: translateY(-3px);
 }
 
