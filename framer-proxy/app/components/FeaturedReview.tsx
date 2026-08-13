@@ -14,7 +14,7 @@ export default function FeaturedReview() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
-          Working with Joseph felt like having a seasoned design partner{" "}
+          Working with Vyoum felt like having a seasoned design partner{" "}
           <strong>who truly understood our vision for KYMA</strong> and brought
           it to life in ways we hadn&apos;t even imagined.
         </motion.blockquote>
@@ -36,7 +36,7 @@ export default function FeaturedReview() {
           />
           <div className={styles.meta}>
             <p className={styles.name}>Priiya Rao</p>
-            <p className={styles.role}>Co-founder of KYMA</p>
+            <p className={styles.role}>FOUNDER of Workpunkt</p>
           </div>
         </motion.div>
       </div>
