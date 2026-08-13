@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "LaunchFolio | Joseph Alexander",
-  description: "The complete portfolio template natively built in Next.js",
+  title: "Vyoum Agarwaal | Portfolio",
+  description: "Full-stack designer and AI product builder — systems that scale growth.",
 };
 
 export default function RootLayout({

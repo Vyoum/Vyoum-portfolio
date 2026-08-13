@@ -114,7 +114,7 @@ export default function PortfolioSections() {
           <div className={styles.posts}>
             <article className={styles.featuredPost}>
               <div className={styles.postArt}>Aa</div>
-              <p>Mar 6, 2025 · By Joseph Alexander</p>
+              <p>Mar 6, 2025 · By Vyoum Agarwaal</p>
               <h3>How designers and developers can actually collaborate.</h3>
             </article>
             <div className={styles.smallPosts}>
@@ -134,11 +134,11 @@ export function Footer() {
       <div className="container">
         <p className={styles.eyebrow}>Speak to me</p>
         <h2>Let&apos;s create incredible<br />work together.</h2>
-        <Link href="mailto:joseph@launchnow.design" className={styles.email}>joseph@launchnow.design <ArrowUpRight /></Link>
+        <Link href="mailto:vyoum@launchnow.design" className={styles.email}>vyoum@launchnow.design <ArrowUpRight /></Link>
         <div className={styles.footerBottom}>
-          <strong>JOSEPH</strong>
+          <strong>VYOUM</strong>
           <div><Link href="#work">Work</Link><Link href="#services">Services</Link><Link href="#pricing">Pricing</Link><Link href="#blog">Blog</Link></div>
-          <p>© 2026 Joseph Alexander</p>
+          <p>© 2026 Vyoum Agarwaal</p>
         </div>
       </div>
     </footer>

@@ -126,8 +126,8 @@ export default function Footer() {
         <div className={styles.contactRow}>
           <div className={styles.block}>
             <p className={styles.label}>Email</p>
-            <a href="mailto:joseph@launchnow.design" className={styles.value}>
-              joseph@launchnow.design
+            <a href="mailto:vyoum@launchnow.design" className={styles.value}>
+              vyoum@launchnow.design
             </a>
           </div>
 

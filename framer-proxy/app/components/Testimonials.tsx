@@ -27,13 +27,13 @@ const testimonials = [
     avatar: "/priiya-rao.png",
   },
   {
-    text: "Our website conversion rate improved significantly thanks to Joseph's expertise.",
+    text: "Our website conversion rate improved significantly thanks to Vyoum's expertise.",
     author: "Ben Harper",
     role: "CTO of Nexus",
     avatar: "https://i.pravatar.cc/96?img=14",
   },
   {
-    text: "Joseph's design approach brought clarity to our complex data visualizations. Our users are thrilled!",
+    text: "Vyoum's design approach brought clarity to our complex data visualizations. Our users are thrilled!",
     author: "Michael Wong",
     role: "Data Scientist at DataSphere",
     avatar: "https://i.pravatar.cc/96?img=11",
@@ -57,17 +57,20 @@ export default function Testimonials() {
     <section className={`section ${styles.testimonialsSection}`} id="testimonials">
       <div className={`container ${styles.container}`}>
         <motion.div
+          className={styles.header}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className={styles.header}
         >
           <h2 className={styles.title}>
             <span>Hear from what my</span>
             <strong>clients have to say.</strong>
           </h2>
-          <div className={styles.rating} aria-label="99 plus happy clients, rated five out of five stars">
+          <div
+            className={styles.rating}
+            aria-label="99 plus happy clients, rated five out of five stars"
+          >
             <div className={styles.avatars} aria-hidden="true">
               {clientAvatars.map((avatar) => (
                 <span
@@ -88,31 +91,34 @@ export default function Testimonials() {
           </div>
         </motion.div>
 
-        <div className={styles.grid}>
+        <div className={styles.track} aria-label="Client reviews">
           {testimonials.map((item, index) => (
-            <motion.article
-              key={item.author}
-              className={styles.card}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-            >
-              <div className={styles.quoteMark} aria-hidden="true">“</div>
-              <p className={styles.text}>{item.text}</p>
-              <div className={styles.author}>
-                <span
-                  className={styles.avatar}
-                  role="img"
-                  aria-label={`${item.author} profile photo`}
-                  style={{ backgroundImage: `url("${item.avatar}")` }}
-                />
-                <div className={styles.authorInfo}>
-                  <h3>{item.author}</h3>
-                  <p>{item.role}</p>
+            <div key={item.author} className={styles.panel}>
+              <motion.article
+                className={styles.card}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.45 }}
+                transition={{ duration: 0.5, delay: Math.min(index, 2) * 0.05 }}
+              >
+                <div className={styles.quoteMark} aria-hidden="true">
+                  “
                 </div>
-              </div>
-            </motion.article>
+                <p className={styles.text}>{item.text}</p>
+                <div className={styles.author}>
+                  <span
+                    className={styles.avatar}
+                    role="img"
+                    aria-label={`${item.author} profile photo`}
+                    style={{ backgroundImage: `url("${item.avatar}")` }}
+                  />
+                  <div className={styles.authorInfo}>
+                    <h3>{item.author}</h3>
+                    <p>{item.role}</p>
+                  </div>
+                </div>
+              </motion.article>
+            </div>
           ))}
         </div>
       </div>

@@ -108,7 +108,7 @@ export default function About() {
               </div>
             </div>
             <div className={styles.profileMeta}>
-              <h3>Vyoum Agarwal</h3>
+              <h3>Vyoum Agarwaal</h3>
               <p>Full-stack Designer</p>
             </div>
 
