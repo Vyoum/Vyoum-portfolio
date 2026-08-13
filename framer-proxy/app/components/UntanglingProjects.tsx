@@ -64,26 +64,59 @@ export default function UntanglingProjects() {
             style={{ opacity: heroOpacity, y: heroY, pointerEvents: heroPointer }}
             className={styles.heroCopy}
           >
-            <div className={styles.badge}>
+            <motion.div
+              className={styles.badge}
+              initial={{ opacity: 0, y: 12, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
               <span className={styles.pulse} />
               Available from August &apos;26
-            </div>
+            </motion.div>
 
             <h1 className={styles.heroTitle}>
-              <span className={styles.titleGray}>Systems that</span>
+              <span className={styles.titleLine}>
+                <motion.span
+                  className={styles.titleGray}
+                  initial={{ opacity: 0, y: "100%" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  Systems that
+                </motion.span>
+              </span>
               <br />
-              <span className={styles.titleBlack}>scale Growth.</span>
+              <span className={styles.titleLine}>
+                <motion.span
+                  className={styles.titleBlack}
+                  initial={{ opacity: 0, y: "100%" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  scale Growth.
+                </motion.span>
+              </span>
             </h1>
 
-            <p className={styles.heroSubtitle}>
+            <motion.p
+              className={styles.heroSubtitle}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.42, ease: [0.22, 1, 0.36, 1] }}
+            >
               <span className={styles.subtitleBold}>
               Strategic development that drives growth, not just working code.
               </span>{" "}
               <span className={styles.subtitleSubtle}>
               29+ products delivered across 3+ countries, turning ambitious ideas into digital experiences built to scale.
               </span>
-            </p>
+            </motion.p>
 
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.54, ease: [0.22, 1, 0.36, 1] }}
+            >
             <Link href="#contact" className={styles.bookCallBtn}>
               <span className={styles.bookCallPeople}>
                 <span className={styles.avatarWrap}>
@@ -96,9 +129,15 @@ export default function UntanglingProjects() {
               </span>
               Book a call with me
             </Link>
+            </motion.div>
 
             {/* Clients + logos — under the CTA, logos flow out from happy clients */}
-            <div className={styles.logosBar}>
+            <motion.div
+              className={styles.logosBar}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.68, ease: [0.22, 1, 0.36, 1] }}
+            >
               <div className={styles.clientStats}>
                 <div className={styles.avatars}>
                   {[5, 4, 3, 2, 1].map((z, i) => (
@@ -136,7 +175,7 @@ export default function UntanglingProjects() {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Pile target in the hero’s right column — cards sit here on load */}
