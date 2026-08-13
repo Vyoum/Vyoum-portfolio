@@ -99,7 +99,7 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.1 }}
           >
             <div className={styles.imageWrap}>
-              <img src="/vyoum-profile.png" alt="Vyoum Agarwal, full-stack designer" />
+              <img src="/vyoum-about.png" alt="Vyoum Agarwaal, full-stack designer" />
               <div className={styles.socials} aria-label="Social profiles">
                 <a href="#contact" aria-label="Website"><Globe2 size={19} /></a>
                 <a href="#contact" aria-label="Apps"><Laptop size={19} /></a>
