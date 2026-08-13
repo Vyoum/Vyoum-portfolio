@@ -136,6 +136,28 @@
   overflow: visible;
 }
 
+.titleLine {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+}
+
+.titleLine > span {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .titleLine {
+    overflow: visible;
+  }
+
+  .titleLine > span {
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
 .titleGray {
   color: #888888;
   font-weight: 500;
