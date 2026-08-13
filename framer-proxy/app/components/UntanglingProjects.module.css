@@ -136,28 +136,6 @@
   overflow: visible;
 }
 
-.titleLine {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  padding-bottom: 0.08em;
-}
-
-.titleLine > span {
-  will-change: transform, opacity;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .titleLine {
-    overflow: visible;
-  }
-
-  .titleLine > span {
-    transform: none !important;
-    filter: none !important;
-  }
-}
-
 .titleGray {
   color: #888888;
   font-weight: 500;
@@ -376,8 +354,9 @@
 /* Pile target — same medium device size as settled cards */
 .pileSlot {
   position: absolute;
-  top: 190px;
-  right: calc(48px + var(--grid-pad));
+  top: 230px;
+  /* Match grid right inset so fan lands cleanly inside the right rail */
+  right: calc(48px + var(--grid-pad) + 40px);
   transform: none;
   width: min(400px, 40%);
   z-index: 5;
@@ -407,9 +386,10 @@
 
 .header {
   position: absolute;
-  top: 148px;
+  top: 180px;
   left: calc(var(--grid-pad) + 24px);
-  right: calc(48px + var(--grid-pad) + 24px);
+  /* Extra inset from the right rail (desktop) */
+  right: calc(48px + var(--grid-pad) + 64px);
   /* Always paint above fanning cards (inspo: title readable over the stack) */
   z-index: 80;
   display: flex;
@@ -444,9 +424,10 @@
 .grid {
   position: absolute;
   left: calc(var(--grid-pad) + 24px);
-  right: calc(48px + var(--grid-pad) + 24px);
-  /* Sit clearly under the Latest Projects heading */
-  top: 340px;
+  /* Extra inset from the right rail (desktop) — cards sit further inside */
+  right: calc(48px + var(--grid-pad) + 64px);
+  /* Sit clearly under the Latest Projects heading + clear of the navbar */
+  top: 372px;
   bottom: auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

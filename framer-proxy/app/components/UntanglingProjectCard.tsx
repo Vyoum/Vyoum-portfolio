@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useTransform, type MotionValue } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { Project, ProjectTone } from "../lib/projects";
 import styles from "./UntanglingProjectCard.module.css";
 
@@ -38,8 +38,6 @@ export default function UntanglingProjectCard({
   const originX = useMotionValue(0);
   const originY = useMotionValue(0);
   const ready = useMotionValue(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const measure = () => {
@@ -109,30 +107,9 @@ export default function UntanglingProjectCard({
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`View ${project.title} case study`}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onFocus={() => setIsHovered(true)}
-          onBlur={() => setIsHovered(false)}
-          onPointerMove={(event) => {
-            const rect = event.currentTarget.getBoundingClientRect();
-            setCursorPosition({
-              x: event.clientX - rect.left,
-              y: event.clientY - rect.top,
-            });
-          }}
         >
           <div className={`${styles.frame} ${TONE_CLASS[project.tone]}`}>
             <div className={styles.shot}>
-              <motion.span
-                className={styles.caseStudyCursor}
-                style={{ left: cursorPosition.x, top: cursorPosition.y }}
-                animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.8 }}
-                transition={{ duration: 0.22, ease: "easeOut" }}
-                aria-hidden="true"
-              >
-                View case study <ArrowUpRight size={13} strokeWidth={2.5} />
-              </motion.span>
               <Image
                 src={project.image}
                 alt={project.title}
