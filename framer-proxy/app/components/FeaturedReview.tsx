@@ -29,7 +29,7 @@ export default function FeaturedReview() {
           <span
             className={styles.avatar}
             style={{
-              backgroundImage: 'url("https://i.pravatar.cc/96?img=12")',
+              backgroundImage: 'url("/priiya-rao.png")',
             }}
             role="img"
             aria-label="Priiya Rao"

@@ -5,44 +5,50 @@ import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import styles from "./Testimonials.module.css";
 
-const clientAvatars = [1, 12, 3, 4, 5];
+const clientAvatars = [
+  "https://i.pravatar.cc/100?img=1",
+  "/priiya-rao.png",
+  "https://i.pravatar.cc/100?img=3",
+  "https://i.pravatar.cc/100?img=4",
+  "https://i.pravatar.cc/100?img=5",
+];
 
 const testimonials = [
   {
     text: "The new UI design cut our customer support tickets in half. It's been a game-changer for us.",
     author: "Martina Martinez",
     role: "Customer Manager at SupportEase",
-    avatar: 47,
+    avatar: "https://i.pravatar.cc/96?img=47",
   },
   {
     text: "Working with Joseph felt like having a seasoned design partner who truly understood our vision for KYMA and brought it to life in ways we hadn't even imagined.",
     author: "Priiya Rao",
     role: "Co-founder of KYMA",
-    avatar: 12,
+    avatar: "/priiya-rao.png",
   },
   {
     text: "Our website conversion rate improved significantly thanks to Joseph's expertise.",
     author: "Ben Harper",
     role: "CTO of Nexus",
-    avatar: 14,
+    avatar: "https://i.pravatar.cc/96?img=14",
   },
   {
     text: "Joseph's design approach brought clarity to our complex data visualizations. Our users are thrilled!",
     author: "Michael Wong",
     role: "Data Scientist at DataSphere",
-    avatar: 11,
+    avatar: "https://i.pravatar.cc/96?img=11",
   },
   {
     text: "The rebranding exceeded our expectations. It's given us a competitive edge in our industry.",
     author: "Sophie Bennett",
     role: "Founder of Northstar",
-    avatar: 32,
+    avatar: "https://i.pravatar.cc/96?img=32",
   },
   {
     text: "The redesign transformed our brand image. We've seen a 30% increase in engagement since launch.",
     author: "Daniel Lee",
     role: "Marketing Director at Alto",
-    avatar: 68,
+    avatar: "https://i.pravatar.cc/96?img=68",
   },
 ];
 
@@ -67,7 +73,7 @@ export default function Testimonials() {
                 <span
                   key={avatar}
                   className={styles.miniAvatar}
-                  style={{ backgroundImage: `url("https://i.pravatar.cc/100?img=${avatar}")` }}
+                  style={{ backgroundImage: `url("${avatar}")` }}
                 />
               ))}
             </div>
@@ -99,7 +105,7 @@ export default function Testimonials() {
                   className={styles.avatar}
                   role="img"
                   aria-label={`${item.author} profile photo`}
-                  style={{ backgroundImage: `url("https://i.pravatar.cc/96?img=${item.avatar}")` }}
+                  style={{ backgroundImage: `url("${item.avatar}")` }}
                 />
                 <div className={styles.authorInfo}>
                   <h3>{item.author}</h3>
