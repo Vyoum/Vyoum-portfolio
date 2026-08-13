@@ -4,6 +4,16 @@ import SmoothScroll from "./components/SmoothScroll";
 import CustomCursor from "./components/CustomCursor";
 import "./globals.css";
 
+const themeScript = `
+  (() => {
+    try {
+      const saved = localStorage.getItem("vyoum-theme");
+      const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = saved === "dark" || saved === "light" ? saved : system;
+    } catch {}
+  })();
+`;
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -22,6 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-background">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${inter.variable} antialiased`}>
         <SmoothScroll>{children}</SmoothScroll>
         <CustomCursor />

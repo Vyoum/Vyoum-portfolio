@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { name: "Work", href: "#work" },
@@ -95,6 +96,7 @@ export default function Navbar() {
             </motion.div>
 
             <div className={styles.actions}>
+              <ThemeToggle />
               <AnimatePresence mode="wait" initial={false}>
                 {showLinks ? (
                   <motion.div
