@@ -564,26 +564,28 @@
   }
 
   .bookCallBtn {
-    gap: 8px;
-    padding: 5px 14px 5px 5px;
-    font-size: 0.8rem;
+    gap: 10px;
+    padding: 8px 22px 8px 8px;
+    min-width: min(100%, 17.5rem);
+    justify-content: flex-start;
+    font-size: 0.9rem;
     margin-bottom: 28px;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
   }
 
   .avatarWrap {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
 
   .youChip {
-    width: 24px;
-    height: 24px;
-    font-size: 0.58rem;
+    width: 28px;
+    height: 28px;
+    font-size: 0.62rem;
   }
 
   .bookCallBtn:hover .bookCallExtra {
-    max-width: 48px;
+    max-width: 56px;
     margin-left: 4px;
     gap: 4px;
   }

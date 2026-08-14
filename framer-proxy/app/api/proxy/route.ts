@@ -1,17 +1,16 @@
-// app/api/proxy/route.ts
 import { NextResponse } from "next/server";
 
-const FRAMER_BASE = "https://vyoum-portfolio.framer.website"; // <-- change this
+/** Live Framer site shown while the Next portfolio is still WIP. */
+const FRAMER_BASE = "https://vyoumportfolio.framer.website";
 
 export const runtime = "edge";
 
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
-    const path = url.searchParams.get("path") || "";
-    const targetUrl = `${FRAMER_BASE}/${path}`;
+    const path = (url.searchParams.get("path") || "").replace(/^\/+/, "");
+    const targetUrl = path ? `${FRAMER_BASE}/${path}` : `${FRAMER_BASE}/`;
 
-    // forward basic headers
     const incoming = request.headers;
     const forwardHeaders = new Headers();
 
@@ -26,7 +25,6 @@ export async function GET(request: Request) {
       if (v) forwardHeaders.set(name, v);
     }
 
-    // important: Framer host
     forwardHeaders.set("host", new URL(FRAMER_BASE).host);
 
     const upstreamRes = await fetch(targetUrl, {
@@ -36,33 +34,30 @@ export async function GET(request: Request) {
     });
 
     const contentType = upstreamRes.headers.get("content-type") || "";
-    const originalHeaders = new Headers(upstreamRes.headers);
-
-    // Remove headers that might conflict
-    originalHeaders.delete("content-security-policy");
-    originalHeaders.delete("x-frame-options");
+    const responseHeaders = new Headers(upstreamRes.headers);
+    responseHeaders.delete("content-security-policy");
+    responseHeaders.delete("x-frame-options");
+    responseHeaders.delete("content-encoding");
+    responseHeaders.delete("content-length");
 
     const buffer = await upstreamRes.arrayBuffer();
 
-    // Optional: rewrite absolute URLs in HTML so user stays on your domain
     if (contentType.includes("text/html")) {
+      const host = url.origin;
       const text = new TextDecoder().decode(buffer);
-      const replaced = text.replaceAll(
-        FRAMER_BASE,
-        // This is your domain on Vercel – update later if needed
-        "https://vyoum-portfolio.framer.website"
-      );
+      const replaced = text
+        .replaceAll(FRAMER_BASE, host)
+        .replaceAll("https://vyoumportfolio.framer.website", host);
 
       return new NextResponse(replaced, {
         status: upstreamRes.status,
-        headers: originalHeaders,
+        headers: responseHeaders,
       });
     }
 
-    // Non-HTML (images, CSS, JS) – passthrough
     return new NextResponse(buffer, {
       status: upstreamRes.status,
-      headers: originalHeaders,
+      headers: responseHeaders,
     });
   } catch (err: unknown) {
     console.error("Proxy error:", err);
