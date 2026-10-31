@@ -87,6 +87,17 @@ button {
   }
 }
 
+/* Keeps content off the fixed ColumnGrid rails, which sit at --grid-pad */
+.container-inset {
+  padding-inline: calc(var(--grid-pad) + 24px);
+}
+
+@media (max-width: 768px) {
+  .container-inset {
+    padding-inline: var(--grid-pad-mobile);
+  }
+}
+
 /* Horizontal rule that snaps to the column rail */
 .gridRule {
   width: 100%;

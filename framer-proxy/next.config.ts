@@ -1,12 +1,9 @@
 import type { NextConfig } from "next";
 
 /**
- * While the Next portfolio is WIP, proxy.ts rewrites to /api/proxy so we
- * can hide the Made-in-Framer badge and inject a sticky email CTA.
- *
- * Set FRAMER_PROXY=0 to work on the Next portfolio locally:
- *   FRAMER_PROXY=0 npm run dev
- *   (or: npm run dev:portfolio)
+ * Serves the Next portfolio by default. Set FRAMER_PROXY=1 to serve the old
+ * Framer site instead (proxy.ts rewrites to /api/proxy):
+ *   npm run dev:framer
  */
 const nextConfig: NextConfig = {
   // Strict Mode double-mounts in `next dev` and can leave Framer Motion

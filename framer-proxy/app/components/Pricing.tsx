@@ -4,12 +4,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import styles from "./Pricing.module.css";
 import { Check } from "lucide-react";
-import Link from "next/link";
+import { PROJECT_INQUIRY_HREF } from "../lib/site";
 
 export default function Pricing() {
   return (
     <section className={`section ${styles.pricingSection}`} id="pricing">
-      <div className={`container ${styles.container}`}>
+      <div className={`container container-inset ${styles.container}`}>
         <div className={styles.header}>
           <motion.h2 
             className={styles.title}
@@ -18,7 +18,7 @@ export default function Pricing() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            Simple pricing. <span className="text-gradient">Standout designs.</span>
+            Simple pricing. <span className="text-gradient">Serious systems.</span>
           </motion.h2>
           <motion.p 
             className={styles.subtitle}
@@ -27,12 +27,12 @@ export default function Pricing() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Clear costs, no hidden fees. Select from monthly subscriptions or individual project rates.
+            Clear starting prices, no hidden fees. Final quote depends on scope, agreed after a discovery call.
           </motion.p>
         </div>
 
         <div className={styles.cards}>
-          {/* Subscription Card */}
+          {/* AI Automation Card */}
           <motion.div 
             className={styles.card}
             initial={{ opacity: 0, y: 30 }}
@@ -42,30 +42,30 @@ export default function Pricing() {
           >
             <div className={styles.cardHeader}>
               <div className={styles.cardBadge}>Slots available</div>
-              <h3 className={styles.cardTitle}>Unlimited Design</h3>
+              <h3 className={styles.cardTitle}>AI Automation</h3>
               <p className={styles.cardDesc}>
-                One flat monthly rate for unlimited design requests. Ideal for ongoing design requirements.
+                Agents and automated workflows that take real work off your team: lead handling, outreach, document intake, and ops.
               </p>
               <div className={styles.price}>
-                $8,000 <span>/ month</span>
+                ₹24,999 <span>onwards</span>
               </div>
             </div>
             <div className={styles.cardFeatures}>
               <ul>
-                <li><Check size={18} className={styles.check} /> No contracts or commitments</li>
-                <li><Check size={18} className={styles.check} /> Pause or cancel anytime</li>
-                <li><Check size={18} className={styles.check} /> Multiple Brands</li>
-                <li><Check size={18} className={styles.check} /> Unlimited requests</li>
-                <li><Check size={18} className={styles.check} /> Avg 48 hour turnaround</li>
-                <li><Check size={18} className={styles.check} /> Framer development</li>
+                <li><Check size={18} className={styles.check} /> Discovery call to map your workflow</li>
+                <li><Check size={18} className={styles.check} /> LangGraph / LangChain agents</li>
+                <li><Check size={18} className={styles.check} /> CRM, email, and tool integrations</li>
+                <li><Check size={18} className={styles.check} /> Retries, monitoring, and LLM tracing</li>
+                <li><Check size={18} className={styles.check} /> Model cost controls</li>
+                <li><Check size={18} className={styles.check} /> Post-launch support</li>
               </ul>
             </div>
-            <Link href="#get-started" className={`btn-primary ${styles.fullWidthBtn}`}>
+            <a href={PROJECT_INQUIRY_HREF} className={`btn-primary ${styles.fullWidthBtn}`}>
               Get Started
-            </Link>
+            </a>
           </motion.div>
 
-          {/* Single Project Card */}
+          {/* Web Development Card */}
           <motion.div 
             className={`${styles.card} ${styles.cardSecondary}`}
             initial={{ opacity: 0, y: 30 }}
@@ -74,25 +74,25 @@ export default function Pricing() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className={styles.cardHeader}>
-              <h3 className={styles.cardTitle}>Single Project</h3>
+              <h3 className={styles.cardTitle}>Web Development</h3>
               <p className={styles.cardDesc}>
-                Comprehensive design services for any project scope. Ideal for one-time design needs or individual tasks.
+                Fast, production-ready websites and web apps, from landing pages to full-stack platforms with real backends.
               </p>
               <div className={styles.price}>
-                Custom Quote
+                ₹14,999 <span>onwards</span>
               </div>
             </div>
             <div className={styles.cardFeatures}>
               <ul>
                 <li><Check size={18} className={styles.check} /> Clearly defined scope</li>
                 <li><Check size={18} className={styles.check} /> Fixed timeline</li>
-                <li><Check size={18} className={styles.check} /> 3 revision rounds</li>
-                <li><Check size={18} className={styles.check} /> Milestone updates</li>
+                <li><Check size={18} className={styles.check} /> Next.js / React frontend</li>
+                <li><Check size={18} className={styles.check} /> Deployment and CI/CD</li>
               </ul>
             </div>
-            <Link href="#quote" className={`btn-secondary ${styles.fullWidthBtn}`}>
+            <a href={PROJECT_INQUIRY_HREF} className={`btn-secondary ${styles.fullWidthBtn}`}>
               Get quote
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>

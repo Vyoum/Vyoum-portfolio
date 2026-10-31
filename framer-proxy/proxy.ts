@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const FRAMER_PROXY_ENABLED = process.env.FRAMER_PROXY !== "0";
+const FRAMER_PROXY_ENABLED = process.env.FRAMER_PROXY === "1";
 
 /**
  * Next.js 16+: file convention is `proxy.ts` (replaces `middleware.ts`).

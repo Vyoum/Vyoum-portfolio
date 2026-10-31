@@ -106,12 +106,6 @@
   color: var(--text-dark);
 }
 
-@media (prefers-color-scheme: dark) {
-  .cardFeatures li {
-    color: #e5e5e5;
-  }
-}
-
 .check {
   color: var(--accent);
   flex-shrink: 0;

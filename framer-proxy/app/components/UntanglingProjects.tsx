@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 import { PROJECTS } from "../lib/projects";
+import { SITE } from "../lib/site";
 import UntanglingProjectCard from "./UntanglingProjectCard";
 import styles from "./UntanglingProjects.module.css";
 
@@ -66,7 +67,7 @@ export default function UntanglingProjects() {
           >
             <div className={styles.badge}>
               <span className={styles.pulse} />
-              Available from August &apos;26
+              Available for new projects
             </div>
 
             <h1 className={styles.heroTitle}>
@@ -154,10 +155,15 @@ export default function UntanglingProjects() {
             className={styles.header}
           >
             <h2 className={styles.title}>Latest Projects</h2>
-            <Link href="#work" className={styles.viewAll}>
+            <a
+              href={SITE.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.viewAll}
+            >
               View all my projects
               <ArrowRight size={16} />
-            </Link>
+            </a>
           </motion.div>
 
           {/* Same four cards: piled at pileRef → settle into this grid */}

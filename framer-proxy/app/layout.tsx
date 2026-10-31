@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import SmoothScroll from "./components/SmoothScroll";
 import CustomCursor from "./components/CustomCursor";
+import { SITE } from "./lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -10,9 +11,25 @@ const inter = Inter({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+const description =
+  "AI engineer building production agentic workflows, AI automation, and full-stack web apps. LangGraph systems running across 50+ schools; AIR 2 at Razorpay Buildathon.";
+
 export const metadata: Metadata = {
-  title: "Vyoum Agarwaal | Portfolio",
-  description: "Full-stack designer and AI product builder — systems that scale growth.",
+  metadataBase: new URL(SITE.url),
+  title: `${SITE.name} | AI Engineer`,
+  description,
+  openGraph: {
+    title: `${SITE.name} | AI Engineer`,
+    description,
+    url: SITE.url,
+    siteName: SITE.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name} | AI Engineer`,
+    description,
+  },
 };
 
 export default function RootLayout({

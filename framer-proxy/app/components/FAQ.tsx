@@ -4,28 +4,28 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./FAQ.module.css";
 import { Plus, Minus, CalendarDays } from "lucide-react";
-import Link from "next/link";
+import { BOOK_CALL_HREF } from "../lib/site";
 
 const faqs = [
   {
-    question: "How long does a typical project take to complete?",
-    answer: "Project timelines vary based on complexity. A simple project might take 2-3 weeks, while more comprehensive designs can take 1-2 months. I will provide a specific estimate after our initial consultation.",
+    question: "What services do you offer?",
+    answer: "I specialize in full-stack web development, AI automation, agentic RAG pipelines, and project management, building modern, reliable systems tailored to how your business actually runs.",
   },
   {
-    question: "Can you work with my existing brand and designs?",
-    answer: "Absolutely! I'm experienced in working with established brands. I will ensure all new designs align perfectly with your existing brand identity and style.",
+    question: "How do I start working with you?",
+    answer: "Email me or book a call. We start with a discovery call where I map your current workflow and goals, then I send a proposal with scope, timeline, and price before any work begins.",
   },
   {
-    question: "What makes your design process unique?",
-    answer: "My process stands out due to our collaborative approach. I involve you at every stage, ensuring the final product truly reflects your vision while benefiting from my expertise.",
+    question: "What tech stack do you use?",
+    answer: "Python, TypeScript, FastAPI, Node.js, React and Next.js, with LangGraph and LangChain for agents. For data and infrastructure: PostgreSQL, MongoDB, Redis, Elasticsearch, Kafka, and AWS with CI/CD.",
   },
   {
-    question: "Do you offer ongoing support after the project is completed?",
-    answer: "Yes, I provide post-project support. This includes minor adjustments and answering questions about your new designs for up to 30 days after delivery. If there's a need for longer support, we can discuss a retainer.",
+    question: "How long does a project take?",
+    answer: "It depends on scope. A website is usually a matter of weeks, while an agent system or full platform takes longer. You'll get a specific timeline in the proposal after our discovery call.",
   },
   {
-    question: "How do you handle confidentiality and intellectual property rights?",
-    answer: "I take confidentiality seriously. All client information and project details are kept strictly confidential. Upon project completion, you'll own full intellectual property rights to the final designs.",
+    question: "Do you provide support after launch?",
+    answer: "Yes. I set up monitoring, alerting, and tracing so issues are caught early, and I stay on to fix what breaks and improve the system once it's running in production.",
   },
 ];
 
@@ -101,10 +101,10 @@ export default function FAQ() {
             <p className={styles.calloutText}>
               Learn more about how I work and how I can help you and your business take the next step.
             </p>
-            <Link className={styles.scheduleButton} href="#contact">
+            <a className={styles.scheduleButton} href={BOOK_CALL_HREF}>
               <CalendarDays aria-hidden="true" />
               Schedule now
-            </Link>
+            </a>
           </motion.aside>
         </div>
       </div>

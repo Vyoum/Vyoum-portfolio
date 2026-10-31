@@ -32,7 +32,7 @@ const blogPosts = [
 export default function BlogPreview() {
   return (
     <section className={`section ${styles.blogSection}`} id="blog">
-      <div className={`container ${styles.container}`}>
+      <div className={`container container-inset ${styles.container}`}>
         <div className={styles.header}>
           <h2 className={styles.title}>From my blog, design insights.</h2>
           <Link href="#all-posts" className="btn-secondary">

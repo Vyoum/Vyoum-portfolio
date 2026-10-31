@@ -21,7 +21,7 @@ const testimonials = [
     avatar: "https://i.pravatar.cc/96?img=47",
   },
   {
-    text: "Working with Vyoum felt like having a seasoned design partner who truly understood our vision for KYMA and brought it to life in ways we hadn't even imagined.",
+    text: "Working with Vyoum felt like having a seasoned design partner who truly understood our vision for Workpunkt and brought it to life in ways we hadn't even imagined.",
     author: "Priiya Rao",
     role: "Founder of Workpunkt",
     avatar: "/priiya-rao.png",

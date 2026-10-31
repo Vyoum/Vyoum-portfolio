@@ -6,7 +6,7 @@ import styles from "./FeaturedReview.module.css";
 export default function FeaturedReview() {
   return (
     <section className={styles.section} aria-label="Client review">
-      <div className={`container ${styles.inner}`}>
+      <div className={`container container-inset ${styles.inner}`}>
         <motion.blockquote
           className={styles.quote}
           initial={{ opacity: 0, y: 24 }}
@@ -15,7 +15,7 @@ export default function FeaturedReview() {
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
           Working with Vyoum felt like having a seasoned design partner{" "}
-          <strong>who truly understood our vision for KYMA</strong> and brought
+          <strong>who truly understood our vision for Workpunkt</strong> and brought
           it to life in ways we hadn&apos;t even imagined.
         </motion.blockquote>
 

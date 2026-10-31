@@ -4,7 +4,15 @@
 }
 
 .container {
-  max-width: 1280px;
+  max-width: var(--grid-max);
+  /* Keep cards inside the fixed column rails (ColumnGrid) */
+  padding-inline: calc(var(--grid-pad) + 24px);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: var(--grid-pad-mobile);
+  }
 }
 
 .content {

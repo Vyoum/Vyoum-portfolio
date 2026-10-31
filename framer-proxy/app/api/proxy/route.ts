@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 /** Live Framer site shown while the Next portfolio is still WIP. */
 const FRAMER_BASE = "https://vyoumportfolio.framer.website";
-const CONTACT_EMAIL = "vyoum@launchnow.design";
+const CONTACT_EMAIL = "vyoumagarwal@gmail.com";
 
 export const runtime = "edge";
 

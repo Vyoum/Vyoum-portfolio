@@ -225,7 +225,8 @@
   gap: 10px;
 }
 
-.menuCol a {
+.menuCol a,
+.menuCol span {
   color: #fff;
   font-size: 1rem;
   font-weight: 500;

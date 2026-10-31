@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion";
 import {
-  Globe2,
+  Bot,
+  BrainCircuit,
   Laptop,
-  PaintBucket,
-  PanelTop,
-  WandSparkles,
+  Rocket,
+  Send,
+  Server,
 } from "lucide-react";
 import styles from "./Services.module.css";
 
@@ -22,12 +23,12 @@ const stack = [
 ] as const;
 
 const services = [
-  { name: "Framer Development", Icon: FramerGlyph },
-  { name: "Brand Design", Icon: PaintBucket },
-  { name: "Web Apps", Icon: Laptop },
-  { name: "Landing Pages", Icon: PanelTop },
-  { name: "Motion Graphics", Icon: WandSparkles },
-  { name: "3D Design", Icon: Globe2 },
+  { name: "AI Agents & Automation", Icon: Bot },
+  { name: "Agentic RAG Systems", Icon: BrainCircuit },
+  { name: "Full-stack Web Apps", Icon: Laptop },
+  { name: "CRM & Outreach Automation", Icon: Send },
+  { name: "Backend & APIs", Icon: Server },
+  { name: "Deployment & DevOps", Icon: Rocket },
 ] as const;
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -70,14 +71,6 @@ const listItemVariants = {
     transition: { duration: 0.65, ease: easeOut },
   },
 };
-
-function FramerGlyph({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden fill="currentColor">
-      <path d="M5 2h14v6.5H12L19 22h-6.5L5 8.5V2zm0 6.5h6.5V15H5V8.5z" />
-    </svg>
-  );
-}
 
 function StackMark({ name }: { name: (typeof stack)[number] }) {
   switch (name) {

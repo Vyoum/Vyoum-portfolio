@@ -2,14 +2,9 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ArrowUpRight,
-  ChevronDown,
-  Globe2,
-  Laptop,
-  PanelTop,
-  WandSparkles,
-} from "lucide-react";
+import { ArrowUpRight, ChevronDown, Mail } from "lucide-react";
+import { IconGitHub, IconLinkedIn } from "./BrandIcons";
+import { EMAIL_HREF, SITE } from "../lib/site";
 import styles from "./About.module.css";
 
 const paragraphs = [
@@ -19,30 +14,36 @@ const paragraphs = [
   },
   {
     lead: "29+ Products Delivered Across 3+ Countries Around the Globe",
-    body: "making sure they’re not just pretty, but actually solve problems. Whether I’m working on a mobile app or a website, my goal is to make something that feels natural and easy to use.",
+    body: "including a LangGraph multi-agent admissions system now running across 50+ schools for WorkPunkt, lifting lead generation by 70%, and CheckoutPilot, a governed agent-to-agent checkout that placed AIR 2 at the Razorpay Buildathon.",
   },
   {
     lead: "I Combine Technology, Design, and Strategy to Build What Actually Matters",
-    body: "but I think that’s what makes good design great. This attention to detail helps me build strong relationships with clients, as they know I’ll put the same care into their project that they would.",
+    body: "and I own the whole loop: the discovery call, the architecture, the build, deployment, monitoring, and fixing what breaks. Retries, evals, tracing, and cost controls are part of the work, not an afterthought.",
   },
 ];
 
 const workHistory = [
   {
-    company: "KYMA",
-    role: "Full-Stack Designer",
-    period: "2012-2024",
+    company: "ElevenX AI",
+    role: "AI Engineer",
+    period: "Sep 2025 – Now",
   },
   {
-    company: "Mugen",
-    role: "Staff Product Designer",
-    period: "2020-2022",
+    company: "Senera Core",
+    role: "Automation Engineer Intern",
+    period: "Feb 2026",
   },
   {
-    company: "Axiom",
-    role: "Designer",
-    period: "2016-2020",
+    company: "Echelon Edge",
+    role: "Full Stack Intern",
+    period: "Jun – Aug 2025",
   },
+];
+
+const profileLinks = [
+  { href: SITE.linkedin, label: "LinkedIn", Icon: IconLinkedIn },
+  { href: SITE.github, label: "GitHub", Icon: IconGitHub },
+  { href: EMAIL_HREF, label: "Email", Icon: Mail },
 ];
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -76,7 +77,7 @@ export default function About() {
 
   return (
     <section className={styles.aboutSection} id="about">
-      <div className={`container ${styles.container}`}>
+      <div className={`container container-inset ${styles.container}`}>
         <motion.header
           className={styles.header}
           initial={{ opacity: 0, y: 28 }}
@@ -85,7 +86,7 @@ export default function About() {
           transition={{ duration: 0.8 }}
         >
           <h2 className={styles.title}>
-            <span>Designing experiences</span>
+            <span>Building systems</span>
             <strong>that solve real problems.</strong>
           </h2>
         </motion.header>
@@ -99,17 +100,25 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.1 }}
           >
             <div className={styles.imageWrap}>
-              <img src="/vyoum-about.png" alt="Vyoum Agarwaal, full-stack designer" />
+              <img src="/vyoum-about.png" alt={`${SITE.name}, ${SITE.role}`} />
               <div className={styles.socials} aria-label="Social profiles">
-                <a href="#contact" aria-label="Website"><Globe2 size={19} /></a>
-                <a href="#contact" aria-label="Apps"><Laptop size={19} /></a>
-                <a href="#contact" aria-label="Web design"><PanelTop size={19} /></a>
-                <a href="#contact" aria-label="Motion design"><WandSparkles size={19} /></a>
+                {profileLinks.map(({ href, label, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    {...(href.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    <Icon size={19} />
+                  </a>
+                ))}
               </div>
             </div>
             <div className={styles.profileMeta}>
-              <h3>Vyoum Agarwaal</h3>
-              <p>Full-stack Designer</p>
+              <h3>{SITE.name}</h3>
+              <p>{SITE.role}</p>
             </div>
 
             <div className={styles.history}>
