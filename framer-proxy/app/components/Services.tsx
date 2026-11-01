@@ -9,6 +9,9 @@ import {
   Send,
   Server,
 } from "lucide-react";
+import { REVEAL_VIEWPORT, blockTransition } from "../lib/motion";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { RevealBlock, RevealText } from "./Reveal";
 import styles from "./Services.module.css";
 
 const stack = [
@@ -32,29 +35,6 @@ const services = [
 ] as const;
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
-
-const leftVariants = {
-  hidden: { opacity: 0, y: 56 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.9,
-      ease: easeOut,
-      staggerChildren: 0.12,
-      delayChildren: 0.06,
-    },
-  },
-};
-
-const leftItemVariants = {
-  hidden: { opacity: 0, y: 36 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.75, ease: easeOut },
-  },
-};
 
 const listVariants = {
   hidden: {},
@@ -177,32 +157,44 @@ function StackMark({ name }: { name: (typeof stack)[number] }) {
 }
 
 export default function Services() {
+  const reduced = usePrefersReducedMotion();
   return (
     <section className={styles.section} id="services">
       <div className={`container ${styles.layout}`}>
-        <motion.div
-          className={styles.left}
-          variants={leftVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.35, margin: "0px 0px -8% 0px" }}
-        >
-          <motion.h2 className={styles.title} variants={leftItemVariants}>
-            <span className={styles.titleMuted}>Services that</span>
-            <span className={styles.titleStrong}>supercharge your business.</span>
-          </motion.h2>
+        <div className={styles.left}>
+          <RevealText
+            className={styles.title}
+            lines={[
+              { text: "Services that", className: styles.titleMuted },
+              { text: "supercharge your business.", className: styles.titleStrong },
+            ]}
+          />
 
-          <motion.div className={styles.stackBlock} variants={leftItemVariants}>
-            <p className={styles.stackLabel}>My tech stack</p>
+          <div className={styles.stackBlock}>
+            <RevealBlock as="p" className={styles.stackLabel} delay={0.1}>
+              My tech stack
+            </RevealBlock>
             <div className={styles.stackGrid}>
-              {stack.map((name) => (
-                <div key={name} className={styles.stackTile} title={name} aria-label={name}>
+              {stack.map((name, i) => (
+                <motion.div
+                  key={name}
+                  className={styles.stackTile}
+                  aria-label={name}
+                  tabIndex={0}
+                  initial={{ opacity: 0, x: -5 * (i + 1) }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={REVEAL_VIEWPORT}
+                  transition={blockTransition(0.1 * i, 0.5, reduced)}
+                >
                   <StackMark name={name} />
-                </div>
+                  <span className={styles.tooltip} role="tooltip">
+                    {name}
+                  </span>
+                </motion.div>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         <div className={styles.divider} aria-hidden />
 

@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./FAQ.module.css";
 import { Plus, Minus, CalendarDays } from "lucide-react";
 import { BOOK_CALL_HREF } from "../lib/site";
+import { REVEAL_VIEWPORT, blockTransition } from "../lib/motion";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { RevealText } from "./Reveal";
 
 const faqs = [
   {
@@ -31,23 +34,21 @@ const faqs = [
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const reduced = usePrefersReducedMotion();
 
   return (
     <section className={`section ${styles.faqSection}`} id="faq">
       <div className={`container ${styles.container}`}>
         <div className={styles.content}>
-          <motion.div 
-            className={styles.header}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className={styles.title}>
-              <span>Your questions</span>
-              <span className={styles.titleMuted}>answered.</span>
-            </h2>
-          </motion.div>
+          <div className={styles.header}>
+            <RevealText
+              className={styles.title}
+              lines={[
+                { text: "Your questions" },
+                { text: "answered.", className: styles.titleMuted },
+              ]}
+            />
+          </div>
           
           <div className={styles.accordion}>
             {faqs.map((faq, index) => {
@@ -58,12 +59,20 @@ export default function FAQ() {
                   className={`${styles.faqItem} ${isOpen ? styles.open : ""}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={REVEAL_VIEWPORT}
+                  transition={blockTransition(index * 0.08, 0.5, reduced)}
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
                   <div className={styles.questionRow}>
-                    <div className={styles.questionNum}>0{index + 1}</div>
+                    <motion.div
+                      className={styles.questionNum}
+                      initial={{ opacity: 0, y: "-50%" }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={REVEAL_VIEWPORT}
+                      transition={blockTransition(index * 0.08 + 0.1, 0.5, reduced)}
+                    >
+                      0{index + 1}
+                    </motion.div>
                     <h3 className={styles.questionText}>{faq.question}</h3>
                     <button className={styles.toggleBtn}>
                       {isOpen ? <Minus size={20} /> : <Plus size={20} />}

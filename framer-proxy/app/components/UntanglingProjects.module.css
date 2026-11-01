@@ -1,8 +1,9 @@
 .scene {
   position: relative;
   width: 100%;
-  /* Extra scroll room so the tall project grid can unpin before Work History */
-  height: 380vh;
+  /* Pinned for exactly the 0.82 × viewport settle distance (SETTLE_VH),
+     then the tall grid scrolls on naturally */
+  height: calc(max(100vh, 1280px) + 82vh);
   /* Same continuous page ground for the whole fan — no section color flip */
   background: var(--background);
 }
@@ -63,89 +64,65 @@
   transform: translateY(-3px);
 }
 
+/* Reference: 16px ring @ .25 breathing 1 ↔ 1.8 (1.6s), 8px solid core */
 .pulse {
   position: relative;
-  width: 8px;
-  height: 8px;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
-  background: #34c759;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.55);
-  animation: pulseDot 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .pulse::before,
 .pulse::after {
   content: "";
   position: absolute;
-  inset: 0;
   border-radius: 50%;
-  background: #34c759;
-  opacity: 0.55;
-  animation: pulseRing 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  background: rgb(18, 179, 63);
+}
+
+.pulse::before {
+  inset: 0;
+  opacity: 0.25;
+  animation: pulseRing 1.6s ease-in-out infinite alternate;
 }
 
 .pulse::after {
-  animation-delay: 0.9s;
-}
-
-@keyframes pulseDot {
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.45);
-  }
-  50% {
-    transform: scale(1.08);
-    box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.12);
-  }
+  inset: 4px;
 }
 
 @keyframes pulseRing {
-  0% {
+  from {
     transform: scale(1);
-    opacity: 0.55;
   }
-  70% {
-    transform: scale(2.6);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(2.6);
-    opacity: 0;
+  to {
+    transform: scale(1.8);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pulse,
-  .pulse::before,
-  .pulse::after {
+  .pulse::before {
     animation: none;
-  }
-
-  .pulse {
-    box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.25);
   }
 }
 
 .heroTitle {
   font-size: clamp(2.8rem, 5vw, 4.5rem);
-  line-height: 1.08;
+  line-height: 0.95;
   margin-bottom: 20px;
   letter-spacing: -0.03em;
   overflow: visible;
 }
 
 .titleGray {
-  color: #888888;
+  color: rgb(130, 130, 130);
   font-weight: 500;
 }
 
 .titleBlack {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   font-style: normal;
-  font-weight: 700;
-  color: var(--foreground);
+  font-weight: 600;
+  color: #000;
   white-space: nowrap;
   display: inline-block;
 }
@@ -171,8 +148,8 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: var(--foreground);
-  color: var(--background);
+  background: #000;
+  color: #fff;
   padding: 8px 24px 8px 8px;
   border-radius: var(--radius-full);
   font-weight: 600;
@@ -181,13 +158,16 @@
     transform var(--transition),
     box-shadow var(--transition),
     gap 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-primary);
   margin-bottom: 50px;
 }
 
 .bookCallBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    0 0.74px 0.74px -0.75px rgba(0, 0, 0, 0.33),
+    0 15px 30px rgba(0, 0, 0, 0.2);
   gap: 14px;
 }
 
@@ -406,19 +386,40 @@
 .title {
   font-size: clamp(2.4rem, 5.2vw, 4.2rem);
   line-height: 0.98;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.03em;
   color: var(--foreground);
 }
 
 .viewAll {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding-bottom: 4px;
-  border-bottom: 1px solid var(--foreground);
   font-size: 0.9rem;
   font-weight: 500;
   white-space: nowrap;
+}
+
+/* Reference: underline grows from a ~2px stub to full width on hover */
+.viewAll::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  height: 1px;
+  background: var(--foreground);
+  opacity: 0;
+  transition:
+    width 0.3s cubic-bezier(0.44, 0, 0.56, 1),
+    opacity 0.3s cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+.viewAll:hover::after,
+.viewAll:focus-visible::after {
+  width: 100%;
+  opacity: 1;
 }
 
 .grid {
@@ -468,27 +469,39 @@
   flex: 1;
   min-width: 0;
   overflow: hidden;
-  /* Logos enter from the right grid edge; soft fade only at the far right clip */
   mask-image: linear-gradient(
     to right,
-    black 0%,
-    black 92%,
+    transparent 0%,
+    black 10%,
+    black 90%,
     transparent 100%
   );
   -webkit-mask-image: linear-gradient(
     to right,
-    black 0%,
-    black 92%,
+    transparent 0%,
+    black 10%,
+    black 90%,
     transparent 100%
   );
 }
 
 .logosTrack {
+  --marquee-gap: 64px;
   display: flex;
   align-items: center;
-  gap: 56px;
-  animation: slide 22s linear infinite;
+  gap: var(--marquee-gap);
+  animation: slide 35s linear infinite;
   white-space: nowrap;
+}
+
+.logosBar:hover .logosTrack {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logosTrack {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes slide {
@@ -496,7 +509,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-50% - 28px));
+    transform: translateX(calc(-50% - var(--marquee-gap) / 2));
   }
 }
 
@@ -545,8 +558,12 @@
   }
 
   .pulse {
-    width: 6px;
-    height: 6px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .pulse::after {
+    inset: 3px;
   }
 
   .heroTitle {
@@ -649,7 +666,7 @@
   }
 
   .logosTrack {
-    gap: 40px;
+    --marquee-gap: 40px;
   }
 
   .logoItem {

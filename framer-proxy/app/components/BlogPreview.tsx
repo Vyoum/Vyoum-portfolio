@@ -2,6 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { EASE_HOVER, EASE_STD, REVEAL_VIEWPORT } from "../lib/motion";
+import { RevealText } from "./Reveal";
 import styles from "./BlogPreview.module.css";
 import Link from "next/link";
 
@@ -34,7 +36,7 @@ export default function BlogPreview() {
     <section className={`section ${styles.blogSection}`} id="blog">
       <div className={`container container-inset ${styles.container}`}>
         <div className={styles.header}>
-          <h2 className={styles.title}>From my blog, design insights.</h2>
+          <RevealText className={styles.title} text="From my blog, design insights." />
           <Link href="#all-posts" className="btn-secondary">
             View All
           </Link>
@@ -47,12 +49,15 @@ export default function BlogPreview() {
               className={styles.postCard}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -4, transition: { duration: 0.3, ease: EASE_HOVER } }}
+              viewport={REVEAL_VIEWPORT}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: EASE_STD }}
             >
               <Link href={post.href} className={styles.postLink}>
-                <div className={styles.postImage}>
-                  {/* Image Placeholder */}
+                <div className={styles.postMedia}>
+                  <div className={styles.postImage}>
+                    {/* Image Placeholder */}
+                  </div>
                 </div>
                 <div className={styles.postContent}>
                   <div className={styles.postMeta}>

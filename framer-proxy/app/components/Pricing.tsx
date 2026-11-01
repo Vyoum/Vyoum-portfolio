@@ -1,40 +1,54 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import styles from "./Pricing.module.css";
 import { Check } from "lucide-react";
 import { PROJECT_INQUIRY_HREF } from "../lib/site";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { RevealBlock, RevealText } from "./Reveal";
 
 export default function Pricing() {
+  const reduced = usePrefersReducedMotion();
+  const featuredRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: featuredRef,
+    offset: ["start end", "end start"],
+  });
+  /* Reference: featured card tilts ≈ -3° → +3° as it crosses the viewport */
+  const tilt = useTransform(scrollYProgress, [0, 1], [-3, 3]);
+  /* Full-width card on phones: a tilt would push its corners off-screen */
+  const [narrow, setNarrow] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 768px)");
+    const update = () => setNarrow(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+
   return (
     <section className={`section ${styles.pricingSection}`} id="pricing">
       <div className={`container container-inset ${styles.container}`}>
         <div className={styles.header}>
-          <motion.h2 
+          <RevealText
             className={styles.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Simple pricing. <span className="text-gradient">Serious systems.</span>
-          </motion.h2>
-          <motion.p 
-            className={styles.subtitle}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
+            lines={[
+              { text: "Simple pricing." },
+              { text: "Serious systems.", wordClassName: "text-gradient" },
+            ]}
+          />
+          <RevealBlock as="p" className={styles.subtitle} delay={0.1}>
             Clear starting prices, no hidden fees. Final quote depends on scope, agreed after a discovery call.
-          </motion.p>
+          </RevealBlock>
         </div>
 
         <div className={styles.cards}>
           {/* AI Automation Card */}
           <motion.div 
+            ref={featuredRef}
             className={styles.card}
+            style={{ rotate: reduced || narrow ? 0 : tilt }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

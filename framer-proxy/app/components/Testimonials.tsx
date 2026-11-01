@@ -3,6 +3,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { REVEAL_VIEWPORT, blockTransition } from "../lib/motion";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import { RevealText } from "./Reveal";
 import styles from "./Testimonials.module.css";
 
 const clientAvatars = [
@@ -53,30 +56,32 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const reduced = usePrefersReducedMotion();
   return (
     <section className={`section ${styles.testimonialsSection}`} id="testimonials">
       <div className={`container ${styles.container}`}>
-        <motion.div
-          className={styles.header}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className={styles.title}>
-            <span>Hear from what my</span>
-            <strong>clients have to say.</strong>
-          </h2>
+        <div className={styles.header}>
+          <RevealText
+            className={styles.title}
+            lines={[
+              { text: "Hear from what my" },
+              { text: "clients have to say.", as: "strong" },
+            ]}
+          />
           <div
             className={styles.rating}
             aria-label="99 plus happy clients, rated five out of five stars"
           >
             <div className={styles.avatars} aria-hidden="true">
-              {clientAvatars.map((avatar) => (
-                <span
+              {clientAvatars.map((avatar, i) => (
+                <motion.span
                   key={avatar}
                   className={styles.miniAvatar}
                   style={{ backgroundImage: `url("${avatar}")` }}
+                  initial={{ opacity: 0, x: -5 * ((i % 3) + 1) }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={REVEAL_VIEWPORT}
+                  transition={blockTransition(0.1 * i, 0.5, reduced)}
                 />
               ))}
             </div>
@@ -89,17 +94,17 @@ export default function Testimonials() {
               <span>29+ Happy clients</span>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         <div className={styles.track} aria-label="Client reviews">
           {testimonials.map((item, index) => (
             <div key={item.author} className={styles.panel}>
               <motion.article
                 className={styles.card}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.45 }}
-                transition={{ duration: 0.5, delay: Math.min(index, 2) * 0.05 }}
+                initial={{ opacity: 0, x: -5 * ((index % 3) + 1) }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={REVEAL_VIEWPORT}
+                transition={blockTransition(0.1 * (index % 3), 0.5, reduced)}
               >
                 <div className={styles.quoteMark} aria-hidden="true">
                   “

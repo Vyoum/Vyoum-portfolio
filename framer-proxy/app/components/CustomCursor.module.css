@@ -30,7 +30,7 @@
   margin: -14px 0 0 -14px;
 }
 
-@media (hover: none), (pointer: coarse) {
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
   .cursor {
     display: none;
   }

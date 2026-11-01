@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, ChevronDown, Mail } from "lucide-react";
 import { IconGitHub, IconLinkedIn } from "./BrandIcons";
 import { EMAIL_HREF, SITE } from "../lib/site";
+import { RevealBlock, RevealText } from "./Reveal";
 import styles from "./About.module.css";
 
 const paragraphs = [
@@ -78,18 +79,15 @@ export default function About() {
   return (
     <section className={styles.aboutSection} id="about">
       <div className={`container container-inset ${styles.container}`}>
-        <motion.header
-          className={styles.header}
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className={styles.title}>
-            <span>Building systems</span>
-            <strong>that solve real problems.</strong>
-          </h2>
-        </motion.header>
+        <header className={styles.header}>
+          <RevealText
+            className={styles.title}
+            lines={[
+              { text: "Building systems" },
+              { text: "that solve real problems.", as: "strong" },
+            ]}
+          />
+        </header>
 
         <div className={styles.bodyGrid}>
           <motion.div
@@ -171,19 +169,13 @@ export default function About() {
             </div>
           </motion.div>
 
-          <motion.div
-            className={styles.copy}
-            initial={{ opacity: 0, y: 34 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, delay: 0.18 }}
-          >
+          <div className={styles.copy}>
             {paragraphs.map((paragraph) => (
-              <p key={paragraph.lead}>
+              <RevealBlock as="p" key={paragraph.lead} delay={0.1}>
                 <strong>{paragraph.lead}</strong> {paragraph.body}
-              </p>
+              </RevealBlock>
             ))}
-          </motion.div>
+          </div>
         </div>
 
         <a className={styles.contactLink} href="#contact">

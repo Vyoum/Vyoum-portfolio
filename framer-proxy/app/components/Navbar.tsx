@@ -8,6 +8,8 @@ import {
   useScroll,
 } from "framer-motion";
 import Link from "next/link";
+import { blockTransition } from "../lib/motion";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import styles from "./Navbar.module.css";
 
 const navLinks = [
@@ -20,7 +22,7 @@ const navLinks = [
 const spring = {
   type: "spring" as const,
   bounce: 0,
-  duration: 0.55,
+  duration: 0.45,
 };
 
 function DotsButton({
@@ -51,24 +53,45 @@ function DotsButton({
 export default function Navbar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  /** Desktop: collapsed pill re-expands while hovered / focused. */
+  const [peek, setPeek] = useState(false);
   const { scrollY } = useScroll();
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
     return scrollY.on("change", (latest) => {
       const nextCollapsed = latest > 50;
       setIsCollapsed(nextCollapsed);
-      if (!nextCollapsed) setMenuOpen(false);
+      if (!nextCollapsed) {
+        setMenuOpen(false);
+        setPeek(false);
+      }
     });
   }, [scrollY]);
 
-  const showLinks = !isCollapsed || menuOpen;
+  const showLinks = !isCollapsed || peek || menuOpen;
 
   return (
     <header className={styles.header}>
-      <div
+      <motion.div
         className={styles.wrap}
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={blockTransition(0.1, 0.6, reduced)}
+        onMouseEnter={() => {
+          if (isCollapsed) setPeek(true);
+        }}
         onMouseLeave={() => {
+          setPeek(false);
           if (isCollapsed) setMenuOpen(false);
+        }}
+        onFocus={() => {
+          if (isCollapsed) setPeek(true);
+        }}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+            setPeek(false);
+          }
         }}
       >
         <LayoutGroup id="site-nav">
@@ -78,7 +101,7 @@ export default function Navbar() {
             aria-label="Primary"
             className={styles.nav}
             style={{
-              gap: isCollapsed && !menuOpen ? 40 : 88,
+              gap: showLinks ? 88 : 40,
             }}
           >
             <motion.div layout="position" transition={spring} className={styles.brand}>
@@ -121,11 +144,7 @@ export default function Navbar() {
                     transition={{ duration: 0.18 }}
                     className={styles.dotsDesktop}
                   >
-                    <DotsButton
-                      open={false}
-                      onClick={() => setMenuOpen(true)}
-                      onMouseEnter={() => setMenuOpen(true)}
-                    />
+                    <DotsButton open={false} onClick={() => setPeek(true)} />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -177,7 +196,7 @@ export default function Navbar() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
     </header>
   );
 }

@@ -1,0 +1,21 @@
+.root {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Eight full-width backdrop filters are too costly on small devices */
+@media (max-width: 640px) {
+  .root {
+    display: none;
+  }
+}

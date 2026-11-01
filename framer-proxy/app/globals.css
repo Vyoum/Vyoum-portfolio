@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #fafafa;
+  /* Card surfaces sit white on the #fafafa page */
+  --card: #ffffff;
   --foreground: #111111;
   --text-muted: #686868;
   --text-dark: #333333;
@@ -16,6 +18,11 @@
   --radius-lg: 24px;
   --radius-full: 9999px;
   --transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  /* Reference primary button: inset highlight + layered soft shadows */
+  --shadow-primary:
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    0 0.74px 0.74px -0.75px rgba(0, 0, 0, 0.33),
+    0 10px 25px rgba(0, 0, 0, 0.15);
 
   /* Page column grid — keep in sync with ColumnGrid */
   --grid-max: 1240px;
@@ -38,7 +45,9 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  /* `clip`, not `hidden`: hidden would make body a scroll container and break
+     the sticky hero; clip also stops mobile widening the layout viewport */
+  overflow-x: clip;
   position: relative;
 }
 
@@ -53,12 +62,17 @@ footer {
 html {
   /* Lenis owns smooth scrolling — avoid fighting native scroll-behavior */
   scroll-behavior: auto;
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-inter), sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.02em;
+}
+
+h2 {
+  letter-spacing: -0.03em;
 }
 
 a {
@@ -131,10 +145,11 @@ button {
 }
 
 .btn-primary {
-  background: var(--foreground);
-  color: var(--background);
+  background: #000;
+  color: #fff;
   padding: 12px 24px;
-  border-radius: var(--radius-full);
+  border-radius: 24px;
+  box-shadow: var(--shadow-primary);
   font-weight: 600;
   font-size: 0.95rem;
   transition: transform var(--transition), opacity var(--transition);
@@ -169,6 +184,43 @@ button {
 
 .section {
   padding: 96px 0;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Word / block reveals: no blur on small screens (perf) */
+@media (max-width: 640px) {
+  .rv-blur {
+    filter: none !important;
+  }
+}
+
+/* Word-split headings: inline-block words, normal spaces between them.
+   !important beats section rules like `.title span { display: block }`. */
+.rv-word {
+  display: inline-block !important;
+  color: inherit !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .text-gradient {

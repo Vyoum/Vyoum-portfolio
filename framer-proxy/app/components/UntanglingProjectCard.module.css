@@ -67,7 +67,7 @@
 }
 
 .card:hover .shotImage {
-  transform: scale(1.04);
+  transform: scale(1.08);
 }
 
 .shotDim {
@@ -160,14 +160,15 @@
   color: var(--foreground);
   white-space: nowrap;
   opacity: 0;
-  transform: translateX(-6px);
+  transform: translateX(-50%);
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease,
+    opacity 0.3s cubic-bezier(0.44, 0, 0.56, 1),
+    transform 0.3s cubic-bezier(0.44, 0, 0.56, 1),
     color 0.2s ease;
 }
 
-.card:hover .link {
+.card:hover .link,
+.card:focus-visible .link {
   opacity: 1;
   transform: translateX(0);
 }

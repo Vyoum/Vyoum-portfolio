@@ -4,29 +4,27 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { CalendarCheck, Mail } from "lucide-react";
+import { blockTransition } from "../lib/motion";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import styles from "./FloatingCTA.module.css";
 
+/** Reference: contact pill slides up once scrollY passes ~300px. */
+const SHOW_AFTER_PX = 300;
+
 /**
- * Site-wide base CTA — fixed at the bottom after the first (home) frame.
+ * Site-wide base CTA — fixed at the bottom once the visitor starts scrolling;
+ * hides near the top and over the footer contact block.
  */
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
-    const home = document.getElementById("home");
-
     const update = () => {
-      if (!home) {
-        setVisible(window.scrollY > window.innerHeight * 0.85);
-        return;
-      }
-      const homeBottom = home.getBoundingClientRect().bottom;
       const footer = document.getElementById("contact");
       const nearFooter =
         footer != null && footer.getBoundingClientRect().top < window.innerHeight - 40;
-
-      // Show once the first frame has scrolled past; hide over the footer CTA
-      setVisible(homeBottom < window.innerHeight * 0.35 && !nearFooter);
+      setVisible(window.scrollY > SHOW_AFTER_PX && !nearFooter);
     };
 
     update();
@@ -43,10 +41,10 @@ export default function FloatingCTA() {
       {visible ? (
         <motion.div
           className={styles.bar}
-          initial={{ opacity: 0, y: 24, x: "-50%" }}
+          initial={{ opacity: 0, y: 100, x: "-50%" }}
           animate={{ opacity: 1, y: 0, x: "-50%" }}
-          exit={{ opacity: 0, y: 16, x: "-50%" }}
-          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          exit={{ opacity: 0, y: 100, x: "-50%" }}
+          transition={blockTransition(0, 0.5, reduced)}
         >
           <Link href="#contact" className={styles.contact}>
             <Mail size={16} strokeWidth={2.25} />
