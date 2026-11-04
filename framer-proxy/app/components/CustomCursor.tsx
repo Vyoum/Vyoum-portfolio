@@ -1,99 +1,72 @@
 "use client";
-
 import { useEffect, useRef } from "react";
 import styles from "./CustomCursor.module.css";
-
-const TRAIL_DISTANCE = 34; // px behind the arrow tip
-const DEFAULT_DIR = { x: 0.4, y: 0.85 }; // sits under/behind a typical arrow
-
 /**
- * Soft lagging dot that trails behind the system cursor at a fixed distance.
+ * Reference cursor ("Launchfolio"): a small 16px translucent dot that follows
+ * the pointer at a FIXED offset (down-right of the arrow tip) with a short
+ * ease (~85ms time-constant, settles in < 300ms). It does not rotate around the
+ * pointer and does not grow over links. Over elements marked
+ * `data-cursor="hide"` (project cards, which show their own "View" pill) the
+ * dot fades out.
  */
+const OFFSET_X = 12; // px right of the pointer (dot's left edge)
+const OFFSET_Y = 20; // px below the pointer (dot's top edge)
+const TAU_MS = 85; // follow time-constant
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
-  const pos = useRef({ x: -100, y: -100 });
-  const target = useRef({ x: -100, y: -100 });
-  const prevPointer = useRef({ x: 0, y: 0 });
-  const direction = useRef({ ...DEFAULT_DIR });
-  const frame = useRef<number | null>(null);
-  const lastTime = useRef(0);
-  const primed = useRef(false);
-
   useEffect(() => {
     const dot = dotRef.current;
     if (!dot) return;
-
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
     if (isCoarse || prefersReducedMotion) return;
-
-    const setTrailTarget = (x: number, y: number) => {
-      target.current = {
-        x: x - direction.current.x * TRAIL_DISTANCE,
-        y: y - direction.current.y * TRAIL_DISTANCE,
-      };
+    const pos = { x: -100, y: -100 };
+    const target = { x: -100, y: -100 };
+    let primed = false;
+    let raf = 0;
+    let last = 0;
+    const place = () => {
+      dot.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
     };
-
     const move = (event: PointerEvent) => {
-      const { clientX: x, clientY: y } = event;
-
-      if (primed.current) {
-        const dx = x - prevPointer.current.x;
-        const dy = y - prevPointer.current.y;
-        const len = Math.hypot(dx, dy);
-        if (len > 0.8) {
-          // Face the travel direction so the dot stays behind the arrow
-          direction.current = { x: dx / len, y: dy / len };
-        }
-      } else {
-        primed.current = true;
-        setTrailTarget(x, y);
-        pos.current = { ...target.current };
-        dot.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0)`;
+      target.x = event.clientX + OFFSET_X;
+      target.y = event.clientY + OFFSET_Y;
+      if (!primed) {
+        primed = true;
+        pos.x = target.x;
+        pos.y = target.y;
+        place();
       }
-
-      prevPointer.current = { x, y };
-      setTrailTarget(x, y);
       dot.classList.add(styles.visible);
-
-      const interactive = (event.target as HTMLElement).closest(
-        "a, button, [role=button], input, textarea, select, summary"
+      const el = event.target as HTMLElement | null;
+      dot.classList.toggle(
+        styles.hidden,
+        Boolean(el?.closest?.('[data-cursor="hide"]'))
       );
-      dot.classList.toggle(styles.hoveringDot, Boolean(interactive));
     };
-
     const leave = () => {
-      primed.current = false;
-      direction.current = { ...DEFAULT_DIR };
-      dot.classList.remove(styles.visible, styles.hoveringDot);
+      primed = false;
+      dot.classList.remove(styles.visible);
     };
-
     const animate = (time: number) => {
-      const rawDt = lastTime.current ? time - lastTime.current : 16.67;
-      lastTime.current = time;
-      const dt = Math.min(rawDt, 32) / 16.67;
-      // Soft chase — lag behind the trail point
-      const ease = 1 - Math.pow(0.86, dt);
-
-      pos.current.x += (target.current.x - pos.current.x) * ease;
-      pos.current.y += (target.current.y - pos.current.y) * ease;
-
-      dot.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0)`;
-      frame.current = window.requestAnimationFrame(animate);
+      const dt = last ? Math.min(time - last, 64) : 16.67;
+      last = time;
+      const ease = 1 - Math.exp(-dt / TAU_MS);
+      pos.x += (target.x - pos.x) * ease;
+      pos.y += (target.y - pos.y) * ease;
+      place();
+      raf = window.requestAnimationFrame(animate);
     };
-
     window.addEventListener("pointermove", move, { passive: true });
     document.documentElement.addEventListener("pointerleave", leave);
-    frame.current = window.requestAnimationFrame(animate);
-
+    raf = window.requestAnimationFrame(animate);
     return () => {
       window.removeEventListener("pointermove", move);
       document.documentElement.removeEventListener("pointerleave", leave);
-      if (frame.current) window.cancelAnimationFrame(frame.current);
+      window.cancelAnimationFrame(raf);
     };
   }, []);
-
   return <div ref={dotRef} className={styles.cursor} aria-hidden="true" />;
 }

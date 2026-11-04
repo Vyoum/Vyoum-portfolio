@@ -5,31 +5,24 @@
   z-index: 9998;
   pointer-events: none;
   opacity: 0;
-  width: 18px;
-  height: 18px;
-  margin: -9px 0 0 -9px;
+  /* Reference: 16px, rgba(255,255,255,.85), backdrop blur 5px, exclusion blend */
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: #fff;
-  /* White base + difference → black on light, white on dark */
-  mix-blend-mode: difference;
-  will-change: transform, opacity, width, height;
-  transition:
-    opacity 200ms ease,
-    width 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    height 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    margin 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  mix-blend-mode: exclusion;
+  will-change: transform, opacity;
+  /* Reference variant spring: bounce .2, duration .4 (approximated) */
+  transition: opacity 400ms cubic-bezier(0.34, 1.2, 0.64, 1);
 }
-
 .visible {
   opacity: 1;
 }
-
-.hoveringDot {
-  width: 28px;
-  height: 28px;
-  margin: -14px 0 0 -14px;
+.hidden {
+  opacity: 0;
 }
-
 @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
   .cursor {
     display: none;

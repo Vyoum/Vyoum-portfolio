@@ -143,6 +143,7 @@ export default function UntanglingProjectCard({
           <Link
             href={project.href}
             className={styles.card}
+            data-cursor="hide"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`View ${project.title} case study`}

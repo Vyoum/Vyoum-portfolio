@@ -20,8 +20,10 @@ import ProgressiveBlur from "./ProgressiveBlur";
 import styles from "./UntanglingProjects.module.css";
 
 const MotionLink = motion.create(Link);
-/** Keep in sync with the `82vh` in `.scene` height. */
-const SETTLE_VH = 0.82;
+/** Keep in sync with the `94vh` in `.scene` height. */
+const SETTLE_VH = 0.94;
+/** Keep in sync with the mobile layout in the CSS module. */
+const MOBILE_QUERY = "(max-width: 860px)";
 const HIDDEN = { opacity: 0.001 };
 const SHOWN = { opacity: 1 };
 
@@ -49,6 +51,15 @@ export default function UntanglingProjects() {
   const reduced = usePrefersReducedMotion();
   const { scrollY } = useScroll();
   const viewportH = useMotionValue(900);
+  const isMobile = useMotionValue(0);
+
+  useEffect(() => {
+    const media = window.matchMedia(MOBILE_QUERY);
+    const update = () => isMobile.set(media.matches ? 1 : 0);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [isMobile]);
 
   useEffect(() => {
     const update = () => viewportH.set(window.innerHeight);
@@ -57,17 +68,24 @@ export default function UntanglingProjects() {
     return () => window.removeEventListener("resize", update);
   }, [viewportH]);
 
-  /* Reference: cards converge linearly over scrollY 0 → 0.82 × innerHeight
+  /* Reference: cards converge linearly over scrollY 0 → 0.94 × innerHeight
      (Lenis supplies the smoothing). .scene height unpins right at t = 1. */
-  const progress = useTransform([scrollY, viewportH], ([y, h]) =>
+  const scrollProgress = useTransform([scrollY, viewportH], ([y, h]) =>
     Math.min(1, Math.max(0, (y as number) / (SETTLE_VH * (h as number))))
+  );
+
+  const progress = useTransform([scrollProgress, isMobile], ([p, m]) =>
+    m ? 1 : (p as number)
+  );
+  const heroProgress = useTransform([scrollProgress, isMobile], ([p, m]) =>
+    m ? 0 : (p as number)
   );
 
   /* Soft hero exit — same continuous ground; cards are the main motion */
   /* Hero is fully gone before the heading starts — they share the same band */
-  const heroOpacity = useTransform(progress, [0, 0.25, 0.45], [1, 0.5, 0]);
-  const heroY = useTransform(progress, [0, 0.45], [0, -28]);
-  const heroPointer = useTransform(progress, (p) => (p > 0.35 ? "none" : "auto"));
+  const heroOpacity = useTransform(heroProgress, [0, 0.25, 0.45], [1, 0.5, 0]);
+  const heroY = useTransform(heroProgress, [0, 0.45], [0, -28]);
+  const heroPointer = useTransform(heroProgress, (p) => (p > 0.35 ? "none" : "auto"));
 
   const headingOpacity = useTransform(progress, [0.48, 0.75], [0, 1]);
   const headingY = useTransform(progress, [0.48, 0.75], [16, 0]);
@@ -88,8 +106,8 @@ export default function UntanglingProjects() {
       window.removeEventListener("resize", measure);
     };
   }, [sceneEnd]);
-  const blurOpacity = useTransform([scrollY, sceneEnd], ([y, end]) =>
-    Math.min(1, Math.max(0, ((end as number) - (y as number)) / 160))
+  const blurOpacity = useTransform([scrollY, sceneEnd, isMobile], ([y, end, m]) =>
+    m ? 0 : Math.min(1, Math.max(0, ((end as number) - (y as number)) / 160))
   );
 
   /* Word reveal for "Latest Projects" once its fade-in starts */
