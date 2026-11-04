@@ -1,9 +1,9 @@
 .scene {
   position: relative;
   width: 100%;
-  /* Pinned for exactly the 0.82 × viewport settle distance (SETTLE_VH),
+  /* Pinned for exactly the 0.94 × viewport settle distance (SETTLE_VH),
      then the tall grid scrolls on naturally */
-  height: calc(max(100vh, 1280px) + 82vh);
+  height: calc(max(100vh, 1280px) + 94vh);
   /* Same continuous page ground for the whole fan — no section color flip */
   background: var(--background);
 }
@@ -490,12 +490,10 @@
   display: flex;
   align-items: center;
   gap: var(--marquee-gap);
-  animation: slide 35s linear infinite;
+  width: max-content;
+  flex-shrink: 0;
+  animation: slide 18.8s linear infinite;
   white-space: nowrap;
-}
-
-.logosBar:hover .logosTrack {
-  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -667,6 +665,7 @@
 
   .logosTrack {
     --marquee-gap: 40px;
+    animation-duration: 11.7s;
   }
 
   .logoItem {
@@ -703,4 +702,14 @@
     overflow-y: auto;
     z-index: 10;
   }
+}
+
+@media (max-width: 860px) {
+  .scene  { height: auto; }
+  .sticky { position: relative; top: auto; height: auto; }
+  .frame  { height: auto; padding-top: 0; padding-bottom: 48px; display: flex; flex-direction: column; }
+  .heroCopy { position: relative; top: auto; left: auto; right: auto; margin-top: 120px; background: none; }
+  .pileSlot { display: none; }
+  .header { position: relative; top: auto; left: auto; right: auto; margin-top: 40px; margin-bottom: 24px; pointer-events: auto; }
+  .grid   { position: relative; top: auto; left: auto; right: auto; bottom: auto; overflow: visible; padding-bottom: 0; }
 }

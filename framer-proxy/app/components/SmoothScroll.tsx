@@ -25,8 +25,38 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       lenisRef.current?.lenis?.raf(timestamp);
     }
 
+    // Next Link otherwise performs its own immediate hash scroll before Lenis.
+    // Cancel that default in capture; Lenis handles the same click in bubble.
+    function handleAnchor(event: MouseEvent) {
+      if (
+        event.defaultPrevented || event.button !== 0 || event.metaKey ||
+        event.ctrlKey || event.shiftKey || event.altKey || !lenisRef.current?.lenis
+      ) return;
+      const anchor = event.composedPath().find(
+        (node): node is HTMLAnchorElement => node instanceof HTMLAnchorElement
+      );
+      if (!anchor || anchor.hasAttribute("download") ||
+        (anchor.target && anchor.target !== "_self")) return;
+      const url = new URL(anchor.href);
+      if (url.origin !== location.origin || url.pathname !== location.pathname ||
+        url.search !== location.search || !url.hash) return;
+      let id: string;
+      try {
+        id = decodeURIComponent(url.hash.slice(1));
+      } catch {
+        return;
+      }
+      if (!document.getElementById(id) && !document.getElementsByName(id).length) return;
+      event.preventDefault();
+      if (url.hash !== location.hash) window.history.pushState(null, "", url.href);
+    }
+
+    document.addEventListener("click", handleAnchor, true);
     frame.update(update, true);
-    return () => cancelFrame(update);
+    return () => {
+      document.removeEventListener("click", handleAnchor, true);
+      cancelFrame(update);
+    };
   }, [reduced]);
 
   if (reduced) return <>{children}</>;
@@ -37,9 +67,12 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       ref={lenisRef}
       options={{
         autoRaf: false,
-        duration: 1.15,
+        duration: 0.8,
         smoothWheel: true,
-        touchMultiplier: 1.2,
+        syncTouch: false,
+        anchors: true,
+        stopInertiaOnNavigate: true,
+        allowNestedScroll: true,
       }}
     >
       {children}
